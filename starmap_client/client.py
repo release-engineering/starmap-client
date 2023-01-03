@@ -20,7 +20,7 @@ class StarmapClient(object):
         """
         Create a new StArMapClient.
 
-        Parameters:
+        Args:
             url (str)
                 URL of the StArMap endpoint.
 
@@ -49,7 +49,7 @@ class StarmapClient(object):
             nvr (str): The image archive name or NVR.
 
         Returns:
-            The query result when found or None.
+            QueryResponse: The query result when found or None.
         """
         return self._query(params={"image": nvr})
 
@@ -64,7 +64,7 @@ class StarmapClient(object):
             version (str, optional): The version from NVR.
 
         Returns:
-            The query result when found or None.
+            QueryResponse: The query result when found or None.
         """
         params = {"name": name}
         if version:
@@ -101,7 +101,7 @@ class StarmapClient(object):
         List all Policies present in StArMap.
 
         Returns:
-            List with all policies present in StArMap.
+            list(Policy): List with all policies present in StArMap.
         """
         if not self._policies:
             self._policies = [p for p in self.policies]
@@ -115,7 +115,7 @@ class StarmapClient(object):
             policy_id (str): The Policy ID to retrieve from StArMap.
 
         Returns:
-            The requested Policy when found.
+            Policy: The requested Policy when found.
         """
         rsp = self.session.get(f"/policy/{policy_id}")
         if rsp.status_code == 404:
@@ -129,7 +129,8 @@ class StarmapClient(object):
         List all mappings for a given Policy ID.
 
         Args:
-            policy_id (str): Policy ID to list the mappings.
+            policy_id (str)
+                Policy ID to list the mappings.
 
         Returns:
             List with the Mappings for the requested Policy.
@@ -144,7 +145,8 @@ class StarmapClient(object):
         Retrieve a single Marketplace Mapping by its ID.
 
         Args:
-            mapping_id (str): The Markeplace Mapping ID to retrieve from StArmAp.
+            mapping_id (str)
+                The Markeplace Mapping ID to retrieve from StArmAp.
 
         Returns:
             The requested Marketplace Mapping when found.
@@ -161,7 +163,8 @@ class StarmapClient(object):
         List all destinations for a given Marketplace Mapping ID.
 
         Args:
-            mapping_id (str): Marketplace Mapping ID to list the mappings.
+            mapping_id (str)
+                Marketplace Mapping ID to list the mappings.
 
         Returns:
             List with the Destinations for the requested Mapping.
@@ -176,7 +179,8 @@ class StarmapClient(object):
         Retrieve a single Destination by its ID.
 
         Args:
-            destination_id (str): The Destination ID to retrieve from StArmAp.
+            destination_id (str)
+                The Destination ID to retrieve from StArmAp.
 
         Returns:
             The requested Destination when found.

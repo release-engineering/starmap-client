@@ -22,8 +22,10 @@ class StarmapSession(object):
         Create the StarmapSession object.
 
         Args:
-            url (str): The StArMap server endpoint base URL
-            api_version: The StArMap server API version to call
+            url (str)
+                The StArMap server endpoint base URL
+            api_version
+                The StArMap server API version to call
             retries (int, optional)
                 The number of request retries on failure
             backoff_factor (float, optional)

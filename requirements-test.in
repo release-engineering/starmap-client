@@ -1,5 +1,8 @@
+alabaster
 coverage
 mypy
 pytest
 pytest-cov
+sphinx
+sphinx-autodoc-typehints
 types-requests
