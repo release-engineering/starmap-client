@@ -1,0 +1,4 @@
+{
+    "destination": "test-destination/foo/bar",
+    "overwrite": false
+}

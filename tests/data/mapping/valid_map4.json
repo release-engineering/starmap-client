@@ -1,0 +1,9 @@
+{
+    "destinations": [
+        {
+            "destination": "test-destination/foo/bar",
+            "overwrite": false
+        }
+    ],
+    "marketplace_account": "test-marketplace"
+}

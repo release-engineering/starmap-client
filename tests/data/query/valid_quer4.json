@@ -1,0 +1,24 @@
+{
+    "mappings":  
+        {
+            "test-marketplace": [
+                {
+                    "destination": "test-destination/foo/bar",
+                    "overwrite": false
+                }
+            ],
+            "another-marketplace": [
+                {
+                    "destination": "aaaaaaaaaaaaaaa",
+                    "overwrite": false,
+                    "meta": {}
+                },
+                {
+                    "destination": "bbbbbbbbbbbbb",
+                    "overwrite": true,
+                    "meta": {"foo": "bar"}
+                }
+            ]
+        },
+    "name": "sample-policy"
+}

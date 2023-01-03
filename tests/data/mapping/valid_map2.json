@@ -1,0 +1,14 @@
+{
+    "destinations": [
+        {
+            "destination": "test-destination/foo/bar",
+            "overwrite": false
+        },
+        {
+            "destination": "second-test-destination/foo/bar",
+            "overwrite": true
+        }
+    ],
+    "marketplace_account": "test-marketplace",
+    "version_fnmatch": "1.*"
+}

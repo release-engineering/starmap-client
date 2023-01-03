@@ -1,0 +1,13 @@
+{
+    "mappings":  
+        {
+            "test-marketplace": [
+            
+                {
+                    "destination": "test-destination/foo/bar",
+                    "overwrite": false
+                }
+            ]
+        },
+    "name": "sample-policy"
+}

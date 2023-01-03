@@ -1,0 +1,35 @@
+{
+    "mappings":  
+        {
+            "test-marketplace": [
+                {
+                    "destination": "test-destination/foo/bar",
+                    "overwrite": false
+                }
+            ],
+            "another-marketplace": [
+                {
+                    "destination": "aaaaaaaaaaaaaaa",
+                    "overwrite": false,
+                    "meta": {}
+                },
+                {
+                    "destination": "bbbbbbbbbbbbb",
+                    "overwrite": true,
+                    "meta": {"foo": "bar"}
+                }
+            ],
+            "third-marketplace": [
+                {
+                    "destination": "foo/bar",
+                    "overwrite": true
+                },
+                {
+                    "architecture": "x86_64",
+                    "destination": "this-is-a-test-destination/with-testing-information",
+                    "overwrite": false
+                }
+            ]
+        },
+    "name": "sample-policy"
+}
