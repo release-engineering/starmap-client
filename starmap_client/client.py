@@ -14,7 +14,9 @@ class StarmapClient(object):
     POLICIES_PER_PAGE = 100
     """Number of policies to retrieve per call."""
 
-    def __init__(self, url: str, api_version: str = "v1"):
+    def __init__(
+        self, url: str, api_version: str = "v1", session_params: Optional[Dict[str, Any]] = None
+    ):
         """
         Create a new StArMapClient.
 
@@ -24,8 +26,11 @@ class StarmapClient(object):
 
             api_version (str, optional)
                 The StArMap API version. Defaults to `v1`.
+            session_params (dict, optional)
+                Additional keyword arguments for StarmapSession
         """
-        self.session = StarmapSession(url, api_version)
+        session_params = session_params or {}
+        self.session = StarmapSession(url, api_version, **session_params)
         self._policies: List[Policy] = []
 
     def _query(self, params: Dict[str, Any]) -> Optional[QueryResponse]:

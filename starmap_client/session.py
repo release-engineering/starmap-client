@@ -3,6 +3,7 @@ import logging
 from typing import Any, Dict
 
 import requests
+from requests.adapters import HTTPAdapter, Retry
 
 log = logging.getLogger(__name__)
 
@@ -10,16 +11,37 @@ log = logging.getLogger(__name__)
 class StarmapSession(object):
     """Implement a HTTP(S) session with StArMap."""
 
-    def __init__(self, url: str, api_version: str):
+    def __init__(
+        self,
+        url: str,
+        api_version: str,
+        retries: int = 3,
+        backoff_factor: float = 2.0,
+    ):
         """
         Create the StarmapSession object.
 
         Args:
             url (str): The StArMap server endpoint base URL
             api_version: The StArMap server API version to call
+            retries (int, optional)
+                The number of request retries on failure
+            backoff_factor (float, optional)
+                The backoff factor to apply between attempts after the second try
         """
         self.url = url
         self.api_version = api_version
+        self.session = requests.Session()
+        retry = Retry(
+            total=retries,
+            read=retries,
+            connect=retries,
+            backoff_factor=backoff_factor,
+            status_forcelist=set(range(500, 512)),
+        )
+        adapter = HTTPAdapter(max_retries=retry)
+        self.session.mount("https://", adapter)
+        self.verify = True
 
     def _request(self, method: str, path: str, **kwargs) -> requests.Response:
         """Perform a generic request on StArMap."""
@@ -31,7 +53,7 @@ class StarmapSession(object):
         url_elements = [self.url, f"/api/{self.api_version}", path]
         url = "/".join(arg.strip("/") for arg in url_elements)
 
-        return requests.request(method, url=url, headers=headers, **kwargs)
+        return self.session.request(method, url=url, headers=headers, verify=self.verify, **kwargs)
 
     def get(self, path: str, **kwargs) -> requests.Response:
         """Perform a GET request on StArMap."""
