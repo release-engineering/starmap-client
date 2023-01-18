@@ -160,6 +160,8 @@ class QueryResponse(StarmapJSONDecodeMixin):
         """
         mappings = json.pop("mappings", {})
         for c in mappings.keys():
+            if not isinstance(mappings[c], list):
+                raise ValueError(f"Expected mappings to be a list, got \"{type(c)}\".")
             dst = [Destination.from_json(d) for d in mappings[c]]
             mappings[c] = dst
         json["clouds"] = mappings

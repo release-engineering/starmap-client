@@ -112,6 +112,8 @@ class TestStarmapClient(TestCase):
         self.mock_resp_success.json.return_value = single_page
         self.mock_session.get.return_value = self.mock_resp_success
 
+        # Iterate over all policies from StarmapClient property and
+        # ensure each of them has a valid format.
         for p in self.svc.policies:
             self.assertEqual(p, Policy.from_json(load_json(fpath)))
 
@@ -142,6 +144,8 @@ class TestStarmapClient(TestCase):
         self.mock_resp_success.json.side_effect = [page1, page2]
         self.mock_session.get.return_value = self.mock_resp_success
 
+        # Iterate over all policies from StarmapClient property and
+        # ensure each of them has a valid format.
         for p in self.svc.policies:
             self.assertEqual(p, Policy.from_json(load_json(fpath)))
 
