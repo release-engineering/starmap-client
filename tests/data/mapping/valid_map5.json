@@ -1,0 +1,10 @@
+{
+    "destinations": [
+        {
+            "destination": "test-destination/foo/bar",
+            "overwrite": false
+        }
+    ],
+    "id": "4ca12b6e-8ae0-11ed-8571-902e165594e8",
+    "marketplace_account": "test-marketplace"
+}

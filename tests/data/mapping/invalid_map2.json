@@ -1,0 +1,4 @@
+{
+    "marketplace_account": "test-marketplace",
+    "error": "Length of 'destinations' must be => 1: 0"
+}

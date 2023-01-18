@@ -1,0 +1,4 @@
+{
+    "id": "e205327a-8ad3-11ed-8c33-902e165594e8",
+    "error": "'destination' must be <class 'str'> \\(got None that is a <class 'NoneType'>\\)."
+}

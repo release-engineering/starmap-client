@@ -1,0 +1,18 @@
+{
+    "mappings": [ 
+        {
+            "destinations": [
+                {
+                    "destination": "test-destination/foo/bar",
+                    "overwrite": false
+                }
+            ],
+            "id": "fd3263f5-f079-4f3e-982a-9e643976b28b",
+            "marketplace_account": "test-marketplace",
+            "meta": {},
+            "version_fnmatch": "1.*"
+        }
+    ],
+    "meta": {"foo": "bar"},
+    "name": "sample-policy"
+}

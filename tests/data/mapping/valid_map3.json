@@ -1,0 +1,10 @@
+{
+    "destinations": [
+        {
+            "destination": "foobar",
+            "overwrite": false
+        }
+    ],
+    "marketplace_account": "test-marketplace",
+    "meta": {"foo": "bar"}
+}
