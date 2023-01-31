@@ -29,8 +29,9 @@ class StarmapJSONDecodeMixin:
         """
         Ensure the given JSON is an instance of `dict`.
 
-        Params:
-            json (Any): A JSON containing a StArMap response.
+        Args:
+            json (Any)
+                A JSON containing a StArMap response.
         """
         if not isinstance(json, dict):
             raise ValueError(
@@ -44,10 +45,11 @@ class StarmapJSONDecodeMixin:
 
         It's intended to be overriden by base classes which needs to do it.
 
-        Params:
-            json (dict): A JSON containing a StArMap response.
+        Args:
+            json (dict)
+                A JSON containing a StArMap response.
         Returns:
-            The modified JSON.
+            dict: The modified JSON.
         """
         return json
 
@@ -56,8 +58,9 @@ class StarmapJSONDecodeMixin:
         """
         Convert a JSON dictionary into class object.
 
-        Params:
-            json (dict): A JSON containing a StArMap response.
+        Args:
+            json (dict)
+                A JSON containing a StArMap response.
         Returns:
             The converted object from JSON.
         """
@@ -77,7 +80,13 @@ class StarmapBaseData:
     """Represent the common data present in StArMap entities."""
 
     id: Optional[str] = field(validator=optional(instance_of(str)))
+    """
+    The unique ID for a StArMap model.
+    This field is never set on :class:`~starmap_client.models.QueryResponse`.
+    """
+
     meta: Optional[Dict[str, Any]] = field()
+    """Dictionary with additional information related to a VM image."""
 
     @meta.validator
     def _is_meta_dict_of_str_any(self, attribute: Attribute, value: Any):
@@ -95,8 +104,13 @@ class Destination(StarmapBaseData, StarmapJSONDecodeMixin):
     """Represent a destination entry from Mapping."""
 
     architecture: Optional[str] = field(validator=optional(instance_of(str)))
+    """Architecture of the VM image."""
+
     destination: str = field(validator=instance_of(str))
+    """The product listing destination in the cloud marketplace."""
+
     overwrite: bool = field(validator=instance_of(bool))
+    """Whether to replace the existing VM image in the destination or append."""
 
 
 @frozen
@@ -112,8 +126,13 @@ class Mapping(StarmapBaseData, StarmapJSONDecodeMixin):
         ],
         converter=lambda x: [Destination.from_json(d) for d in x] if x else [],
     )
+    """List of destinations for the marketplace account."""
+
     marketplace_account: str = field(validator=instance_of(str))
+    """A string representing the destination marketplace account."""
+
     version_fnmatch: Optional[str] = field(validator=optional(instance_of(str)))
+    """A ``fnmatch`` string to apply the destinations only to the matched NVR versions."""
 
 
 @frozen
@@ -129,7 +148,10 @@ class Policy(StarmapBaseData, StarmapJSONDecodeMixin):
         ],
         converter=lambda x: [Mapping.from_json(m) for m in x] if x else [],
     )
+    """List of marketplace mappings which the Policy applies to."""
+
     name: str = field(validator=instance_of(str))
+    """The Koji Package name representing also the Policy name."""
 
 
 @frozen
@@ -156,7 +178,7 @@ class QueryResponse(StarmapJSONDecodeMixin):
         Params:
             json (dict): A JSON containing a StArMap Query response.
         Returns:
-            The modified JSON.
+            dict: The modified JSON.
         """
         mappings = json.pop("mappings", {})
         for c in mappings.keys():

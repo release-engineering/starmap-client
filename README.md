@@ -10,6 +10,10 @@ It's written to support applications running on `Python >= 3.7`.
 
 This library has a minimum set of requirements (namely `attrs` and `requests`) and can be installed and used in any supported environment.
 
+## Documentation
+
+The documentation of `StArMap Client` is [available here](https://stratosphere.pages.redhat.com/starmap-client/).
+
 ## Installation
 
 To install this library go to the project's root directory and execute:
