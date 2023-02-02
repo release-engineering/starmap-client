@@ -2,6 +2,10 @@
 
 The client implementation for [StArMap](https://gitlab.cee.redhat.com/stratosphere/starmap).
 
+[![pipeline](https://gitlab.cee.redhat.com/stratosphere/starmap-client/badges/main/pipeline.svg)](https://gitlab.cee.redhat.com/stratosphere/starmap-client/-/pipelines)
+[![coverage](https://gitlab.cee.redhat.com/stratosphere/starmap-client/badges/main/coverage.svg)](https://gitlab.cee.redhat.com/stratosphere/starmap-client/-/jobs)
+[![releases](https://gitlab.cee.redhat.com/stratosphere/starmap-client/-/badges/release.svg)](https://gitlab.cee.redhat.com/stratosphere/starmap-client/-/releases/)
+
 ## Overview
 
 The `StArMap Client` is a client library to communicate with [StArMap](https://gitlab.cee.redhat.com/stratosphere/starmap).
