@@ -3,6 +3,7 @@
 The client implementation for [StArMap](https://gitlab.cee.redhat.com/stratosphere/starmap).
 
 [![pipeline](https://gitlab.cee.redhat.com/stratosphere/starmap-client/badges/main/pipeline.svg)](https://gitlab.cee.redhat.com/stratosphere/starmap-client/-/pipelines)
+[![Quality Gate Status](https://sonarqube.corp.redhat.com/api/project_badges/measure?project=stratosphere_starmap-client&metric=alert_status&token=cc200ebb1eb3be0a1ce831185a3bbc1adfafd47e)](https://sonarqube.corp.redhat.com/dashboard?id=stratosphere_starmap-client)
 [![coverage](https://gitlab.cee.redhat.com/stratosphere/starmap-client/badges/main/coverage.svg)](https://gitlab.cee.redhat.com/stratosphere/starmap-client/-/jobs)
 [![releases](https://gitlab.cee.redhat.com/stratosphere/starmap-client/-/badges/release.svg)](https://gitlab.cee.redhat.com/stratosphere/starmap-client/-/releases/)
 
