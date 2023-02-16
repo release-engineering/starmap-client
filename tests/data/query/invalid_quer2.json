@@ -1,0 +1,8 @@
+{
+    "mappings":  
+        {
+            "test-marketplace": "foo"
+        },
+    "name": "sample-policy",
+    "error": "Expected mappings to be a list, got \"<class 'str'>\""
+}

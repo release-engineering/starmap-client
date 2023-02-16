@@ -1,0 +1,12 @@
+{
+    "mappings":  
+        {
+            "test-marketplace": {
+                    "destination": "test-destination/foo/bar",
+                    "overwrite": false
+            }
+
+        },
+    "name": "sample-policy",
+    "error": "Expected mappings to be a list, got \"<class 'dict'>\""
+}
