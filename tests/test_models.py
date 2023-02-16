@@ -208,6 +208,20 @@ class TestQueryResponse:
         with pytest.raises(TypeError):
             QueryResponse(**data)
 
+    @pytest.mark.parametrize(
+        "json_file",
+        [
+            "tests/data/query/invalid_quer1.json",
+            "tests/data/query/invalid_quer2.json",
+        ],
+    )
+    def test_invalid_clouds(self, json_file) -> None:
+        data = load_json(json_file)
+        err = data.pop("error")
+
+        with pytest.raises((TypeError, ValueError), match=err):
+            QueryResponse.from_json(data)
+
     def test_frozen_query(self):
         data = load_json("tests/data/query/valid_quer1.json")
 
