@@ -159,6 +159,8 @@ class QueryResponse(StarmapJSONDecodeMixin):
     """Represent a query response from StArMap."""
 
     name: str = field(validator=instance_of(str))
+    """The :class:`~Policy` name."""
+
     clouds: Dict[str, List[Destination]] = field(
         default=Factory(dict),
         validator=deep_mapping(
@@ -169,6 +171,7 @@ class QueryResponse(StarmapJSONDecodeMixin):
             mapping_validator=instance_of(dict),
         ),
     )
+    """Dictionary with the cloud marketplaces aliases and their respective Destinations."""
 
     @classmethod
     def _preprocess_json(cls, json: Any) -> Dict[str, Any]:
