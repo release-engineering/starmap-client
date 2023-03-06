@@ -17,7 +17,7 @@ variables:
   # -- Settings for code_scanning
   PROJECT_NAME: "stratosphere_starmap-client"
   CODE_SCANNING_LANGUAGE: "Python"
-  CODE_SCANNING_EXCLUSIONS: "tests/**"
+  CODE_SCANNING_EXCLUSIONS: "tests/**,docs/**"
 
 .common: &common
   image: quay.io/redhat-aqe/tox:latest
