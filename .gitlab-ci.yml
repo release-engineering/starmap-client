@@ -57,11 +57,6 @@ security:
 code_scanning:
   stage: security
 
-rh-gitleaks-scan:
-  # FIXME: We still need to have an account in a Pattern Distribution Server to use rh-gitleaks
-  rules:
-    - allow_failure: true
-
 coverage:
   <<: *common
   coverage: /(?i)total.*? (100(?:\.0+)?\%|[1-9]?\d(?:\.\d+)?\%)$/
