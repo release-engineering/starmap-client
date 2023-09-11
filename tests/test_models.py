@@ -22,6 +22,7 @@ class TestDestination:
             "tests/data/destination/valid_dest3.json",
             "tests/data/destination/valid_dest4.json",
             "tests/data/destination/valid_dest5.json",
+            "tests/data/destination/valid_dest6.json",
         ],
     )
     def test_valid_destination_json(self, json_file: str) -> None:
@@ -41,6 +42,8 @@ class TestDestination:
             "tests/data/destination/invalid_dest1.json",
             "tests/data/destination/invalid_dest2.json",
             "tests/data/destination/invalid_dest3.json",
+            "tests/data/destination/invalid_dest4.json",
+            "tests/data/destination/invalid_dest5.json",
         ],
     )
     def test_invalid_destination_json(self, json_file: str) -> None:
