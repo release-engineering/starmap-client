@@ -112,6 +112,17 @@ class Destination(StarmapBaseData, StarmapJSONDecodeMixin):
     overwrite: bool = field(validator=instance_of(bool))
     """Whether to replace the existing VM image in the destination or append."""
 
+    tags: Optional[Dict[str, str]] = field(
+        validator=optional(
+            deep_mapping(
+                key_validator=instance_of(str),
+                value_validator=instance_of(str),
+                mapping_validator=instance_of(dict),
+            )
+        )
+    )
+    """Dictionary with custom tags to be set on cloud marketplaces resources."""
+
 
 @frozen
 class Mapping(StarmapBaseData, StarmapJSONDecodeMixin):

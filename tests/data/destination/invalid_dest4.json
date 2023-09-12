@@ -1,5 +1,5 @@
 {
     "destination": "test",
     "overwrite": 1,
-    "error": "'overwrite' must be <class 'bool'> \\(got None that is a <class 'int'>\\)."
+    "error": "'overwrite' must be <class 'bool'> \\(got 1 that is a <class 'int'>\\)."
 }

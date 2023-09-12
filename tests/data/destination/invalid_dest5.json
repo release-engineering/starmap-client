@@ -1,0 +1,6 @@
+{
+    "destination": "test",
+    "overwrite": false,
+    "tags": 1,
+    "error": "'tags' must be <class 'dict'> \\(got 1 that is a <class 'int'>\\)."
+}

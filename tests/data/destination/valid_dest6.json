@@ -1,0 +1,7 @@
+{
+    "id": "e205327a-8ad3-11ed-8c33-902e165594e8",
+    "destination": "aaabbcccddeefffggghhh/ii/jjkk/ll/mm/nn/oo/p/q/r/s/t/u/v/w/x/y-z",
+    "meta": {"foo": "bar", "a": 1},
+    "overwrite": true,
+    "tags": {"tag1": "value1", "tag2": "value2"}
+}
