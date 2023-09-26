@@ -2,7 +2,8 @@
     "destinations": [
         {
             "destination": "test-destination/foo/bar",
-            "overwrite": false
+            "overwrite": false,
+            "stage_preview": false
         }
     ],
     "id": "fd3263f5-f079-4f3e-982a-9e643976b28b",

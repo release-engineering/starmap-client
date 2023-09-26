@@ -4,18 +4,21 @@
             "test-marketplace": [
                 {
                     "destination": "test-destination/foo/bar",
-                    "overwrite": false
+                    "overwrite": false,
+                    "stage_preview": true
                 }
             ],
             "another-marketplace": [
                 {
                     "destination": "aaaaaaaaaaaaaaa",
                     "overwrite": false,
+                    "stage_preview": true,
                     "meta": {}
                 },
                 {
                     "destination": "bbbbbbbbbbbbb",
                     "overwrite": true,
+                    "stage_preview": false,
                     "meta": {"foo": "bar"}
                 }
             ]

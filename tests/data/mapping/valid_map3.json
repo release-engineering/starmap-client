@@ -2,7 +2,8 @@
     "destinations": [
         {
             "destination": "foobar",
-            "overwrite": false
+            "overwrite": false,
+            "stage_preview": false
         }
     ],
     "marketplace_account": "test-marketplace",

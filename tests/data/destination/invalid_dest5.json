@@ -1,6 +1,7 @@
 {
     "destination": "test",
     "overwrite": false,
+    "stage_preview": false,
     "tags": 1,
     "error": "'tags' must be <class 'dict'> \\(got 1 that is a <class 'int'>\\)."
 }
