@@ -4,30 +4,35 @@
             "test-marketplace": [
                 {
                     "destination": "test-destination/foo/bar",
-                    "overwrite": false
+                    "overwrite": false,
+                    "stage_preview": false
                 }
             ],
             "another-marketplace": [
                 {
                     "destination": "aaaaaaaaaaaaaaa",
                     "overwrite": false,
+                    "stage_preview": false,
                     "meta": {}
                 },
                 {
                     "destination": "bbbbbbbbbbbbb",
                     "overwrite": true,
+                    "stage_preview": true,
                     "meta": {"foo": "bar"}
                 }
             ],
             "third-marketplace": [
                 {
                     "destination": "foo/bar",
-                    "overwrite": true
+                    "overwrite": true,
+                    "stage_preview": true
                 },
                 {
                     "architecture": "x86_64",
                     "destination": "this-is-a-test-destination/with-testing-information",
-                    "overwrite": false
+                    "overwrite": false,
+                    "stage_preview": false
                 }
             ]
         },

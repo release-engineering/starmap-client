@@ -112,6 +112,9 @@ class Destination(StarmapBaseData, StarmapJSONDecodeMixin):
     overwrite: bool = field(validator=instance_of(bool))
     """Whether to replace the existing VM image in the destination or append."""
 
+    stage_preview: bool = field(validator=instance_of(bool))
+    """Whether to publish the VM image in the Marketplace as ``preview`` during QE or not."""
+
     tags: Optional[Dict[str, str]] = field(
         validator=optional(
             deep_mapping(

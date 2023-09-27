@@ -5,7 +5,8 @@
             
                 {
                     "destination": "test-destination/foo/bar",
-                    "overwrite": false
+                    "overwrite": false,
+                    "stage_preview": false
                 }
             ]
         },

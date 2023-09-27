@@ -4,11 +4,13 @@
             "test-marketplace": [
                 {
                     "destination": "test-destination/foo/bar",
-                    "overwrite": false
+                    "overwrite": false,
+                    "stage_preview": false
                 },
                 {
                     "destination": "second-test-destination/foo/bar",
                     "overwrite": true,
+                    "stage_preview": true,
                     "meta": {"foo": "bar"}
                 }
             ],
@@ -16,11 +18,13 @@
                 {
                     "destination": "aaaaaaaaaaaaaaa",
                     "overwrite": false,
+                    "stage_preview": false,
                     "meta": {}
                 },
                 {
                     "destination": "bbbbbbbbbbbbb",
                     "overwrite": true,
+                    "stage_preview": true,
                     "meta": {"foo": "bar"}
                 }
             ]

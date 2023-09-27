@@ -44,6 +44,7 @@ class TestDestination:
             "tests/data/destination/invalid_dest3.json",
             "tests/data/destination/invalid_dest4.json",
             "tests/data/destination/invalid_dest5.json",
+            "tests/data/destination/invalid_dest6.json",
         ],
     )
     def test_invalid_destination_json(self, json_file: str) -> None:
