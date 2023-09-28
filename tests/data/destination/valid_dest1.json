@@ -1,5 +1,6 @@
 {
     "destination": "test-destination/foo/bar",
     "overwrite": false,
+    "delete_restricted": false,
     "stage_preview": true
 }

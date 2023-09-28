@@ -5,6 +5,7 @@
                 {
                     "destination": "test-destination/foo/bar",
                     "overwrite": false,
+                    "delete_restricted": false,
                     "stage_preview": true
                 }
             ],
@@ -12,12 +13,14 @@
                 {
                     "destination": "aaaaaaaaaaaaaaa",
                     "overwrite": false,
+                    "delete_restricted": false,
                     "stage_preview": true,
                     "meta": {}
                 },
                 {
                     "destination": "bbbbbbbbbbbbb",
                     "overwrite": true,
+                    "delete_restricted": false,
                     "stage_preview": false,
                     "meta": {"foo": "bar"}
                 }

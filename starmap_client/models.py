@@ -115,6 +115,9 @@ class Destination(StarmapBaseData, StarmapJSONDecodeMixin):
     stage_preview: bool = field(validator=instance_of(bool))
     """Whether to publish the VM image in the Marketplace as ``preview`` during QE or not."""
 
+    delete_restricted: bool = field(validator=instance_of(bool))
+    """Whether to delete an AMI and snapshot after restricting it"""
+
     tags: Optional[Dict[str, str]] = field(
         validator=optional(
             deep_mapping(

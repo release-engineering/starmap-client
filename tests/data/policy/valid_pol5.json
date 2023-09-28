@@ -5,6 +5,7 @@
                 {
                     "destination": "test-destination/foo/bar",
                     "overwrite": false,
+                    "delete_restricted": false,
                     "stage_preview": false
                 }
             ],
@@ -18,6 +19,7 @@
                 {
                     "destination": "another-destination/foo/bar",
                     "overwrite": true,
+                    "delete_restricted": false,
                     "stage_preview": true
                 }
             ],
