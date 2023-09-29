@@ -3,5 +3,6 @@
     "architecture": "x86_64",
     "destination": "this-is-a-test-destination/with-testing-information",
     "overwrite": false,
+    "delete_restricted": false,
     "stage_preview": false
 }
