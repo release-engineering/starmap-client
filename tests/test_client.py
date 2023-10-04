@@ -38,7 +38,7 @@ class TestStarmapClient(TestCase):
         self.mock_resp_success.status_code = 200
         self.mock_resp_not_found = mock.MagicMock()
         self.mock_resp_not_found.status_code = 404
-        self.mock_resp_not_found.raise_for_status.side_effect = HTTPError("Not found")
+        self.mock_resp_not_found.raise_for_status.side_effect = HTTPError("Not found")  # type: ignore  # noqa: E501
 
     def tearDown(self):
         mock.patch.stopall()
