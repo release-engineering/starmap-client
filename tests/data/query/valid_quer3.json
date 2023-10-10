@@ -33,5 +33,6 @@
                 }
             ]
         },
+    "workflow": "stratosphere",
     "name": "sample-policy"
 }

@@ -50,7 +50,7 @@ class TestStarmapClient(TestCase):
 
         res = self.svc.query_image(self.image)
 
-        expected_params = {"image": self.image}
+        expected_params = {"image": self.image, "workflow": "stratosphere"}
         self.mock_session.get.assert_called_once_with("/query", params=expected_params)
         self.mock_resp_success.raise_for_status.assert_called_once()
         # Note: JSON need to be loaded twice as `from_json` pops its original data
@@ -62,7 +62,10 @@ class TestStarmapClient(TestCase):
         with self._caplog.at_level(logging.ERROR):
             res = self.svc.query_image(self.image)
 
-        expected_msg = "Marketplace mappings not defined for {'image': '%s'}" % self.image
+        expected_msg = (
+            "Marketplace mappings not defined for {'image': '%s', 'workflow': 'stratosphere'}"
+            % self.image
+        )
         assert expected_msg in self._caplog.text
 
         self.assertIsNone(res)
@@ -74,7 +77,7 @@ class TestStarmapClient(TestCase):
 
         res = self.svc.query_image_by_name(name=self.image_name)
 
-        expected_params = {"name": self.image_name}
+        expected_params = {"name": self.image_name, "workflow": "stratosphere"}
         self.mock_session.get.assert_called_once_with("/query", params=expected_params)
         self.mock_resp_success.raise_for_status.assert_called_once()
         # Note: JSON need to be loaded twice as `from_json` pops its original data
@@ -87,7 +90,11 @@ class TestStarmapClient(TestCase):
 
         res = self.svc.query_image_by_name(name=self.image_name, version=self.image_version)
 
-        expected_params = {"name": self.image_name, "version": self.image_version}
+        expected_params = {
+            "name": self.image_name,
+            "version": self.image_version,
+            "workflow": "stratosphere",
+        }
         self.mock_session.get.assert_called_once_with("/query", params=expected_params)
         self.mock_resp_success.raise_for_status.assert_called_once()
         # Note: JSON need to be loaded twice as `from_json` pops its original data

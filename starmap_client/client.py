@@ -2,7 +2,14 @@
 import logging
 from typing import Any, Dict, Iterator, List, Optional
 
-from starmap_client.models import Destination, Mapping, PaginatedRawData, Policy, QueryResponse
+from starmap_client.models import (
+    Destination,
+    Mapping,
+    PaginatedRawData,
+    Policy,
+    QueryResponse,
+    Workflow,
+)
 from starmap_client.session import StarmapSession
 
 log = logging.getLogger(__name__)
@@ -41,20 +48,26 @@ class StarmapClient(object):
         rsp.raise_for_status()
         return QueryResponse.from_json(json=rsp.json())
 
-    def query_image(self, nvr: str) -> Optional[QueryResponse]:
+    def query_image(
+        self, nvr: str, workflow: Workflow = Workflow.stratosphere
+    ) -> Optional[QueryResponse]:
         """
         Query StArMap using an image NVR.
 
         Args:
             nvr (str): The image archive name or NVR.
+            workflow(Workflow, optional): The desired workflow to retrieve the mappings from.
 
         Returns:
             QueryResponse: The query result when found or None.
         """
-        return self._query(params={"image": nvr})
+        return self._query(params={"image": nvr, "workflow": workflow.value})
 
     def query_image_by_name(
-        self, name: str, version: Optional[str] = None
+        self,
+        name: str,
+        version: Optional[str] = None,
+        workflow: Workflow = Workflow.stratosphere,
     ) -> Optional[QueryResponse]:
         """
         Query StArMap using an image NVR.
@@ -62,11 +75,12 @@ class StarmapClient(object):
         Args:
             name (str): The image name from NVR.
             version (str, optional): The version from NVR.
+            workflow (Workflow, optional): The desired workflow to retrieve the mappings from.
 
         Returns:
             QueryResponse: The query result when found or None.
         """
-        params = {"name": name}
+        params = {"name": name, "workflow": workflow.value}
         if version:
             params.update({"version": version})
         return self._query(params=params)

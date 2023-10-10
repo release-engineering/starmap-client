@@ -1,5 +1,6 @@
 # SPDX-License-Identifier: GPL-3.0-or-later
 import sys
+from enum import Enum
 from typing import Any, Dict, List, Optional
 
 if sys.version_info >= (3, 8):
@@ -18,6 +19,14 @@ __all__ = [
     'PaginatedRawData',
     'PaginationMetadata',
 ]
+
+
+class Workflow(Enum):
+    """Define the valid workflows for StArMap."""
+
+    community = "community"
+
+    stratosphere = "stratosphere"
 
 
 @frozen
@@ -170,6 +179,9 @@ class Policy(StarmapBaseData, StarmapJSONDecodeMixin):
     name: str = field(validator=instance_of(str))
     """The Koji Package name representing also the Policy name."""
 
+    workflow: Workflow = field(converter=lambda x: Workflow(x))
+    """The policy workflow name."""
+
 
 @frozen
 class QueryResponse(StarmapJSONDecodeMixin):
@@ -177,6 +189,9 @@ class QueryResponse(StarmapJSONDecodeMixin):
 
     name: str = field(validator=instance_of(str))
     """The :class:`~Policy` name."""
+
+    workflow: Workflow = field(converter=lambda x: Workflow(x))
+    """The :class:`~Policy` workflow."""
 
     clouds: Dict[str, List[Destination]] = field(
         default=Factory(dict),
