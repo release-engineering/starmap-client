@@ -1,5 +1,6 @@
 {
     "id": "60e6774a-8ae1-11ed-9ce9-902e165594e8",
+    "workflow": "stratosphere",
     "mappings": [ 
         {
             "destinations": [

@@ -16,5 +16,6 @@
         }
     ],
     "meta": {"foo": "bar"},
+    "workflow": "stratosphere",
     "name": "sample-policy"
 }

@@ -16,5 +16,6 @@
             "version_fnmatch": "1.*"
         }
     ],
+    "workflow": "stratosphere",
     "name": "sample-policy"
 }

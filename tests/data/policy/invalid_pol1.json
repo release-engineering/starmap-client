@@ -3,5 +3,6 @@
     "mappings": [],
     "meta": {"foo": "bar"},
     "name": "sample-policy",
+    "workflow": "stratosphere",
     "error": "Length of 'mappings' must be => 1: 0"
 }

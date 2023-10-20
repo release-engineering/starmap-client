@@ -9,5 +9,6 @@
 
         },
     "name": "sample-policy",
+    "workflow": "stratosphere",
     "error": "Expected mappings to be a list, got \"<class 'dict'>\""
 }
