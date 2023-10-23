@@ -21,7 +21,7 @@ __all__ = [
 ]
 
 
-class Workflow(Enum):
+class Workflow(str, Enum):
     """Define the valid workflows for StArMap."""
 
     community = "community"
