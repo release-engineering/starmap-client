@@ -127,6 +127,9 @@ class Destination(StarmapBaseData, StarmapJSONDecodeMixin):
     delete_restricted: bool = field(validator=instance_of(bool))
     """Whether to delete an AMI and snapshot after restricting it"""
 
+    provider: Optional[str] = field(validator=optional(instance_of(str)))
+    """Represent the RHSM provider name for the community workflow."""
+
     tags: Optional[Dict[str, str]] = field(
         validator=optional(
             deep_mapping(

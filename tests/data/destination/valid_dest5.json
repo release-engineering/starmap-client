@@ -4,5 +4,6 @@
     "meta": {"foo": "bar", "a": 1},
     "overwrite": true,
     "delete_restricted": false,
-    "stage_preview": true
+    "stage_preview": true,
+    "provider": "AWS"
 }
