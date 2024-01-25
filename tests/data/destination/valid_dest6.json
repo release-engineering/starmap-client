@@ -4,6 +4,6 @@
     "meta": {"foo": "bar", "a": 1},
     "overwrite": true,
     "stage_preview": false,
-    "delete_restricted": false,
+    "restrict_version": false,
     "tags": {"tag1": "value1", "tag2": "value2"}
 }

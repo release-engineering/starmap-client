@@ -2,6 +2,6 @@
     "destination": "test",
     "overwrite": 1,
     "stage_preview": false,
-    "delete_restricted": false,
+    "restrict_version": false,
     "error": "'overwrite' must be <class 'bool'> \\(got 1 that is a <class 'int'>\\)."
 }
