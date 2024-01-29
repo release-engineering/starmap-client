@@ -5,7 +5,7 @@
                 {
                     "destination": "test-destination/foo/bar",
                     "overwrite": false,
-                    "delete_restricted": false,
+                    "restrict_version": false,
                     "stage_preview": false
                 }
             ],
@@ -13,14 +13,14 @@
                 {
                     "destination": "aaaaaaaaaaaaaaa",
                     "overwrite": false,
-                    "delete_restricted": false,
+                    "restrict_version": false,
                     "stage_preview": false,
                     "meta": {}
                 },
                 {
                     "destination": "bbbbbbbbbbbbb",
                     "overwrite": true,
-                    "delete_restricted": false,
+                    "restrict_version": false,
                     "stage_preview": true,
                     "meta": {"foo": "bar"}
                 }
@@ -29,14 +29,14 @@
                 {
                     "destination": "foo/bar",
                     "overwrite": true,
-                    "delete_restricted": false,
+                    "restrict_version": false,
                     "stage_preview": true
                 },
                 {
                     "architecture": "x86_64",
                     "destination": "this-is-a-test-destination/with-testing-information",
                     "overwrite": false,
-                    "delete_restricted": false,
+                    "restrict_version": false,
                     "stage_preview": false
                 }
             ]

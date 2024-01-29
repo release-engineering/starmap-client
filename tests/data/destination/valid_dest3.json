@@ -3,7 +3,7 @@
     "architecture": "x86_64",
     "destination": "this-is-a-test-destination/with-testing-information",
     "overwrite": false,
-    "delete_restricted": false,
+    "restrict_version": false,
     "stage_preview": false,
     "provider": "AGOV"
 }

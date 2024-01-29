@@ -3,7 +3,7 @@
     "destination": "aaabbcccddeefffggghhh/ii/jjkk/ll/mm/nn/oo/p/q/r/s/t/u/v/w/x/y-z",
     "meta": {"foo": "bar", "a": 1},
     "overwrite": true,
-    "delete_restricted": false,
+    "restrict_version": false,
     "stage_preview": true,
     "provider": "AWS"
 }

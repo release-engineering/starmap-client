@@ -3,7 +3,7 @@
         {
             "test-marketplace": {
                     "destination": "test-destination/foo/bar",
-                    "delete_restricted": false,
+                    "restrict_version": false,
                     "overwrite": false
             }
 

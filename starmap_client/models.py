@@ -124,8 +124,8 @@ class Destination(StarmapBaseData, StarmapJSONDecodeMixin):
     stage_preview: bool = field(validator=instance_of(bool))
     """Whether to publish the VM image in the Marketplace as ``preview`` during QE or not."""
 
-    delete_restricted: bool = field(validator=instance_of(bool))
-    """Whether to delete an AMI and snapshot after restricting it"""
+    restrict_version: bool = field(validator=instance_of(bool))
+    """Whether to restrict and image and delete it's AMI and snapshot"""
 
     provider: Optional[str] = field(validator=optional(instance_of(str)))
     """Represent the RHSM provider name for the community workflow."""

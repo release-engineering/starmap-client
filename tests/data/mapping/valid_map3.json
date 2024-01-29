@@ -3,7 +3,7 @@
         {
             "destination": "foobar",
             "overwrite": false,
-            "delete_restricted": false,
+            "restrict_version": false,
             "stage_preview": false
         }
     ],

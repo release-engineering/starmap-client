@@ -5,13 +5,13 @@
                 {
                     "destination": "test-destination/foo/bar",
                     "overwrite": false,
-                    "delete_restricted": false,
+                    "restrict_version": false,
                     "stage_preview": false
                 },
                 {
                     "destination": "second-test-destination/foo/bar",
                     "overwrite": true,
-                    "delete_restricted": false,
+                    "restrict_version": false,
                     "stage_preview": true,
                     "meta": {"foo": "bar"}
                 }
@@ -20,14 +20,14 @@
                 {
                     "destination": "aaaaaaaaaaaaaaa",
                     "overwrite": false,
-                    "delete_restricted": false,
+                    "restrict_version": false,
                     "stage_preview": false,
                     "meta": {}
                 },
                 {
                     "destination": "bbbbbbbbbbbbb",
                     "overwrite": true,
-                    "delete_restricted": false,
+                    "restrict_version": false,
                     "stage_preview": true,
                     "meta": {"foo": "bar"}
                 }
