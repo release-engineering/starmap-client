@@ -161,7 +161,15 @@ class Mapping(StarmapBaseData, StarmapJSONDecodeMixin):
     """A string representing the destination marketplace account."""
 
     version_fnmatch: Optional[str] = field(validator=optional(instance_of(str)))
-    """A ``fnmatch`` string to apply the destinations only to the matched NVR versions."""
+    """A ``fnmatch`` string to apply the destinations only to the matched NVR versions.
+
+    It can't be set together with ``version_regexmatch``.
+    """
+
+    version_regexmatch: Optional[str] = field(validator=optional(instance_of(str)))
+    """A ``regex`` string to apply the destinations only to the matched NVR versions.
+
+    It can't be set together with ``version_fnmatch``."""
 
 
 @frozen
