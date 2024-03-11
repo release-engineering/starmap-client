@@ -11,7 +11,7 @@ The client implementation for [StArMap](https://gitlab.cee.redhat.com/stratosphe
 
 The `StArMap Client` is a client library to communicate with [StArMap](https://gitlab.cee.redhat.com/stratosphere/starmap).
 
-It's written to support applications running on `Python >= 3.7`.
+It's written to support applications running on `Python >= 3.8`.
 
 This library has a minimum set of requirements (namely `attrs` and `requests`) and can be installed and used in any supported environment.
 
@@ -59,7 +59,7 @@ Querying the destinations of an image:
 
 The versions listed below are the one which were tested and work. Other versions can work as well.
 
-- Install or create a `virtualenv` for `python` >= 3.7
+- Install or create a `virtualenv` for `python` >= 3.8
 - Install `tox` >= 3.25
 
 ### Dependency Management
@@ -97,4 +97,4 @@ To automatically format your code you man run `tox -e autoformat`.
 
 ### Unit tests
 
-To run unit tests use `tox -e py37,py38,py39,py310`.
+To run unit tests use `tox -e py38,py39,py310`.

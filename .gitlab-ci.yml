@@ -69,12 +69,6 @@ coverage:
     paths: 
       - .coverage-reports
 
-python3.7:
-  <<: *common
-  stage: unit-tests
-  script: 
-    - tox -e py37
-
 python3.8:
   <<: *common
   stage: unit-tests
