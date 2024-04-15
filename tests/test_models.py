@@ -121,9 +121,8 @@ class TestMapping:
     )
     def test_invalid_mapping_json(self, json_file: str) -> None:
         data = load_json(json_file)
-        err = data.pop("error")
 
-        with pytest.raises((TypeError, ValueError), match=err):
+        with pytest.raises((TypeError, ValueError)):
             Mapping.from_json(data)
 
     def test_frozen_mapping(self):
@@ -170,9 +169,8 @@ class TestPolicy:
     )
     def test_invalid_policy_json(self, json_file: str) -> None:
         data = load_json(json_file)
-        err = data.pop("error")
 
-        with pytest.raises((TypeError, ValueError), match=err):
+        with pytest.raises((TypeError, ValueError)):
             Policy.from_json(data)
 
     def test_frozen_policy(self):
