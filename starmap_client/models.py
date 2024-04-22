@@ -127,6 +127,12 @@ class Destination(StarmapBaseData, StarmapJSONDecodeMixin):
     restrict_version: bool = field(validator=instance_of(bool))
     """Whether to restrict and image and delete it's AMI and snapshot"""
 
+    restrict_major: Optional[int] = field(validator=optional(instance_of(int)))
+    """How many major versions are allowed in product"""
+
+    restrict_minor: Optional[int] = field(validator=optional(instance_of(int)))
+    """How many minor versions are allowed in product"""
+
     provider: Optional[str] = field(validator=optional(instance_of(str)))
     """Represent the RHSM provider name for the community workflow."""
 
