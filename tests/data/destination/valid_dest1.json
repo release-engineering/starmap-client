@@ -2,5 +2,7 @@
     "destination": "test-destination/foo/bar",
     "overwrite": false,
     "restrict_version": false,
+    "restrict_major": 1,
+    "restrict_minor": 1,
     "stage_preview": true
 }
