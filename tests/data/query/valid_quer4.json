@@ -5,8 +5,7 @@
                 {
                     "destination": "test-destination/foo/bar",
                     "overwrite": false,
-                    "restrict_version": false,
-                    "stage_preview": true
+                    "restrict_version": false
                 }
             ],
             "another-marketplace": [
@@ -14,14 +13,12 @@
                     "destination": "aaaaaaaaaaaaaaa",
                     "overwrite": false,
                     "restrict_version": false,
-                    "stage_preview": true,
                     "meta": {}
                 },
                 {
                     "destination": "bbbbbbbbbbbbb",
                     "overwrite": true,
                     "restrict_version": false,
-                    "stage_preview": false,
                     "meta": {"foo": "bar"}
                 }
             ]

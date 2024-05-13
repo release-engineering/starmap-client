@@ -3,8 +3,7 @@
         {
             "destination": "test-destination/foo/bar",
             "overwrite": false,
-            "restrict_version": false,
-            "stage_preview": false
+            "restrict_version": false
         }
     ],
     "marketplace_account": "test-marketplace"

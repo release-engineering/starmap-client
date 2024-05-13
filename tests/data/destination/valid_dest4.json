@@ -3,6 +3,5 @@
     "destination": "aaabbcccddeefffggghhh/ii/jjkk/ll/mm/nn/oo/p/q/r/s/t/u/v/w/x/y-z",
     "overwrite": true,
     "restrict_version": false,
-    "stage_preview": true,
     "provider": "ACN"
 }
