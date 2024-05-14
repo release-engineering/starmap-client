@@ -4,6 +4,5 @@
     "overwrite": false,
     "restrict_version": false,
     "restrict_major": null,
-    "restrict_minor": null,
-    "stage_preview": false
+    "restrict_minor": null
 }

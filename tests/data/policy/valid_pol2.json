@@ -5,8 +5,7 @@
                 {
                     "destination": "test-destination/foo/bar",
                     "overwrite": false,
-                    "restrict_version": false,
-                    "stage_preview": false
+                    "restrict_version": false
                 }
             ],
             "id": "fd3263f5-f079-4f3e-982a-9e643976b28b",

@@ -4,6 +4,5 @@
     "destination": "this-is-a-test-destination/with-testing-information",
     "overwrite": false,
     "restrict_version": false,
-    "stage_preview": false,
     "provider": "AGOV"
 }

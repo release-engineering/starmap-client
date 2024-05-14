@@ -1,6 +1,5 @@
 {
     "destination": "test",
-    "stage_preview": false,
     "restrict_version": false,
     "error": "'overwrite' must be <class 'bool'> \\(got None that is a <class 'NoneType'>\\)."
 }

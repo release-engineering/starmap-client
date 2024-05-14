@@ -5,14 +5,12 @@
                 {
                     "destination": "test-destination/foo/bar",
                     "overwrite": false,
-                    "restrict_version": false,
-                    "stage_preview": false
+                    "restrict_version": false
                 },
                 {
                     "destination": "second-test-destination/foo/bar",
                     "overwrite": true,
                     "restrict_version": false,
-                    "stage_preview": false,
                     "meta": {"foo": "bar"}
                 }
             ]
