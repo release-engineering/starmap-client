@@ -20,6 +20,21 @@ jobs:
         run: pip install tox 'virtualenv<20.21.1'
       - name: Run Linting
         run: tox -e lint
+  mypy:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - name: Install OS packages
+        run: |
+          sudo apt-get -y update
+          sudo apt-get install -y rpm
+          sudo apt-get install -y libkrb5-dev
+      - name: Setup Python
+        uses: actions/setup-python@v2
+        with:
+          python-version: 3.9
+      - name: Install Tox
+        run: pip install tox 'virtualenv<20.21.1'
       - name: Run MyPy
         run: tox -e mypy
   unit-tests:
@@ -58,15 +73,10 @@ jobs:
           python-version: 3.8
       - name: Install Tox
         run: pip install tox 'virtualenv<20.21.1'
-      - name: Run Tox
-        run: tox -e coverage
       - name: Install pytest cov
         run: pip install pytest-cov
-      - name: Upload coverage to Codecov
-        uses: codecov/codecov-action@v2
-        with:
-          fail_ci_if_error: true
-          verbose: true
+      - name: Run Tox
+        run: tox -e coverage
   security:
     runs-on: ubuntu-latest
     steps:
