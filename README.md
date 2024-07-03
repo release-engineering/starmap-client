@@ -1,15 +1,18 @@
 # StArMap Client
 
-The client implementation for [StArMap](https://gitlab.cee.redhat.com/stratosphere/starmap).
+The client implementation for _StArMap_ service,
+used by [release-engineering](https://github.com/release-engineering) publishing tools.
 
-[![pipeline](https://gitlab.cee.redhat.com/stratosphere/starmap-client/badges/main/pipeline.svg)](https://gitlab.cee.redhat.com/stratosphere/starmap-client/-/pipelines)
-[![Quality Gate Status](https://sonarqube.corp.redhat.com/api/project_badges/measure?project=stratosphere_starmap-client&metric=alert_status&token=cc200ebb1eb3be0a1ce831185a3bbc1adfafd47e)](https://sonarqube.corp.redhat.com/dashboard?id=stratosphere_starmap-client)
-[![coverage](https://gitlab.cee.redhat.com/stratosphere/starmap-client/badges/main/coverage.svg)](https://gitlab.cee.redhat.com/stratosphere/starmap-client/-/jobs)
-[![releases](https://gitlab.cee.redhat.com/stratosphere/starmap-client/-/badges/release.svg)](https://gitlab.cee.redhat.com/stratosphere/starmap-client/-/releases/)
+![GitHub Actions Workflow Status](https://img.shields.io/github/actions/workflow/status/release-engineering/starmap-client/tox-test.yml)
+![GitHub Release](https://img.shields.io/github/v/release/release-engineering/starmap-client)
+[![PyPI version](https://badge.fury.io/py/starmap-client.svg)](https://badge.fury.io/py/starmap-client)
+
+- [Source](https://github.com/release-engineering/starmap-client)
+- [Documentation](https://release-engineering.github.io/starmap-client/)
 
 ## Overview
 
-The `StArMap Client` is a client library to communicate with [StArMap](https://gitlab.cee.redhat.com/stratosphere/starmap).
+The `StArMap Client` is a client library to communicate with the _StArMap_ service.
 
 It's written to support applications running on `Python >= 3.8`.
 
@@ -17,7 +20,7 @@ This library has a minimum set of requirements (namely `attrs` and `requests`) a
 
 ## Documentation
 
-The documentation of `StArMap Client` is [available here](https://stratosphere.pages.redhat.com/starmap-client/).
+The documentation of `StArMap Client` is [available here](https://release-engineering.github.io/starmap-client/).
 
 ## Installation
 
