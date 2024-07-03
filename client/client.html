@@ -1,0 +1,352 @@
+<!DOCTYPE html>
+
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>Client &#8212; StArMap Client  documentation</title>
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=4f649999" />
+    <link rel="stylesheet" type="text/css" href="../_static/alabaster.css?v=1fc5d657" />
+    <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js?v=b3ba4146"></script>
+    <script src="../_static/doctools.js?v=888ff710"></script>
+    <script src="../_static/sphinx_highlight.js?v=4825356b"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Models" href="../model/models.html" />
+    <link rel="prev" title="StArMap Client" href="../index.html" />
+   
+  <link rel="stylesheet" href="../_static/custom.css" type="text/css" />
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9" />
+
+  </head><body>
+  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          
+
+          <div class="body" role="main">
+            
+  <section id="client">
+<h1>Client<a class="headerlink" href="#client" title="Permalink to this heading">¶</a></h1>
+<p>Define the client classes to communicate with StArMap over HTTPS.</p>
+<dl class="py class">
+<dt class="sig sig-object py" id="starmap_client.StarmapClient">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">starmap_client.</span></span><span class="sig-name descname"><span class="pre">StarmapClient</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">url</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">api_version</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'v1'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">session_params</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/starmap_client/client.html#StarmapClient"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#starmap_client.StarmapClient" title="Permalink to this definition">¶</a></dt>
+<dd><p>Implement the StArMap client.</p>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="starmap_client.StarmapClient.POLICIES_PER_PAGE">
+<span class="sig-name descname"><span class="pre">POLICIES_PER_PAGE</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">100</span></em><a class="headerlink" href="#starmap_client.StarmapClient.POLICIES_PER_PAGE" title="Permalink to this definition">¶</a></dt>
+<dd><p>Number of policies to retrieve per call.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="starmap_client.StarmapClient.__init__">
+<span class="sig-name descname"><span class="pre">__init__</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">url</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">api_version</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'v1'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">session_params</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/starmap_client/client.html#StarmapClient.__init__"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#starmap_client.StarmapClient.__init__" title="Permalink to this definition">¶</a></dt>
+<dd><p>Create a new StArMapClient.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>url</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.12)"><em>str</em></a>) – URL of the StArMap endpoint.</p></li>
+<li><p><strong>api_version</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.12)"><em>str</em></a><em>, </em><em>optional</em>) – The StArMap API version. Defaults to <cite>v1</cite>.</p></li>
+<li><p><strong>session_params</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#dict" title="(in Python v3.12)"><em>dict</em></a><em>, </em><em>optional</em>) – Additional keyword arguments for StarmapSession</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="starmap_client.StarmapClient.query_image">
+<span class="sig-name descname"><span class="pre">query_image</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">nvr</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">workflow</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">Workflow.stratosphere</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/starmap_client/client.html#StarmapClient.query_image"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#starmap_client.StarmapClient.query_image" title="Permalink to this definition">¶</a></dt>
+<dd><p>Query StArMap using an image NVR.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>nvr</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.12)"><em>str</em></a>) – The image archive name or NVR.</p></li>
+<li><p><strong>workflow</strong> (<em>Workflow</em><em>, </em><em>optional</em>) – The desired workflow to retrieve the mappings from.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>The query result when found or None.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><a class="reference internal" href="../model/models.html#starmap_client.models.QueryResponse" title="starmap_client.models.QueryResponse">QueryResponse</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="starmap_client.StarmapClient.query_image_by_name">
+<span class="sig-name descname"><span class="pre">query_image_by_name</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">name</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">version</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">workflow</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">Workflow.stratosphere</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/starmap_client/client.html#StarmapClient.query_image_by_name"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#starmap_client.StarmapClient.query_image_by_name" title="Permalink to this definition">¶</a></dt>
+<dd><p>Query StArMap using an image NVR.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>name</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.12)"><em>str</em></a>) – The image name from NVR.</p></li>
+<li><p><strong>version</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.12)"><em>str</em></a><em>, </em><em>optional</em>) – The version from NVR.</p></li>
+<li><p><strong>workflow</strong> (<em>Workflow</em><em>, </em><em>optional</em>) – The desired workflow to retrieve the mappings from.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>The query result when found or None.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><a class="reference internal" href="../model/models.html#starmap_client.models.QueryResponse" title="starmap_client.models.QueryResponse">QueryResponse</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="starmap_client.StarmapClient.policies">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">policies</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Iterator" title="(in Python v3.12)"><span class="pre">Iterator</span></a><span class="p"><span class="pre">[</span></span><a class="reference internal" href="../model/models.html#starmap_client.models.Policy" title="starmap_client.models.Policy"><span class="pre">Policy</span></a><span class="p"><span class="pre">]</span></span></em><a class="headerlink" href="#starmap_client.StarmapClient.policies" title="Permalink to this definition">¶</a></dt>
+<dd><p>Iterate over all Policies registered in StArMap.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="starmap_client.StarmapClient.list_policies">
+<span class="sig-name descname"><span class="pre">list_policies</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/starmap_client/client.html#StarmapClient.list_policies"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#starmap_client.StarmapClient.list_policies" title="Permalink to this definition">¶</a></dt>
+<dd><p>List all Policies present in StArMap.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>List with all policies present in StArMap.</p>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#list" title="(in Python v3.12)">list</a>(<a class="reference internal" href="../model/models.html#starmap_client.models.Policy" title="starmap_client.models.Policy">Policy</a>)</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="starmap_client.StarmapClient.get_policy">
+<span class="sig-name descname"><span class="pre">get_policy</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">policy_id</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/starmap_client/client.html#StarmapClient.get_policy"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#starmap_client.StarmapClient.get_policy" title="Permalink to this definition">¶</a></dt>
+<dd><p>Retrieve a single policy by its ID.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>policy_id</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.12)"><em>str</em></a>) – The Policy ID to retrieve from StArMap.</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>The requested Policy when found.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><a class="reference internal" href="../model/models.html#starmap_client.models.Policy" title="starmap_client.models.Policy">Policy</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="starmap_client.StarmapClient.list_mappings">
+<span class="sig-name descname"><span class="pre">list_mappings</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">policy_id</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/starmap_client/client.html#StarmapClient.list_mappings"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#starmap_client.StarmapClient.list_mappings" title="Permalink to this definition">¶</a></dt>
+<dd><p>List all mappings for a given Policy ID.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>policy_id</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.12)"><em>str</em></a>) – Policy ID to list the mappings.</p>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p><span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.List" title="(in Python v3.12)"><code class="xref py py-class docutils literal notranslate"><span class="pre">List</span></code></a>[<a class="reference internal" href="../model/models.html#starmap_client.models.Mapping" title="starmap_client.models.Mapping"><code class="xref py py-class docutils literal notranslate"><span class="pre">Mapping</span></code></a>]</span></p>
+</dd>
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>List with the Mappings for the requested Policy.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="starmap_client.StarmapClient.get_mapping">
+<span class="sig-name descname"><span class="pre">get_mapping</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">mapping_id</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/starmap_client/client.html#StarmapClient.get_mapping"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#starmap_client.StarmapClient.get_mapping" title="Permalink to this definition">¶</a></dt>
+<dd><p>Retrieve a single Marketplace Mapping by its ID.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>mapping_id</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.12)"><em>str</em></a>) – The Markeplace Mapping ID to retrieve from StArmAp.</p>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p><span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Optional" title="(in Python v3.12)"><code class="xref py py-data docutils literal notranslate"><span class="pre">Optional</span></code></a>[<a class="reference internal" href="../model/models.html#starmap_client.models.Mapping" title="starmap_client.models.Mapping"><code class="xref py py-class docutils literal notranslate"><span class="pre">Mapping</span></code></a>]</span></p>
+</dd>
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>The requested Marketplace Mapping when found.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="starmap_client.StarmapClient.list_destinations">
+<span class="sig-name descname"><span class="pre">list_destinations</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">mapping_id</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/starmap_client/client.html#StarmapClient.list_destinations"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#starmap_client.StarmapClient.list_destinations" title="Permalink to this definition">¶</a></dt>
+<dd><p>List all destinations for a given Marketplace Mapping ID.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>mapping_id</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.12)"><em>str</em></a>) – Marketplace Mapping ID to list the mappings.</p>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p><span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.List" title="(in Python v3.12)"><code class="xref py py-class docutils literal notranslate"><span class="pre">List</span></code></a>[<a class="reference internal" href="../model/models.html#starmap_client.models.Destination" title="starmap_client.models.Destination"><code class="xref py py-class docutils literal notranslate"><span class="pre">Destination</span></code></a>]</span></p>
+</dd>
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>List with the Destinations for the requested Mapping.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="starmap_client.StarmapClient.get_destination">
+<span class="sig-name descname"><span class="pre">get_destination</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">destination_id</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/starmap_client/client.html#StarmapClient.get_destination"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#starmap_client.StarmapClient.get_destination" title="Permalink to this definition">¶</a></dt>
+<dd><p>Retrieve a single Destination by its ID.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>destination_id</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.12)"><em>str</em></a>) – The Destination ID to retrieve from StArmAp.</p>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p><span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Optional" title="(in Python v3.12)"><code class="xref py py-data docutils literal notranslate"><span class="pre">Optional</span></code></a>[<a class="reference internal" href="../model/models.html#starmap_client.models.Destination" title="starmap_client.models.Destination"><code class="xref py py-class docutils literal notranslate"><span class="pre">Destination</span></code></a>]</span></p>
+</dd>
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>The requested Destination when found.</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="starmap_client.session.StarmapSession">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">starmap_client.session.</span></span><span class="sig-name descname"><span class="pre">StarmapSession</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">url</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">api_version</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">retries</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">3</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">backoff_factor</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">2.0</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/starmap_client/session.html#StarmapSession"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#starmap_client.session.StarmapSession" title="Permalink to this definition">¶</a></dt>
+<dd><p>Implement a HTTP(S) session with StArMap.</p>
+<dl class="py method">
+<dt class="sig sig-object py" id="starmap_client.session.StarmapSession.__init__">
+<span class="sig-name descname"><span class="pre">__init__</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">url</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">api_version</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">retries</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">3</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">backoff_factor</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">2.0</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/starmap_client/session.html#StarmapSession.__init__"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#starmap_client.session.StarmapSession.__init__" title="Permalink to this definition">¶</a></dt>
+<dd><p>Create the StarmapSession object.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>url</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.12)"><em>str</em></a>) – The StArMap server endpoint base URL</p></li>
+<li><p><strong>api_version</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.12)"><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code></a></span>) – The StArMap server API version to call</p></li>
+<li><p><strong>retries</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.12)"><em>int</em></a><em>, </em><em>optional</em>) – The number of request retries on failure</p></li>
+<li><p><strong>backoff_factor</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.12)"><em>float</em></a><em>, </em><em>optional</em>) – The backoff factor to apply between attempts after the second try</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="starmap_client.session.StarmapSession.get">
+<span class="sig-name descname"><span class="pre">get</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">path</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/starmap_client/session.html#StarmapSession.get"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#starmap_client.session.StarmapSession.get" title="Permalink to this definition">¶</a></dt>
+<dd><p>Perform a GET request on StArMap.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><span class="sphinx_autodoc_typehints-type"><code class="xref py py-class docutils literal notranslate"><span class="pre">Response</span></code></span></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="starmap_client.session.StarmapSession.post">
+<span class="sig-name descname"><span class="pre">post</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">path</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">json</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/starmap_client/session.html#StarmapSession.post"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#starmap_client.session.StarmapSession.post" title="Permalink to this definition">¶</a></dt>
+<dd><p>Perform a POST request on StArMap.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><span class="sphinx_autodoc_typehints-type"><code class="xref py py-class docutils literal notranslate"><span class="pre">Response</span></code></span></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="starmap_client.session.StarmapSession.put">
+<span class="sig-name descname"><span class="pre">put</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">path</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">json</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/starmap_client/session.html#StarmapSession.put"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#starmap_client.session.StarmapSession.put" title="Permalink to this definition">¶</a></dt>
+<dd><p>Perform a PUT request on StArMap.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><span class="sphinx_autodoc_typehints-type"><code class="xref py py-class docutils literal notranslate"><span class="pre">Response</span></code></span></p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+</section>
+
+
+          </div>
+          
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+<h1 class="logo"><a href="../index.html">StArMap Client</a></h1>
+
+
+
+<p class="blurb">A client library to communicate with StArMap</p>
+
+
+
+
+
+
+<h3>Navigation</h3>
+<p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
+<ul class="current">
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Client</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#starmap_client.StarmapClient"><code class="docutils literal notranslate"><span class="pre">StarmapClient</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="#starmap_client.session.StarmapSession"><code class="docutils literal notranslate"><span class="pre">StarmapSession</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../model/models.html">Models</a></li>
+</ul>
+
+
+<hr />
+<ul>
+    
+    <li class="toctree-l1"><a href="https://gitlab.cee.redhat.com/stratosphere/starmap-client">Source</a></li>
+    
+    <li class="toctree-l1"><a href="genindex.html">Index</a></li>
+    
+</ul>
+<div class="relations">
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="../index.html">Documentation overview</a><ul>
+      <li>Previous: <a href="../index.html" title="previous chapter">StArMap Client</a></li>
+      <li>Next: <a href="../model/models.html" title="next chapter">Models</a></li>
+  </ul></li>
+</ul>
+</div>
+<div id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="../search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false"/>
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</div>
+<script>document.getElementById('searchbox').style.display = "block"</script>
+
+
+
+
+
+
+
+
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &copy;2023, Jonathan Gangi.
+      
+      |
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 7.1.2</a>
+      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.13</a>
+      
+      |
+      <a href="../_sources/client/client.rst.txt"
+          rel="nofollow">Page source</a>
+    </div>
+
+    
+
+    
+  </body>
+</html>

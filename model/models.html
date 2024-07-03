@@ -1,0 +1,294 @@
+<!DOCTYPE html>
+
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>Models &#8212; StArMap Client  documentation</title>
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=4f649999" />
+    <link rel="stylesheet" type="text/css" href="../_static/alabaster.css?v=1fc5d657" />
+    <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js?v=b3ba4146"></script>
+    <script src="../_static/doctools.js?v=888ff710"></script>
+    <script src="../_static/sphinx_highlight.js?v=4825356b"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="prev" title="Client" href="../client/client.html" />
+   
+  <link rel="stylesheet" href="../_static/custom.css" type="text/css" />
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9" />
+
+  </head><body>
+  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          
+
+          <div class="body" role="main">
+            
+  <section id="models">
+<h1>Models<a class="headerlink" href="#models" title="Permalink to this heading">¶</a></h1>
+<p>The models returned by <code class="docutils literal notranslate"><span class="pre">StarmapClient</span></code>.</p>
+<dl class="py class">
+<dt class="sig sig-object py" id="starmap_client.models.Policy">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">starmap_client.models.</span></span><span class="sig-name descname"><span class="pre">Policy</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">id</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">meta</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">mappings</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">name</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">workflow</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/starmap_client/models.html#Policy"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#starmap_client.models.Policy" title="Permalink to this definition">¶</a></dt>
+<dd><p>Represent a StArMap policy.</p>
+<p><strong>Attributes:</strong></p>
+<ul class="simple">
+<li><p><code class="xref py py-meth docutils literal notranslate"><span class="pre">id()</span></code> <em>[inherited]</em></p></li>
+<li><p><code class="xref py py-meth docutils literal notranslate"><span class="pre">meta()</span></code> <em>[inherited]</em></p></li>
+<li><p><a class="reference internal" href="#starmap_client.models.Policy.mappings" title="starmap_client.models.Policy.mappings"><code class="xref py py-meth docutils literal notranslate"><span class="pre">mappings()</span></code></a></p></li>
+<li><p><a class="reference internal" href="#starmap_client.models.Policy.name" title="starmap_client.models.Policy.name"><code class="xref py py-meth docutils literal notranslate"><span class="pre">name()</span></code></a></p></li>
+<li><p><a class="reference internal" href="#starmap_client.models.Policy.workflow" title="starmap_client.models.Policy.workflow"><code class="xref py py-meth docutils literal notranslate"><span class="pre">workflow()</span></code></a></p></li>
+</ul>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="starmap_client.models.Policy.mappings">
+<span class="sig-name descname"><span class="pre">mappings</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.List" title="(in Python v3.12)"><code class="xref py py-class docutils literal notranslate"><span class="pre">List</span></code></a><span class="pre">[</span><a class="reference internal" href="#starmap_client.models.Mapping" title="starmap_client.models.Mapping"><code class="xref py py-class docutils literal notranslate"><span class="pre">Mapping</span></code></a><span class="pre">]</span></em><a class="headerlink" href="#starmap_client.models.Policy.mappings" title="Permalink to this definition">¶</a></dt>
+<dd><p>List of marketplace mappings which the Policy applies to.</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="starmap_client.models.Policy.name">
+<span class="sig-name descname"><span class="pre">name</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.12)"><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code></a></em><a class="headerlink" href="#starmap_client.models.Policy.name" title="Permalink to this definition">¶</a></dt>
+<dd><p>The Koji Package name representing also the Policy name.</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="starmap_client.models.Policy.workflow">
+<span class="sig-name descname"><span class="pre">workflow</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><code class="xref py py-class docutils literal notranslate"><span class="pre">Workflow</span></code></em><a class="headerlink" href="#starmap_client.models.Policy.workflow" title="Permalink to this definition">¶</a></dt>
+<dd><p>The policy workflow name.</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="starmap_client.models.Mapping">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">starmap_client.models.</span></span><span class="sig-name descname"><span class="pre">Mapping</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">id</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">meta</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">destinations</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">marketplace_account</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">version_fnmatch</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">version_regexmatch</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/starmap_client/models.html#Mapping"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#starmap_client.models.Mapping" title="Permalink to this definition">¶</a></dt>
+<dd><p>Represent a marketplace Mapping from Policy.</p>
+<p><strong>Attributes:</strong></p>
+<ul class="simple">
+<li><p><code class="xref py py-meth docutils literal notranslate"><span class="pre">id()</span></code> <em>[inherited]</em></p></li>
+<li><p><code class="xref py py-meth docutils literal notranslate"><span class="pre">meta()</span></code> <em>[inherited]</em></p></li>
+<li><p><a class="reference internal" href="#starmap_client.models.Mapping.destinations" title="starmap_client.models.Mapping.destinations"><code class="xref py py-meth docutils literal notranslate"><span class="pre">destinations()</span></code></a></p></li>
+<li><p><a class="reference internal" href="#starmap_client.models.Mapping.marketplace_account" title="starmap_client.models.Mapping.marketplace_account"><code class="xref py py-meth docutils literal notranslate"><span class="pre">marketplace_account()</span></code></a></p></li>
+<li><p><a class="reference internal" href="#starmap_client.models.Mapping.version_fnmatch" title="starmap_client.models.Mapping.version_fnmatch"><code class="xref py py-meth docutils literal notranslate"><span class="pre">version_fnmatch()</span></code></a></p></li>
+<li><p><a class="reference internal" href="#starmap_client.models.Mapping.version_regexmatch" title="starmap_client.models.Mapping.version_regexmatch"><code class="xref py py-meth docutils literal notranslate"><span class="pre">version_regexmatch()</span></code></a></p></li>
+</ul>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="starmap_client.models.Mapping.destinations">
+<span class="sig-name descname"><span class="pre">destinations</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.List" title="(in Python v3.12)"><code class="xref py py-class docutils literal notranslate"><span class="pre">List</span></code></a><span class="pre">[</span><a class="reference internal" href="#starmap_client.models.Destination" title="starmap_client.models.Destination"><code class="xref py py-class docutils literal notranslate"><span class="pre">Destination</span></code></a><span class="pre">]</span></em><a class="headerlink" href="#starmap_client.models.Mapping.destinations" title="Permalink to this definition">¶</a></dt>
+<dd><p>List of destinations for the marketplace account.</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="starmap_client.models.Mapping.marketplace_account">
+<span class="sig-name descname"><span class="pre">marketplace_account</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.12)"><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code></a></em><a class="headerlink" href="#starmap_client.models.Mapping.marketplace_account" title="Permalink to this definition">¶</a></dt>
+<dd><p>A string representing the destination marketplace account.</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="starmap_client.models.Mapping.version_fnmatch">
+<span class="sig-name descname"><span class="pre">version_fnmatch</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Optional" title="(in Python v3.12)"><code class="xref py py-data docutils literal notranslate"><span class="pre">Optional</span></code></a><span class="pre">[</span><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.12)"><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code></a><span class="pre">]</span></em><a class="headerlink" href="#starmap_client.models.Mapping.version_fnmatch" title="Permalink to this definition">¶</a></dt>
+<dd><p>A <code class="docutils literal notranslate"><span class="pre">fnmatch</span></code> string to apply the destinations only to the matched NVR versions.</p>
+<p>It can’t be set together with <code class="docutils literal notranslate"><span class="pre">version_regexmatch</span></code>.</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="starmap_client.models.Mapping.version_regexmatch">
+<span class="sig-name descname"><span class="pre">version_regexmatch</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Optional" title="(in Python v3.12)"><code class="xref py py-data docutils literal notranslate"><span class="pre">Optional</span></code></a><span class="pre">[</span><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.12)"><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code></a><span class="pre">]</span></em><a class="headerlink" href="#starmap_client.models.Mapping.version_regexmatch" title="Permalink to this definition">¶</a></dt>
+<dd><p>A <code class="docutils literal notranslate"><span class="pre">regex</span></code> string to apply the destinations only to the matched NVR versions.</p>
+<p>It can’t be set together with <code class="docutils literal notranslate"><span class="pre">version_fnmatch</span></code>.</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="starmap_client.models.Destination">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">starmap_client.models.</span></span><span class="sig-name descname"><span class="pre">Destination</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">id</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">meta</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">architecture</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">destination</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">overwrite</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">restrict_version</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">restrict_major</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">restrict_minor</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">provider</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">tags</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/starmap_client/models.html#Destination"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#starmap_client.models.Destination" title="Permalink to this definition">¶</a></dt>
+<dd><p>Represent a destination entry from Mapping.</p>
+<p><strong>Attributes:</strong></p>
+<ul class="simple">
+<li><p><code class="xref py py-meth docutils literal notranslate"><span class="pre">id()</span></code> <em>[inherited]</em></p></li>
+<li><p><code class="xref py py-meth docutils literal notranslate"><span class="pre">meta()</span></code> <em>[inherited]</em></p></li>
+<li><p><a class="reference internal" href="#starmap_client.models.Destination.architecture" title="starmap_client.models.Destination.architecture"><code class="xref py py-meth docutils literal notranslate"><span class="pre">architecture()</span></code></a></p></li>
+<li><p><a class="reference internal" href="#starmap_client.models.Destination.destination" title="starmap_client.models.Destination.destination"><code class="xref py py-meth docutils literal notranslate"><span class="pre">destination()</span></code></a></p></li>
+<li><p><a class="reference internal" href="#starmap_client.models.Destination.overwrite" title="starmap_client.models.Destination.overwrite"><code class="xref py py-meth docutils literal notranslate"><span class="pre">overwrite()</span></code></a></p></li>
+<li><p><a class="reference internal" href="#starmap_client.models.Destination.provider" title="starmap_client.models.Destination.provider"><code class="xref py py-meth docutils literal notranslate"><span class="pre">provider()</span></code></a></p></li>
+<li><p><a class="reference internal" href="#starmap_client.models.Destination.restrict_major" title="starmap_client.models.Destination.restrict_major"><code class="xref py py-meth docutils literal notranslate"><span class="pre">restrict_major()</span></code></a></p></li>
+<li><p><a class="reference internal" href="#starmap_client.models.Destination.restrict_minor" title="starmap_client.models.Destination.restrict_minor"><code class="xref py py-meth docutils literal notranslate"><span class="pre">restrict_minor()</span></code></a></p></li>
+<li><p><a class="reference internal" href="#starmap_client.models.Destination.restrict_version" title="starmap_client.models.Destination.restrict_version"><code class="xref py py-meth docutils literal notranslate"><span class="pre">restrict_version()</span></code></a></p></li>
+<li><p><a class="reference internal" href="#starmap_client.models.Destination.tags" title="starmap_client.models.Destination.tags"><code class="xref py py-meth docutils literal notranslate"><span class="pre">tags()</span></code></a></p></li>
+</ul>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="starmap_client.models.Destination.architecture">
+<span class="sig-name descname"><span class="pre">architecture</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Optional" title="(in Python v3.12)"><code class="xref py py-data docutils literal notranslate"><span class="pre">Optional</span></code></a><span class="pre">[</span><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.12)"><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code></a><span class="pre">]</span></em><a class="headerlink" href="#starmap_client.models.Destination.architecture" title="Permalink to this definition">¶</a></dt>
+<dd><p>Architecture of the VM image.</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="starmap_client.models.Destination.destination">
+<span class="sig-name descname"><span class="pre">destination</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.12)"><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code></a></em><a class="headerlink" href="#starmap_client.models.Destination.destination" title="Permalink to this definition">¶</a></dt>
+<dd><p>The product listing destination in the cloud marketplace.</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="starmap_client.models.Destination.overwrite">
+<span class="sig-name descname"><span class="pre">overwrite</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.12)"><code class="xref py py-class docutils literal notranslate"><span class="pre">bool</span></code></a></em><a class="headerlink" href="#starmap_client.models.Destination.overwrite" title="Permalink to this definition">¶</a></dt>
+<dd><p>Whether to replace the existing VM image in the destination or append.</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="starmap_client.models.Destination.restrict_version">
+<span class="sig-name descname"><span class="pre">restrict_version</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.12)"><code class="xref py py-class docutils literal notranslate"><span class="pre">bool</span></code></a></em><a class="headerlink" href="#starmap_client.models.Destination.restrict_version" title="Permalink to this definition">¶</a></dt>
+<dd><p>Whether to restrict and image and delete it’s AMI and snapshot</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="starmap_client.models.Destination.restrict_major">
+<span class="sig-name descname"><span class="pre">restrict_major</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Optional" title="(in Python v3.12)"><code class="xref py py-data docutils literal notranslate"><span class="pre">Optional</span></code></a><span class="pre">[</span><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.12)"><code class="xref py py-class docutils literal notranslate"><span class="pre">int</span></code></a><span class="pre">]</span></em><a class="headerlink" href="#starmap_client.models.Destination.restrict_major" title="Permalink to this definition">¶</a></dt>
+<dd><p>How many major versions are allowed in product</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="starmap_client.models.Destination.restrict_minor">
+<span class="sig-name descname"><span class="pre">restrict_minor</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Optional" title="(in Python v3.12)"><code class="xref py py-data docutils literal notranslate"><span class="pre">Optional</span></code></a><span class="pre">[</span><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.12)"><code class="xref py py-class docutils literal notranslate"><span class="pre">int</span></code></a><span class="pre">]</span></em><a class="headerlink" href="#starmap_client.models.Destination.restrict_minor" title="Permalink to this definition">¶</a></dt>
+<dd><p>How many minor versions are allowed in product</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="starmap_client.models.Destination.provider">
+<span class="sig-name descname"><span class="pre">provider</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Optional" title="(in Python v3.12)"><code class="xref py py-data docutils literal notranslate"><span class="pre">Optional</span></code></a><span class="pre">[</span><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.12)"><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code></a><span class="pre">]</span></em><a class="headerlink" href="#starmap_client.models.Destination.provider" title="Permalink to this definition">¶</a></dt>
+<dd><p>Represent the RHSM provider name for the community workflow.</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="starmap_client.models.Destination.tags">
+<span class="sig-name descname"><span class="pre">tags</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Optional" title="(in Python v3.12)"><code class="xref py py-data docutils literal notranslate"><span class="pre">Optional</span></code></a><span class="pre">[</span><a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Dict" title="(in Python v3.12)"><code class="xref py py-class docutils literal notranslate"><span class="pre">Dict</span></code></a><span class="pre">[</span><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.12)"><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code></a><span class="pre">,</span> <a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.12)"><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code></a><span class="pre">]]</span></em><a class="headerlink" href="#starmap_client.models.Destination.tags" title="Permalink to this definition">¶</a></dt>
+<dd><p>Dictionary with custom tags to be set on cloud marketplaces resources.</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="starmap_client.models.QueryResponse">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">starmap_client.models.</span></span><span class="sig-name descname"><span class="pre">QueryResponse</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">name</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">workflow</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">clouds</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">_Nothing.NOTHING</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/starmap_client/models.html#QueryResponse"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#starmap_client.models.QueryResponse" title="Permalink to this definition">¶</a></dt>
+<dd><p>Represent a query response from StArMap.</p>
+<p><strong>Attributes:</strong></p>
+<ul class="simple">
+<li><p><a class="reference internal" href="#starmap_client.models.QueryResponse.clouds" title="starmap_client.models.QueryResponse.clouds"><code class="xref py py-meth docutils literal notranslate"><span class="pre">clouds()</span></code></a></p></li>
+<li><p><a class="reference internal" href="#starmap_client.models.QueryResponse.name" title="starmap_client.models.QueryResponse.name"><code class="xref py py-meth docutils literal notranslate"><span class="pre">name()</span></code></a></p></li>
+<li><p><a class="reference internal" href="#starmap_client.models.QueryResponse.workflow" title="starmap_client.models.QueryResponse.workflow"><code class="xref py py-meth docutils literal notranslate"><span class="pre">workflow()</span></code></a></p></li>
+</ul>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="starmap_client.models.QueryResponse.name">
+<span class="sig-name descname"><span class="pre">name</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.12)"><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code></a></em><a class="headerlink" href="#starmap_client.models.QueryResponse.name" title="Permalink to this definition">¶</a></dt>
+<dd><p>The <a class="reference internal" href="#starmap_client.models.Policy" title="starmap_client.models.Policy"><code class="xref py py-class docutils literal notranslate"><span class="pre">Policy</span></code></a> name.</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="starmap_client.models.QueryResponse.workflow">
+<span class="sig-name descname"><span class="pre">workflow</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><code class="xref py py-class docutils literal notranslate"><span class="pre">Workflow</span></code></em><a class="headerlink" href="#starmap_client.models.QueryResponse.workflow" title="Permalink to this definition">¶</a></dt>
+<dd><p>The <a class="reference internal" href="#starmap_client.models.Policy" title="starmap_client.models.Policy"><code class="xref py py-class docutils literal notranslate"><span class="pre">Policy</span></code></a> workflow.</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="starmap_client.models.QueryResponse.clouds">
+<span class="sig-name descname"><span class="pre">clouds</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Dict" title="(in Python v3.12)"><code class="xref py py-class docutils literal notranslate"><span class="pre">Dict</span></code></a><span class="pre">[</span><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.12)"><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code></a><span class="pre">,</span> <a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.List" title="(in Python v3.12)"><code class="xref py py-class docutils literal notranslate"><span class="pre">List</span></code></a><span class="pre">[</span><a class="reference internal" href="#starmap_client.models.Destination" title="starmap_client.models.Destination"><code class="xref py py-class docutils literal notranslate"><span class="pre">Destination</span></code></a><span class="pre">]]</span></em><a class="headerlink" href="#starmap_client.models.QueryResponse.clouds" title="Permalink to this definition">¶</a></dt>
+<dd><p>Dictionary with the cloud marketplaces aliases and their respective Destinations.</p>
+</dd></dl>
+
+</dd></dl>
+
+</section>
+
+
+          </div>
+          
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+<h1 class="logo"><a href="../index.html">StArMap Client</a></h1>
+
+
+
+<p class="blurb">A client library to communicate with StArMap</p>
+
+
+
+
+
+
+<h3>Navigation</h3>
+<p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../client/client.html">Client</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Models</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#starmap_client.models.Policy"><code class="docutils literal notranslate"><span class="pre">Policy</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="#starmap_client.models.Mapping"><code class="docutils literal notranslate"><span class="pre">Mapping</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="#starmap_client.models.Destination"><code class="docutils literal notranslate"><span class="pre">Destination</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="#starmap_client.models.QueryResponse"><code class="docutils literal notranslate"><span class="pre">QueryResponse</span></code></a></li>
+</ul>
+</li>
+</ul>
+
+
+<hr />
+<ul>
+    
+    <li class="toctree-l1"><a href="https://gitlab.cee.redhat.com/stratosphere/starmap-client">Source</a></li>
+    
+    <li class="toctree-l1"><a href="genindex.html">Index</a></li>
+    
+</ul>
+<div class="relations">
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="../index.html">Documentation overview</a><ul>
+      <li>Previous: <a href="../client/client.html" title="previous chapter">Client</a></li>
+  </ul></li>
+</ul>
+</div>
+<div id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="../search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false"/>
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</div>
+<script>document.getElementById('searchbox').style.display = "block"</script>
+
+
+
+
+
+
+
+
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &copy;2023, Jonathan Gangi.
+      
+      |
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 7.1.2</a>
+      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.13</a>
+      
+      |
+      <a href="../_sources/model/models.rst.txt"
+          rel="nofollow">Page source</a>
+    </div>
+
+    
+
+    
+  </body>
+</html>

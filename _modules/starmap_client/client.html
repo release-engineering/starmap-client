@@ -1,0 +1,318 @@
+<!DOCTYPE html>
+
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>starmap_client.client &#8212; StArMap Client  documentation</title>
+    <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=4f649999" />
+    <link rel="stylesheet" type="text/css" href="../../_static/alabaster.css?v=1fc5d657" />
+    <script data-url_root="../../" id="documentation_options" src="../../_static/documentation_options.js?v=b3ba4146"></script>
+    <script src="../../_static/doctools.js?v=888ff710"></script>
+    <script src="../../_static/sphinx_highlight.js?v=4825356b"></script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+   
+  <link rel="stylesheet" href="../../_static/custom.css" type="text/css" />
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9" />
+
+  </head><body>
+  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          
+
+          <div class="body" role="main">
+            
+  <h1>Source code for starmap_client.client</h1><div class="highlight"><pre>
+<span></span><span class="c1"># SPDX-License-Identifier: GPL-3.0-or-later</span>
+<span class="kn">import</span> <span class="nn">logging</span>
+<span class="kn">from</span> <span class="nn">typing</span> <span class="kn">import</span> <span class="n">Any</span><span class="p">,</span> <span class="n">Dict</span><span class="p">,</span> <span class="n">Iterator</span><span class="p">,</span> <span class="n">List</span><span class="p">,</span> <span class="n">Optional</span>
+
+<span class="kn">from</span> <span class="nn">starmap_client.models</span> <span class="kn">import</span> <span class="p">(</span>
+    <span class="n">Destination</span><span class="p">,</span>
+    <span class="n">Mapping</span><span class="p">,</span>
+    <span class="n">PaginatedRawData</span><span class="p">,</span>
+    <span class="n">Policy</span><span class="p">,</span>
+    <span class="n">QueryResponse</span><span class="p">,</span>
+    <span class="n">Workflow</span><span class="p">,</span>
+<span class="p">)</span>
+<span class="kn">from</span> <span class="nn">starmap_client.session</span> <span class="kn">import</span> <span class="n">StarmapSession</span>
+
+<span class="n">log</span> <span class="o">=</span> <span class="n">logging</span><span class="o">.</span><span class="n">getLogger</span><span class="p">(</span><span class="vm">__name__</span><span class="p">)</span>
+
+
+<div class="viewcode-block" id="StarmapClient"><a class="viewcode-back" href="../../client/client.html#starmap_client.StarmapClient">[docs]</a><span class="k">class</span> <span class="nc">StarmapClient</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Implement the StArMap client.&quot;&quot;&quot;</span>
+
+    <span class="n">POLICIES_PER_PAGE</span> <span class="o">=</span> <span class="mi">100</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Number of policies to retrieve per call.&quot;&quot;&quot;</span>
+
+<div class="viewcode-block" id="StarmapClient.__init__"><a class="viewcode-back" href="../../client/client.html#starmap_client.StarmapClient.__init__">[docs]</a>    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span>
+        <span class="bp">self</span><span class="p">,</span> <span class="n">url</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">api_version</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">&quot;v1&quot;</span><span class="p">,</span> <span class="n">session_params</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Any</span><span class="p">]]</span> <span class="o">=</span> <span class="kc">None</span>
+    <span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Create a new StArMapClient.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            url (str)</span>
+<span class="sd">                URL of the StArMap endpoint.</span>
+
+<span class="sd">            api_version (str, optional)</span>
+<span class="sd">                The StArMap API version. Defaults to `v1`.</span>
+<span class="sd">            session_params (dict, optional)</span>
+<span class="sd">                Additional keyword arguments for StarmapSession</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">session_params</span> <span class="o">=</span> <span class="n">session_params</span> <span class="ow">or</span> <span class="p">{}</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">session</span> <span class="o">=</span> <span class="n">StarmapSession</span><span class="p">(</span><span class="n">url</span><span class="p">,</span> <span class="n">api_version</span><span class="p">,</span> <span class="o">**</span><span class="n">session_params</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_policies</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="n">Policy</span><span class="p">]</span> <span class="o">=</span> <span class="p">[]</span></div>
+
+    <span class="k">def</span> <span class="nf">_query</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">params</span><span class="p">:</span> <span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Any</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="n">Optional</span><span class="p">[</span><span class="n">QueryResponse</span><span class="p">]:</span>
+        <span class="n">rsp</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">session</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;/query&quot;</span><span class="p">,</span> <span class="n">params</span><span class="o">=</span><span class="n">params</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">rsp</span><span class="o">.</span><span class="n">status_code</span> <span class="o">==</span> <span class="mi">404</span><span class="p">:</span>
+            <span class="n">log</span><span class="o">.</span><span class="n">error</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Marketplace mappings not defined for </span><span class="si">{</span><span class="n">params</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+            <span class="k">return</span> <span class="kc">None</span>
+        <span class="n">rsp</span><span class="o">.</span><span class="n">raise_for_status</span><span class="p">()</span>
+        <span class="k">return</span> <span class="n">QueryResponse</span><span class="o">.</span><span class="n">from_json</span><span class="p">(</span><span class="n">json</span><span class="o">=</span><span class="n">rsp</span><span class="o">.</span><span class="n">json</span><span class="p">())</span>
+
+<div class="viewcode-block" id="StarmapClient.query_image"><a class="viewcode-back" href="../../client/client.html#starmap_client.StarmapClient.query_image">[docs]</a>    <span class="k">def</span> <span class="nf">query_image</span><span class="p">(</span>
+        <span class="bp">self</span><span class="p">,</span> <span class="n">nvr</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">workflow</span><span class="p">:</span> <span class="n">Workflow</span> <span class="o">=</span> <span class="n">Workflow</span><span class="o">.</span><span class="n">stratosphere</span>
+    <span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Optional</span><span class="p">[</span><span class="n">QueryResponse</span><span class="p">]:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Query StArMap using an image NVR.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            nvr (str): The image archive name or NVR.</span>
+<span class="sd">            workflow(Workflow, optional): The desired workflow to retrieve the mappings from.</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            QueryResponse: The query result when found or None.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_query</span><span class="p">(</span><span class="n">params</span><span class="o">=</span><span class="p">{</span><span class="s2">&quot;image&quot;</span><span class="p">:</span> <span class="n">nvr</span><span class="p">,</span> <span class="s2">&quot;workflow&quot;</span><span class="p">:</span> <span class="n">workflow</span><span class="o">.</span><span class="n">value</span><span class="p">})</span></div>
+
+<div class="viewcode-block" id="StarmapClient.query_image_by_name"><a class="viewcode-back" href="../../client/client.html#starmap_client.StarmapClient.query_image_by_name">[docs]</a>    <span class="k">def</span> <span class="nf">query_image_by_name</span><span class="p">(</span>
+        <span class="bp">self</span><span class="p">,</span>
+        <span class="n">name</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
+        <span class="n">version</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+        <span class="n">workflow</span><span class="p">:</span> <span class="n">Workflow</span> <span class="o">=</span> <span class="n">Workflow</span><span class="o">.</span><span class="n">stratosphere</span><span class="p">,</span>
+    <span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Optional</span><span class="p">[</span><span class="n">QueryResponse</span><span class="p">]:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Query StArMap using an image NVR.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            name (str): The image name from NVR.</span>
+<span class="sd">            version (str, optional): The version from NVR.</span>
+<span class="sd">            workflow (Workflow, optional): The desired workflow to retrieve the mappings from.</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            QueryResponse: The query result when found or None.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">params</span> <span class="o">=</span> <span class="p">{</span><span class="s2">&quot;name&quot;</span><span class="p">:</span> <span class="n">name</span><span class="p">,</span> <span class="s2">&quot;workflow&quot;</span><span class="p">:</span> <span class="n">workflow</span><span class="o">.</span><span class="n">value</span><span class="p">}</span>
+        <span class="k">if</span> <span class="n">version</span><span class="p">:</span>
+            <span class="n">params</span><span class="o">.</span><span class="n">update</span><span class="p">({</span><span class="s2">&quot;version&quot;</span><span class="p">:</span> <span class="n">version</span><span class="p">})</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_query</span><span class="p">(</span><span class="n">params</span><span class="o">=</span><span class="n">params</span><span class="p">)</span></div>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">policies</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Iterator</span><span class="p">[</span><span class="n">Policy</span><span class="p">]:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Iterate over all Policies registered in StArMap.&quot;&quot;&quot;</span>
+        <span class="n">has_next_page</span> <span class="o">=</span> <span class="kc">True</span>
+        <span class="n">page</span> <span class="o">=</span> <span class="mi">1</span>
+
+        <span class="c1"># Iterate over pagination until there is no longer a &quot;next&quot; URL</span>
+        <span class="k">while</span> <span class="n">has_next_page</span><span class="p">:</span>
+            <span class="n">params</span> <span class="o">=</span> <span class="p">{</span><span class="s2">&quot;page&quot;</span><span class="p">:</span> <span class="n">page</span><span class="p">,</span> <span class="s2">&quot;per_page&quot;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">POLICIES_PER_PAGE</span><span class="p">}</span>
+            <span class="n">res</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">session</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;policy&quot;</span><span class="p">,</span> <span class="n">params</span><span class="o">=</span><span class="n">params</span><span class="p">)</span>
+            <span class="k">if</span> <span class="n">res</span><span class="o">.</span><span class="n">status_code</span> <span class="o">==</span> <span class="mi">404</span><span class="p">:</span>
+                <span class="n">log</span><span class="o">.</span><span class="n">error</span><span class="p">(</span><span class="s2">&quot;No policies registered in StArMap.&quot;</span><span class="p">)</span>
+            <span class="n">res</span><span class="o">.</span><span class="n">raise_for_status</span><span class="p">()</span>
+
+            <span class="n">data</span><span class="p">:</span> <span class="n">PaginatedRawData</span> <span class="o">=</span> <span class="n">res</span><span class="o">.</span><span class="n">json</span><span class="p">()</span>
+            <span class="n">nav</span> <span class="o">=</span> <span class="n">data</span><span class="p">[</span><span class="s2">&quot;nav&quot;</span><span class="p">]</span>
+
+            <span class="c1"># Yield all Policy elements from the current page list</span>
+            <span class="k">for</span> <span class="n">item</span> <span class="ow">in</span> <span class="n">data</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;items&quot;</span><span class="p">,</span> <span class="p">[]):</span>
+                <span class="k">yield</span> <span class="n">Policy</span><span class="o">.</span><span class="n">from_json</span><span class="p">(</span><span class="n">item</span><span class="p">)</span>
+
+            <span class="c1"># next iteration</span>
+            <span class="n">has_next_page</span> <span class="o">=</span> <span class="n">nav</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;next&quot;</span><span class="p">)</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span>
+            <span class="n">page</span> <span class="o">+=</span> <span class="mi">1</span>
+
+<div class="viewcode-block" id="StarmapClient.list_policies"><a class="viewcode-back" href="../../client/client.html#starmap_client.StarmapClient.list_policies">[docs]</a>    <span class="k">def</span> <span class="nf">list_policies</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">List</span><span class="p">[</span><span class="n">Policy</span><span class="p">]:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        List all Policies present in StArMap.</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            list(Policy): List with all policies present in StArMap.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">_policies</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_policies</span> <span class="o">=</span> <span class="p">[</span><span class="n">p</span> <span class="k">for</span> <span class="n">p</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">policies</span><span class="p">]</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_policies</span></div>
+
+<div class="viewcode-block" id="StarmapClient.get_policy"><a class="viewcode-back" href="../../client/client.html#starmap_client.StarmapClient.get_policy">[docs]</a>    <span class="k">def</span> <span class="nf">get_policy</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">policy_id</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Optional</span><span class="p">[</span><span class="n">Policy</span><span class="p">]:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Retrieve a single policy by its ID.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            policy_id (str): The Policy ID to retrieve from StArMap.</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            Policy: The requested Policy when found.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">rsp</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">session</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;/policy/</span><span class="si">{</span><span class="n">policy_id</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">rsp</span><span class="o">.</span><span class="n">status_code</span> <span class="o">==</span> <span class="mi">404</span><span class="p">:</span>
+            <span class="n">log</span><span class="o">.</span><span class="n">error</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Policy not found with ID = </span><span class="se">\&quot;</span><span class="si">{</span><span class="n">policy_id</span><span class="si">}</span><span class="se">\&quot;</span><span class="s2">&quot;</span><span class="p">)</span>
+            <span class="k">return</span> <span class="kc">None</span>
+        <span class="n">rsp</span><span class="o">.</span><span class="n">raise_for_status</span><span class="p">()</span>
+        <span class="k">return</span> <span class="n">Policy</span><span class="o">.</span><span class="n">from_json</span><span class="p">(</span><span class="n">json</span><span class="o">=</span><span class="n">rsp</span><span class="o">.</span><span class="n">json</span><span class="p">())</span></div>
+
+<div class="viewcode-block" id="StarmapClient.list_mappings"><a class="viewcode-back" href="../../client/client.html#starmap_client.StarmapClient.list_mappings">[docs]</a>    <span class="k">def</span> <span class="nf">list_mappings</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">policy_id</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">List</span><span class="p">[</span><span class="n">Mapping</span><span class="p">]:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        List all mappings for a given Policy ID.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            policy_id (str)</span>
+<span class="sd">                Policy ID to list the mappings.</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            List with the Mappings for the requested Policy.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">res</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_policy</span><span class="p">(</span><span class="n">policy_id</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">res</span><span class="p">:</span>
+            <span class="k">return</span> <span class="n">res</span><span class="o">.</span><span class="n">mappings</span>
+        <span class="k">return</span> <span class="p">[]</span></div>
+
+<div class="viewcode-block" id="StarmapClient.get_mapping"><a class="viewcode-back" href="../../client/client.html#starmap_client.StarmapClient.get_mapping">[docs]</a>    <span class="k">def</span> <span class="nf">get_mapping</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">mapping_id</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Optional</span><span class="p">[</span><span class="n">Mapping</span><span class="p">]:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Retrieve a single Marketplace Mapping by its ID.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            mapping_id (str)</span>
+<span class="sd">                The Markeplace Mapping ID to retrieve from StArmAp.</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            The requested Marketplace Mapping when found.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">rsp</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">session</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;/mapping/</span><span class="si">{</span><span class="n">mapping_id</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">rsp</span><span class="o">.</span><span class="n">status_code</span> <span class="o">==</span> <span class="mi">404</span><span class="p">:</span>
+            <span class="n">log</span><span class="o">.</span><span class="n">error</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Marketplace Mapping not found with ID = </span><span class="se">\&quot;</span><span class="si">{</span><span class="n">mapping_id</span><span class="si">}</span><span class="se">\&quot;</span><span class="s2">&quot;</span><span class="p">)</span>
+            <span class="k">return</span> <span class="kc">None</span>
+        <span class="n">rsp</span><span class="o">.</span><span class="n">raise_for_status</span><span class="p">()</span>
+        <span class="k">return</span> <span class="n">Mapping</span><span class="o">.</span><span class="n">from_json</span><span class="p">(</span><span class="n">json</span><span class="o">=</span><span class="n">rsp</span><span class="o">.</span><span class="n">json</span><span class="p">())</span></div>
+
+<div class="viewcode-block" id="StarmapClient.list_destinations"><a class="viewcode-back" href="../../client/client.html#starmap_client.StarmapClient.list_destinations">[docs]</a>    <span class="k">def</span> <span class="nf">list_destinations</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">mapping_id</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">List</span><span class="p">[</span><span class="n">Destination</span><span class="p">]:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        List all destinations for a given Marketplace Mapping ID.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            mapping_id (str)</span>
+<span class="sd">                Marketplace Mapping ID to list the mappings.</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            List with the Destinations for the requested Mapping.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">res</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_mapping</span><span class="p">(</span><span class="n">mapping_id</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">res</span><span class="p">:</span>
+            <span class="k">return</span> <span class="n">res</span><span class="o">.</span><span class="n">destinations</span>
+        <span class="k">return</span> <span class="p">[]</span></div>
+
+<div class="viewcode-block" id="StarmapClient.get_destination"><a class="viewcode-back" href="../../client/client.html#starmap_client.StarmapClient.get_destination">[docs]</a>    <span class="k">def</span> <span class="nf">get_destination</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">destination_id</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Optional</span><span class="p">[</span><span class="n">Destination</span><span class="p">]:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Retrieve a single Destination by its ID.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            destination_id (str)</span>
+<span class="sd">                The Destination ID to retrieve from StArmAp.</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            The requested Destination when found.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">rsp</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">session</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;/destination/</span><span class="si">{</span><span class="n">destination_id</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">rsp</span><span class="o">.</span><span class="n">status_code</span> <span class="o">==</span> <span class="mi">404</span><span class="p">:</span>
+            <span class="n">log</span><span class="o">.</span><span class="n">error</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Destination not found with ID = </span><span class="se">\&quot;</span><span class="si">{</span><span class="n">destination_id</span><span class="si">}</span><span class="se">\&quot;</span><span class="s2">&quot;</span><span class="p">)</span>
+            <span class="k">return</span> <span class="kc">None</span>
+        <span class="n">rsp</span><span class="o">.</span><span class="n">raise_for_status</span><span class="p">()</span>
+        <span class="k">return</span> <span class="n">Destination</span><span class="o">.</span><span class="n">from_json</span><span class="p">(</span><span class="n">json</span><span class="o">=</span><span class="n">rsp</span><span class="o">.</span><span class="n">json</span><span class="p">())</span></div></div>
+</pre></div>
+
+          </div>
+          
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+<h1 class="logo"><a href="../../index.html">StArMap Client</a></h1>
+
+
+
+<p class="blurb">A client library to communicate with StArMap</p>
+
+
+
+
+
+
+<h3>Navigation</h3>
+<p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../client/client.html">Client</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../model/models.html">Models</a></li>
+</ul>
+
+
+<hr />
+<ul>
+    
+    <li class="toctree-l1"><a href="https://gitlab.cee.redhat.com/stratosphere/starmap-client">Source</a></li>
+    
+    <li class="toctree-l1"><a href="genindex.html">Index</a></li>
+    
+</ul>
+<div class="relations">
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="../../index.html">Documentation overview</a><ul>
+  <li><a href="../index.html">Module code</a><ul>
+  </ul></li>
+  </ul></li>
+</ul>
+</div>
+<div id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="../../search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false"/>
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</div>
+<script>document.getElementById('searchbox').style.display = "block"</script>
+
+
+
+
+
+
+
+
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &copy;2023, Jonathan Gangi.
+      
+      |
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 7.1.2</a>
+      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.13</a>
+      
+    </div>
+
+    
+
+    
+  </body>
+</html>
