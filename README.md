@@ -12,7 +12,7 @@ used by [release-engineering](https://github.com/release-engineering) publishing
 
 ## Overview
 
-The `StArMap Client` is a client library to communicate with the _StArMap_ service.
+The `StArMap Client` is a client library to communicate with the _StArMap_ service, which is used to map a VM image build to its respective cloud marketplace(s) destination(s).
 
 It's written to support applications running on `Python >= 3.8`.
 
