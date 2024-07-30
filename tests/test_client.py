@@ -10,6 +10,7 @@ from requests.exceptions import HTTPError
 
 from starmap_client import StarmapClient
 from starmap_client.models import Destination, Mapping, Policy, QueryResponse
+from starmap_client.providers import InMemoryMapProvider
 
 
 def load_json(json_file: str) -> Any:
@@ -56,6 +57,17 @@ class TestStarmapClient(TestCase):
         # Note: JSON need to be loaded twice as `from_json` pops its original data
         self.assertEqual(res, QueryResponse.from_json(load_json(fpath)))
 
+    def test_in_memory_query_image(self):
+        fpath = "tests/data/query/valid_quer1.json"
+        data = [QueryResponse.from_json(load_json(fpath))]
+        provider = InMemoryMapProvider(data)
+
+        self.svc = StarmapClient("https://test.starmap.com", api_version="v1", provider=provider)
+
+        res = self.svc.query_image("sample-policy-1.0-1.raw.xz")
+        self.mock_session.get.assert_not_called()
+        self.assertEqual(res, data[0])
+
     def test_query_image_not_found(self):
         self.mock_session.get.return_value = self.mock_resp_not_found
 
@@ -82,6 +94,17 @@ class TestStarmapClient(TestCase):
         self.mock_resp_success.raise_for_status.assert_called_once()
         # Note: JSON need to be loaded twice as `from_json` pops its original data
         self.assertEqual(res, QueryResponse.from_json(load_json(fpath)))
+
+    def test_in_memory_query_image_by_name(self):
+        fpath = "tests/data/query/valid_quer1.json"
+        data = [QueryResponse.from_json(load_json(fpath))]
+        provider = InMemoryMapProvider(data)
+
+        self.svc = StarmapClient("https://test.starmap.com", api_version="v1", provider=provider)
+
+        res = self.svc.query_image_by_name(name="sample-policy")
+        self.mock_session.get.assert_not_called()
+        self.assertEqual(res, data[0])
 
     def test_query_image_by_name_version(self):
         fpath = "tests/data/query/valid_quer1.json"
