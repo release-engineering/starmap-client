@@ -10,6 +10,7 @@ from starmap_client.models import (
     QueryResponse,
     Workflow,
 )
+from starmap_client.providers import StarmapProvider
 from starmap_client.session import StarmapSession
 
 log = logging.getLogger(__name__)
@@ -22,7 +23,11 @@ class StarmapClient(object):
     """Number of policies to retrieve per call."""
 
     def __init__(
-        self, url: str, api_version: str = "v1", session_params: Optional[Dict[str, Any]] = None
+        self,
+        url: str,
+        api_version: str = "v1",
+        session_params: Optional[Dict[str, Any]] = None,
+        provider: Optional[StarmapProvider] = None,
     ):
         """
         Create a new StArMapClient.
@@ -35,13 +40,25 @@ class StarmapClient(object):
                 The StArMap API version. Defaults to `v1`.
             session_params (dict, optional)
                 Additional keyword arguments for StarmapSession
+            provider (StarmapProvider, optional):
+                Object responsible to provide mappings locally. When set the client will be query it
+                first and if no mapping is found the subsequent request will be made to the server.
         """
         session_params = session_params or {}
         self.session = StarmapSession(url, api_version, **session_params)
+        self._provider = provider
         self._policies: List[Policy] = []
 
     def _query(self, params: Dict[str, Any]) -> Optional[QueryResponse]:
-        rsp = self.session.get("/query", params=params)
+        qr = None
+        if self._provider:
+            qr = self._provider.query(params)
+        rsp = qr or self.session.get("/query", params=params)
+        if isinstance(rsp, QueryResponse):
+            log.debug(
+                "Returning response from the local provider %s", self._provider.__class__.__name__
+            )
+            return rsp
         if rsp.status_code == 404:
             log.error(f"Marketplace mappings not defined for {params}")
             return None
