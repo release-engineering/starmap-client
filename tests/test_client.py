@@ -11,6 +11,7 @@ from requests.exceptions import HTTPError
 from starmap_client import StarmapClient
 from starmap_client.models import Destination, Mapping, Policy, QueryResponse
 from starmap_client.providers import InMemoryMapProvider
+from starmap_client.session import StarmapMockSession
 
 
 def load_json(json_file: str) -> Any:
@@ -196,10 +197,8 @@ class TestStarmapClient(TestCase):
         self.mock_session.get.return_value = self.mock_resp_not_found
 
         with self._caplog.at_level(logging.ERROR):
-            with pytest.raises(HTTPError):
-                for _ in self.svc.policies:
-                    pass
-
+            with pytest.raises(StopIteration):
+                next(self.svc.policies)
         assert "No policies registered in StArMap." in self._caplog.text
 
     @mock.patch('starmap_client.StarmapClient.policies')
@@ -329,3 +328,35 @@ class TestStarmapClient(TestCase):
         assert expected_msg in self._caplog.text
 
         self.assertIsNone(res)
+
+    def test_client_requires_url_or_session(self):
+        error = "Cannot initialize the client without defining either an \"url\" or \"session\"."
+        with pytest.raises(ValueError, match=error):
+            StarmapClient()
+
+
+def test_offline_client():
+    """Ensure the cient can be used offline with a local provider."""
+    fpath = "tests/data/query/valid_quer1.json"
+    qr = QueryResponse.from_json(load_json(fpath))
+
+    # The provider will have the QueryResponse from fpath
+    provider = InMemoryMapProvider([qr])
+
+    # The session will prevent StarmapClient to request a real server
+    session = StarmapMockSession("fake.starmap.url", "v1")
+
+    # Offline client
+    svc = StarmapClient(session=session, provider=provider)
+
+    assert session.json_data == {}
+    assert session.status_code == 404
+
+    assert svc.query_image("sample-policy-123.132-0.123") == qr
+    assert svc.query_image_by_name("sample-policy", "8.0") == qr
+    assert svc.get_destination("test") is None
+    assert svc.get_mapping("test") is None
+    assert svc.get_policy("test") is None
+    assert svc.list_policies() == []
+    assert svc.list_mappings("test") == []
+    assert svc.list_destinations("test") == []
