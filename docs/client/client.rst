@@ -1,13 +1,9 @@
 Client
 ======
 
-Define the client classes to communicate with StArMap over HTTPS.
+Define the client classes to communicate with StArMap through a `session`_.
 
+.. include:: usage.rst
+.. include:: implementation.rst
 
-.. autoclass:: starmap_client.StarmapClient
-   :members:
-   :special-members: __init__
-
-.. autoclass:: starmap_client.session.StarmapSession
-   :members:
-   :special-members: __init__
+.. _session: ../session/session.html

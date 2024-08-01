@@ -57,7 +57,7 @@ html_theme = 'alabaster'
 html_theme_options = {
     "description": "A client library to communicate with StArMap",
     "extra_nav_links": {
-        "Source": "https://gitlab.cee.redhat.com/stratosphere/starmap-client",
+        "Source": "https://github.com/release-engineering/starmap-client",
         "Index": "genindex.html",
     },
     # default is 940px which seems to be a little too small to display 88 chars code
