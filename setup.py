@@ -21,6 +21,7 @@ setup(
     install_requires=[
         'attrs',
         'requests',
+        'requests_mock',
         'urllib3<2.0.0'
     ],
     zip_safe=False,
