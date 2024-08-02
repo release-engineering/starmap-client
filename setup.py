@@ -7,7 +7,7 @@ setup(
     keywords='stratosphere content artifact mapping cli',
     author='Jonathan Gangi',
     author_email='jgangi@redhat.com',
-    url='https://gitlab.cee.redhat.com/stratosphere/starmap-client',
+    url='https://github.com/release-engineering/starmap-client',
     license='GPLv3+',
     packages=find_packages(exclude=['tests', 'tests.*']),
     include_package_data=True,
@@ -21,6 +21,7 @@ setup(
     install_requires=[
         'attrs',
         'requests',
+        'requests_mock',
         'urllib3<2.0.0'
     ],
     zip_safe=False,

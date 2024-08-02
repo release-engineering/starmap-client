@@ -1,6 +1,6 @@
 from unittest import TestCase, mock
 
-from starmap_client.session import StarmapSession
+from starmap_client.session import StarmapMockSession, StarmapSession
 
 
 class TestStarmapSession(TestCase):
@@ -38,3 +38,35 @@ class TestStarmapSession(TestCase):
         data = {"foo": "bar"}
         self.session.put("/foo", json=data)
         self._assert_requested_with(method="put", path="foo", json=data)
+
+
+class TestMockSession(TestCase):
+    def setUp(self):
+        self.starmap_url = "test.starmap.com"
+        self.starmap_api_version = "v1"
+        self.status_code = 404
+        self.json = {}
+        self.session = StarmapMockSession(
+            url=self.starmap_url,
+            api_version=self.starmap_api_version,
+            status_code=self.status_code,
+            json_data=self.json,
+        )
+
+    def _assert_response(self, response):
+        assert response.status_code == self.status_code
+        assert response.json() == self.json
+
+    def test_get_request(self):
+        res = self.session.get("/foo")
+        self._assert_response(res)
+
+    def test_post_request(self):
+        data = {"foo": "bar"}
+        res = self.session.post("/foo", json=data)
+        self._assert_response(res)
+
+    def test_put_request(self):
+        data = {"foo": "bar"}
+        res = self.session.put("/foo", json=data)
+        self._assert_response(res)

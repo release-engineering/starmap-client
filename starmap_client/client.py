@@ -11,7 +11,7 @@ from starmap_client.models import (
     Workflow,
 )
 from starmap_client.providers import StarmapProvider
-from starmap_client.session import StarmapSession
+from starmap_client.session import StarmapBaseSession, StarmapSession
 
 log = logging.getLogger(__name__)
 
@@ -24,8 +24,9 @@ class StarmapClient(object):
 
     def __init__(
         self,
-        url: str,
+        url: Optional[str] = None,
         api_version: str = "v1",
+        session: Optional[StarmapBaseSession] = None,
         session_params: Optional[Dict[str, Any]] = None,
         provider: Optional[StarmapProvider] = None,
     ):
@@ -33,19 +34,26 @@ class StarmapClient(object):
         Create a new StArMapClient.
 
         Args:
-            url (str)
-                URL of the StArMap endpoint.
+            url (str, optional)
+                URL of the StArMap endpoint. Required when session is not set.
 
             api_version (str, optional)
                 The StArMap API version. Defaults to `v1`.
+            session (StarmapBaseSession, optional)
+                Defines the session object to use. Defaults to `StarmapSession` when not set
             session_params (dict, optional)
                 Additional keyword arguments for StarmapSession
             provider (StarmapProvider, optional):
                 Object responsible to provide mappings locally. When set the client will be query it
                 first and if no mapping is found the subsequent request will be made to the server.
         """
+        if url is None and session is None:
+            raise ValueError(
+                "Cannot initialize the client without defining either an \"url\" or \"session\"."
+            )
         session_params = session_params or {}
-        self.session = StarmapSession(url, api_version, **session_params)
+        url = url or ""  # just to make mypy happy. The URL is mandatory if session is not defined
+        self.session = session or StarmapSession(url, api_version, **session_params)
         self._provider = provider
         self._policies: List[Policy] = []
 
@@ -114,6 +122,7 @@ class StarmapClient(object):
             res = self.session.get("policy", params=params)
             if res.status_code == 404:
                 log.error("No policies registered in StArMap.")
+                return
             res.raise_for_status()
 
             data: PaginatedRawData = res.json()
