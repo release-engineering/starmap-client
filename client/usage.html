@@ -5,17 +5,16 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
-    <title>StArMap Client &#8212; StArMap Client  documentation</title>
-    <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=4f649999" />
-    <link rel="stylesheet" type="text/css" href="_static/alabaster.css?v=1fc5d657" />
-    <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js?v=b3ba4146"></script>
-    <script src="_static/doctools.js?v=888ff710"></script>
-    <script src="_static/sphinx_highlight.js?v=4825356b"></script>
-    <link rel="index" title="Index" href="genindex.html" />
-    <link rel="search" title="Search" href="search.html" />
-    <link rel="next" title="Client" href="client/client.html" />
+    <title>Usage &#8212; StArMap Client  documentation</title>
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=4f649999" />
+    <link rel="stylesheet" type="text/css" href="../_static/alabaster.css?v=1fc5d657" />
+    <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js?v=b3ba4146"></script>
+    <script src="../_static/doctools.js?v=888ff710"></script>
+    <script src="../_static/sphinx_highlight.js?v=4825356b"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
    
-  <link rel="stylesheet" href="_static/custom.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/custom.css" type="text/css" />
   
   
   <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9" />
@@ -30,84 +29,15 @@
 
           <div class="body" role="main">
             
-  <section id="starmap-client">
-<h1>StArMap Client<a class="headerlink" href="#starmap-client" title="Permalink to this heading">¶</a></h1>
-<p>A client library to communicate with StArMap.</p>
-<div class="toctree-wrapper compound">
-<p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
-<ul>
-<li class="toctree-l1"><a class="reference internal" href="client/client.html">Client</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="client/client.html#usage">Usage</a></li>
-<li class="toctree-l2"><a class="reference internal" href="client/client.html#implementation">Implementation</a></li>
-</ul>
-</li>
-<li class="toctree-l1"><a class="reference internal" href="model/models.html">Models</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="model/models.html#starmap_client.models.Policy"><code class="docutils literal notranslate"><span class="pre">Policy</span></code></a></li>
-<li class="toctree-l2"><a class="reference internal" href="model/models.html#starmap_client.models.Mapping"><code class="docutils literal notranslate"><span class="pre">Mapping</span></code></a></li>
-<li class="toctree-l2"><a class="reference internal" href="model/models.html#starmap_client.models.Destination"><code class="docutils literal notranslate"><span class="pre">Destination</span></code></a></li>
-<li class="toctree-l2"><a class="reference internal" href="model/models.html#starmap_client.models.QueryResponse"><code class="docutils literal notranslate"><span class="pre">QueryResponse</span></code></a></li>
-</ul>
-</li>
-<li class="toctree-l1"><a class="reference internal" href="session/session.html">Session</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="session/session.html#interface">Interface</a></li>
-<li class="toctree-l2"><a class="reference internal" href="session/session.html#implementations">Implementations</a></li>
-</ul>
-</li>
-<li class="toctree-l1"><a class="reference internal" href="provider/provider.html">Providers</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="provider/provider.html#interface">Interface</a></li>
-<li class="toctree-l2"><a class="reference internal" href="provider/provider.html#implementations">Implementations</a></li>
-</ul>
-</li>
-</ul>
-</div>
-<section id="quick-start">
-<h2>Quick Start<a class="headerlink" href="#quick-start" title="Permalink to this heading">¶</a></h2>
-<p>Install starmap_client:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">pip</span> <span class="n">install</span> <span class="n">starmap</span><span class="o">-</span><span class="n">client</span>
-</pre></div>
-</div>
-<p>In your python code, obtain a <a class="reference internal" href="client/implementation.html#starmap_client.StarmapClient" title="starmap_client.StarmapClient"><code class="xref py py-class docutils literal notranslate"><span class="pre">StarmapClient</span></code></a> instance and
-use it to communicate with <code class="docutils literal notranslate"><span class="pre">StArMap</span></code>:</p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">starmap_client</span> <span class="kn">import</span> <span class="n">StarmapClient</span>
-<span class="kn">import</span> <span class="nn">logging</span>
-
-<span class="c1"># Alternatively you can pass the api_version as well. Defaults to &quot;v1&quot;.</span>
-<span class="c1"># client = StarmapClient(url=&quot;https://starmap.example.com&quot;, api_version=&quot;v1&quot;)</span>
-<span class="n">client</span> <span class="o">=</span> <span class="n">StarmapClient</span><span class="p">(</span><span class="n">url</span><span class="o">=</span><span class="s2">&quot;https://starmap.example.com&quot;</span><span class="p">)</span>
-</pre></div>
-</div>
-<p>Then it’s possible to use the client object to call any API endpoint from <code class="docutils literal notranslate"><span class="pre">StArMap</span></code>.</p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Query image destinations by NVR</span>
-<span class="n">query</span> <span class="o">=</span> <span class="n">client</span><span class="o">.</span><span class="n">query_image</span><span class="p">(</span><span class="s2">&quot;sample-product-1.0.0-vhd.xz&quot;</span><span class="p">)</span>
-
-<span class="c1"># Query image destinations by name only</span>
-<span class="n">query</span> <span class="o">=</span> <span class="n">client</span><span class="o">.</span><span class="n">query_image_by_name</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="s2">&quot;sample-product&quot;</span><span class="p">)</span>
-
-<span class="c1"># Query image destinations by name and version</span>
-<span class="n">query</span> <span class="o">=</span> <span class="n">client</span><span class="o">.</span><span class="n">query_image_by_name</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="s2">&quot;sample-product&quot;</span><span class="p">,</span> <span class="n">version</span><span class="o">=</span><span class="s2">&quot;1.0.0&quot;</span><span class="p">)</span>
-
-<span class="c1"># Iterate over all policies from StArMap</span>
-<span class="k">for</span> <span class="n">policy</span> <span class="ow">in</span> <span class="n">client</span><span class="o">.</span><span class="n">policies</span><span class="p">:</span>
-    <span class="c1"># Do something</span>
-    <span class="o">...</span>
-
-<span class="c1"># List all policies</span>
-<span class="n">policies</span> <span class="o">=</span> <span class="n">client</span><span class="o">.</span><span class="n">list_policies</span><span class="p">()</span>
-
-<span class="c1"># Get a specific policy by its ID</span>
-<span class="n">policy</span> <span class="o">=</span> <span class="n">client</span><span class="o">.</span><span class="n">get_policy</span><span class="p">(</span><span class="n">policy_id</span><span class="o">=</span><span class="s2">&quot;426a3eac-8b9d-11ed-90ee-902e165594e8&quot;</span><span class="p">)</span>
-</pre></div>
-</div>
-</section>
-<section id="usage">
-<h2>Usage<a class="headerlink" href="#usage" title="Permalink to this heading">¶</a></h2>
-<p>The <a class="reference internal" href="client/implementation.html#starmap_client.StarmapClient" title="starmap_client.StarmapClient"><code class="xref py py-class docutils literal notranslate"><span class="pre">StarmapClient</span></code></a> can be used to query the StArMap service over network and/or
+  <section id="usage">
+<h1>Usage<a class="headerlink" href="#usage" title="Permalink to this heading">¶</a></h1>
+<p>The <a class="reference internal" href="implementation.html#starmap_client.StarmapClient" title="starmap_client.StarmapClient"><code class="xref py py-class docutils literal notranslate"><span class="pre">StarmapClient</span></code></a> can be used to query the StArMap service over network and/or
 locally.</p>
 <p>In the subsections below you can find how to properly use the client for different
 query use-cases.</p>
 <section id="online-usage">
-<h3>Online Usage<a class="headerlink" href="#online-usage" title="Permalink to this heading">¶</a></h3>
-<p>In this mode the <a class="reference internal" href="client/implementation.html#starmap_client.StarmapClient" title="starmap_client.StarmapClient"><code class="xref py py-class docutils literal notranslate"><span class="pre">StarmapClient</span></code></a> will always request data from the server over the network.</p>
+<h2>Online Usage<a class="headerlink" href="#online-usage" title="Permalink to this heading">¶</a></h2>
+<p>In this mode the <a class="reference internal" href="implementation.html#starmap_client.StarmapClient" title="starmap_client.StarmapClient"><code class="xref py py-class docutils literal notranslate"><span class="pre">StarmapClient</span></code></a> will always request data from the server over the network.</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">starmap_client</span> <span class="kn">import</span> <span class="n">StarmapClient</span>
 
 <span class="c1"># Initialize the online client with the URL only</span>
@@ -126,8 +56,8 @@ query use-cases.</p>
 <p>Note that either <code class="docutils literal notranslate"><span class="pre">url</span></code> or <code class="docutils literal notranslate"><span class="pre">session</span></code> must be passed to the client to instantiate the object.</p>
 </section>
 <section id="offline-usage">
-<h3>Offline Usage<a class="headerlink" href="#offline-usage" title="Permalink to this heading">¶</a></h3>
-<p>In this mode the <a class="reference internal" href="client/implementation.html#starmap_client.StarmapClient" title="starmap_client.StarmapClient"><code class="xref py py-class docutils literal notranslate"><span class="pre">StarmapClient</span></code></a> will always request data from a local <a class="reference external" href="../provider/provider.html">provider</a> instead of using the network.</p>
+<h2>Offline Usage<a class="headerlink" href="#offline-usage" title="Permalink to this heading">¶</a></h2>
+<p>In this mode the <a class="reference internal" href="implementation.html#starmap_client.StarmapClient" title="starmap_client.StarmapClient"><code class="xref py py-class docutils literal notranslate"><span class="pre">StarmapClient</span></code></a> will always request data from a local <a class="reference external" href="../provider/provider.html">provider</a> instead of using the network.</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">json</span>
 <span class="kn">from</span> <span class="nn">starmap_client</span> <span class="kn">import</span> <span class="n">StarmapClient</span>
 <span class="kn">from</span> <span class="nn">starmap_client.session</span> <span class="kn">import</span> <span class="n">StarmapMockSession</span>
@@ -152,8 +82,8 @@ query use-cases.</p>
 </div>
 </section>
 <section id="hybrid-usage">
-<h3>Hybrid Usage:<a class="headerlink" href="#hybrid-usage" title="Permalink to this heading">¶</a></h3>
-<p>In this mode the <a class="reference internal" href="client/implementation.html#starmap_client.StarmapClient" title="starmap_client.StarmapClient"><code class="xref py py-class docutils literal notranslate"><span class="pre">StarmapClient</span></code></a> will first request data from a local <a class="reference external" href="../provider/provider.html">provider</a> and
+<h2>Hybrid Usage:<a class="headerlink" href="#hybrid-usage" title="Permalink to this heading">¶</a></h2>
+<p>In this mode the <a class="reference internal" href="implementation.html#starmap_client.StarmapClient" title="starmap_client.StarmapClient"><code class="xref py py-class docutils literal notranslate"><span class="pre">StarmapClient</span></code></a> will first request data from a local <a class="reference external" href="../provider/provider.html">provider</a> and
 only proceed to query over network if the local provider doesn’t have the requested mapping.</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">json</span>
 <span class="kn">from</span> <span class="nn">starmap_client</span> <span class="kn">import</span> <span class="n">StarmapClient</span>
@@ -177,7 +107,6 @@ only proceed to query over network if the local provider doesn’t have the requ
 </div>
 </section>
 </section>
-</section>
 
 
           </div>
@@ -186,7 +115,7 @@ only proceed to query over network if the local provider doesn’t have the requ
       </div>
       <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
         <div class="sphinxsidebarwrapper">
-<h1 class="logo"><a href="#">StArMap Client</a></h1>
+<h1 class="logo"><a href="../index.html">StArMap Client</a></h1>
 
 
 
@@ -200,10 +129,10 @@ only proceed to query over network if the local provider doesn’t have the requ
 <h3>Navigation</h3>
 <p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
 <ul>
-<li class="toctree-l1"><a class="reference internal" href="client/client.html">Client</a></li>
-<li class="toctree-l1"><a class="reference internal" href="model/models.html">Models</a></li>
-<li class="toctree-l1"><a class="reference internal" href="session/session.html">Session</a></li>
-<li class="toctree-l1"><a class="reference internal" href="provider/provider.html">Providers</a></li>
+<li class="toctree-l1"><a class="reference internal" href="client.html">Client</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../model/models.html">Models</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../session/session.html">Session</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../provider/provider.html">Providers</a></li>
 </ul>
 
 
@@ -218,15 +147,14 @@ only proceed to query over network if the local provider doesn’t have the requ
 <div class="relations">
 <h3>Related Topics</h3>
 <ul>
-  <li><a href="#">Documentation overview</a><ul>
-      <li>Next: <a href="client/client.html" title="next chapter">Client</a></li>
+  <li><a href="../index.html">Documentation overview</a><ul>
   </ul></li>
 </ul>
 </div>
 <div id="searchbox" style="display: none" role="search">
   <h3 id="searchlabel">Quick search</h3>
     <div class="searchformwrapper">
-    <form class="search" action="search.html" method="get">
+    <form class="search" action="../search.html" method="get">
       <input type="text" name="q" aria-labelledby="searchlabel" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false"/>
       <input type="submit" value="Go" />
     </form>
@@ -253,7 +181,7 @@ only proceed to query over network if the local provider doesn’t have the requ
       &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.13</a>
       
       |
-      <a href="_sources/index.rst.txt"
+      <a href="../_sources/client/usage.rst.txt"
           rel="nofollow">Page source</a>
     </div>
 
