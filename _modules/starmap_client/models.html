@@ -52,6 +52,26 @@
 <span class="p">]</span>
 
 
+<span class="k">class</span> <span class="nc">PaginationMetadata</span><span class="p">(</span><span class="n">TypedDict</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Datastructure of the metadata about the paginated query.&quot;&quot;&quot;</span>
+
+    <span class="n">first</span><span class="p">:</span> <span class="nb">str</span>
+    <span class="n">last</span><span class="p">:</span> <span class="nb">str</span>
+    <span class="nb">next</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span>
+    <span class="n">page</span><span class="p">:</span> <span class="nb">int</span>
+    <span class="n">per_page</span><span class="p">:</span> <span class="nb">int</span>
+    <span class="n">previous</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span>
+    <span class="n">total</span><span class="p">:</span> <span class="nb">int</span>
+    <span class="n">total_pages</span><span class="p">:</span> <span class="nb">int</span>
+
+
+<span class="k">class</span> <span class="nc">PaginatedRawData</span><span class="p">(</span><span class="n">TypedDict</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Represent a paginated StArMap data in its raw format (Dict).&quot;&quot;&quot;</span>
+
+    <span class="n">items</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="n">Any</span><span class="p">]</span>
+    <span class="n">nav</span><span class="p">:</span> <span class="n">PaginationMetadata</span>
+
+
 <span class="k">class</span> <span class="nc">Workflow</span><span class="p">(</span><span class="nb">str</span><span class="p">,</span> <span class="n">Enum</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Define the valid workflows for StArMap.&quot;&quot;&quot;</span>
 
@@ -116,14 +136,8 @@
 
 
 <span class="nd">@frozen</span>
-<span class="k">class</span> <span class="nc">StarmapBaseData</span><span class="p">:</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;Represent the common data present in StArMap entities.&quot;&quot;&quot;</span>
-
-    <span class="nb">id</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="n">field</span><span class="p">(</span><span class="n">validator</span><span class="o">=</span><span class="n">optional</span><span class="p">(</span><span class="n">instance_of</span><span class="p">(</span><span class="nb">str</span><span class="p">)))</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">    The unique ID for a StArMap model.</span>
-<span class="sd">    This field is never set on :class:`~starmap_client.models.QueryResponse`.</span>
-<span class="sd">    &quot;&quot;&quot;</span>
+<span class="k">class</span> <span class="nc">MetaMixin</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Mixin for defining the meta attribute and its validator.&quot;&quot;&quot;</span>
 
     <span class="n">meta</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Any</span><span class="p">]]</span> <span class="o">=</span> <span class="n">field</span><span class="p">()</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Dictionary with additional information related to a VM image.&quot;&quot;&quot;</span>
@@ -139,8 +153,19 @@
                 <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Invalid key </span><span class="se">\&quot;</span><span class="si">{</span><span class="n">k</span><span class="si">}</span><span class="se">\&quot;</span><span class="s2"> for </span><span class="se">\&quot;</span><span class="si">{</span><span class="n">attribute</span><span class="o">.</span><span class="n">name</span><span class="si">}</span><span class="se">\&quot;</span><span class="s2">. Expected: </span><span class="se">\&quot;</span><span class="s2">str</span><span class="se">\&quot;</span><span class="s2">&quot;</span><span class="p">)</span>
 
 
+<span class="nd">@frozen</span>
+<span class="k">class</span> <span class="nc">StarmapBaseData</span><span class="p">(</span><span class="n">MetaMixin</span><span class="p">,</span> <span class="n">StarmapJSONDecodeMixin</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Represent the common data present in StArMap entities.&quot;&quot;&quot;</span>
+
+    <span class="nb">id</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="n">field</span><span class="p">(</span><span class="n">validator</span><span class="o">=</span><span class="n">optional</span><span class="p">(</span><span class="n">instance_of</span><span class="p">(</span><span class="nb">str</span><span class="p">)))</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    The unique ID for a StArMap model.</span>
+<span class="sd">    This field is never set on :class:`~starmap_client.models.QueryResponse`.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+
 <div class="viewcode-block" id="Destination"><a class="viewcode-back" href="../../model/models.html#starmap_client.models.Destination">[docs]</a><span class="nd">@frozen</span>
-<span class="k">class</span> <span class="nc">Destination</span><span class="p">(</span><span class="n">StarmapBaseData</span><span class="p">,</span> <span class="n">StarmapJSONDecodeMixin</span><span class="p">):</span>
+<span class="k">class</span> <span class="nc">Destination</span><span class="p">(</span><span class="n">StarmapBaseData</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Represent a destination entry from Mapping.&quot;&quot;&quot;</span>
 
     <span class="n">architecture</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="n">field</span><span class="p">(</span><span class="n">validator</span><span class="o">=</span><span class="n">optional</span><span class="p">(</span><span class="n">instance_of</span><span class="p">(</span><span class="nb">str</span><span class="p">)))</span>
@@ -177,7 +202,7 @@
 
 
 <div class="viewcode-block" id="Mapping"><a class="viewcode-back" href="../../model/models.html#starmap_client.models.Mapping">[docs]</a><span class="nd">@frozen</span>
-<span class="k">class</span> <span class="nc">Mapping</span><span class="p">(</span><span class="n">StarmapBaseData</span><span class="p">,</span> <span class="n">StarmapJSONDecodeMixin</span><span class="p">):</span>
+<span class="k">class</span> <span class="nc">Mapping</span><span class="p">(</span><span class="n">StarmapBaseData</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Represent a marketplace Mapping from Policy.&quot;&quot;&quot;</span>
 
     <span class="n">destinations</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="n">Destination</span><span class="p">]</span> <span class="o">=</span> <span class="n">field</span><span class="p">(</span>
@@ -207,7 +232,7 @@
 
 
 <div class="viewcode-block" id="Policy"><a class="viewcode-back" href="../../model/models.html#starmap_client.models.Policy">[docs]</a><span class="nd">@frozen</span>
-<span class="k">class</span> <span class="nc">Policy</span><span class="p">(</span><span class="n">StarmapBaseData</span><span class="p">,</span> <span class="n">StarmapJSONDecodeMixin</span><span class="p">):</span>
+<span class="k">class</span> <span class="nc">Policy</span><span class="p">(</span><span class="n">StarmapBaseData</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Represent a StArMap policy.&quot;&quot;&quot;</span>
 
     <span class="n">mappings</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="n">Mapping</span><span class="p">]</span> <span class="o">=</span> <span class="n">field</span><span class="p">(</span>
@@ -268,26 +293,6 @@
             <span class="n">mappings</span><span class="p">[</span><span class="n">c</span><span class="p">]</span> <span class="o">=</span> <span class="n">dst</span>
         <span class="n">json</span><span class="p">[</span><span class="s2">&quot;clouds&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">mappings</span>
         <span class="k">return</span> <span class="n">json</span></div>
-
-
-<span class="k">class</span> <span class="nc">PaginationMetadata</span><span class="p">(</span><span class="n">TypedDict</span><span class="p">):</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;Datastructure of the metadata about the paginated query.&quot;&quot;&quot;</span>
-
-    <span class="n">first</span><span class="p">:</span> <span class="nb">str</span>
-    <span class="n">last</span><span class="p">:</span> <span class="nb">str</span>
-    <span class="nb">next</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span>
-    <span class="n">page</span><span class="p">:</span> <span class="nb">int</span>
-    <span class="n">per_page</span><span class="p">:</span> <span class="nb">int</span>
-    <span class="n">previous</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span>
-    <span class="n">total</span><span class="p">:</span> <span class="nb">int</span>
-    <span class="n">total_pages</span><span class="p">:</span> <span class="nb">int</span>
-
-
-<span class="k">class</span> <span class="nc">PaginatedRawData</span><span class="p">(</span><span class="n">TypedDict</span><span class="p">):</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;Represent a paginated StArMap data in its raw format (Dict).&quot;&quot;&quot;</span>
-
-    <span class="n">items</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="n">Any</span><span class="p">]</span>
-    <span class="n">nav</span><span class="p">:</span> <span class="n">PaginationMetadata</span>
 </pre></div>
 
           </div>
