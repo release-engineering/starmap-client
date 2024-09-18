@@ -21,6 +21,26 @@ __all__ = [
 ]
 
 
+class PaginationMetadata(TypedDict):
+    """Datastructure of the metadata about the paginated query."""
+
+    first: str
+    last: str
+    next: Optional[str]
+    page: int
+    per_page: int
+    previous: Optional[str]
+    total: int
+    total_pages: int
+
+
+class PaginatedRawData(TypedDict):
+    """Represent a paginated StArMap data in its raw format (Dict)."""
+
+    items: List[Any]
+    nav: PaginationMetadata
+
+
 class Workflow(str, Enum):
     """Define the valid workflows for StArMap."""
 
@@ -85,14 +105,8 @@ class StarmapJSONDecodeMixin:
 
 
 @frozen
-class StarmapBaseData:
-    """Represent the common data present in StArMap entities."""
-
-    id: Optional[str] = field(validator=optional(instance_of(str)))
-    """
-    The unique ID for a StArMap model.
-    This field is never set on :class:`~starmap_client.models.QueryResponse`.
-    """
+class MetaMixin:
+    """Mixin for defining the meta attribute and its validator."""
 
     meta: Optional[Dict[str, Any]] = field()
     """Dictionary with additional information related to a VM image."""
@@ -109,7 +123,18 @@ class StarmapBaseData:
 
 
 @frozen
-class Destination(StarmapBaseData, StarmapJSONDecodeMixin):
+class StarmapBaseData(MetaMixin, StarmapJSONDecodeMixin):
+    """Represent the common data present in StArMap entities."""
+
+    id: Optional[str] = field(validator=optional(instance_of(str)))
+    """
+    The unique ID for a StArMap model.
+    This field is never set on :class:`~starmap_client.models.QueryResponse`.
+    """
+
+
+@frozen
+class Destination(StarmapBaseData):
     """Represent a destination entry from Mapping."""
 
     architecture: Optional[str] = field(validator=optional(instance_of(str)))
@@ -146,7 +171,7 @@ class Destination(StarmapBaseData, StarmapJSONDecodeMixin):
 
 
 @frozen
-class Mapping(StarmapBaseData, StarmapJSONDecodeMixin):
+class Mapping(StarmapBaseData):
     """Represent a marketplace Mapping from Policy."""
 
     destinations: List[Destination] = field(
@@ -176,7 +201,7 @@ class Mapping(StarmapBaseData, StarmapJSONDecodeMixin):
 
 
 @frozen
-class Policy(StarmapBaseData, StarmapJSONDecodeMixin):
+class Policy(StarmapBaseData):
     """Represent a StArMap policy."""
 
     mappings: List[Mapping] = field(
@@ -237,23 +262,3 @@ class QueryResponse(StarmapJSONDecodeMixin):
             mappings[c] = dst
         json["clouds"] = mappings
         return json
-
-
-class PaginationMetadata(TypedDict):
-    """Datastructure of the metadata about the paginated query."""
-
-    first: str
-    last: str
-    next: Optional[str]
-    page: int
-    per_page: int
-    previous: Optional[str]
-    total: int
-    total_pages: int
-
-
-class PaginatedRawData(TypedDict):
-    """Represent a paginated StArMap data in its raw format (Dict)."""
-
-    items: List[Any]
-    nav: PaginationMetadata
