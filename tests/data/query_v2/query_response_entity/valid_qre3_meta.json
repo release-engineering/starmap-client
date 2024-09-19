@@ -1,0 +1,8 @@
+{
+    "test-marketplace": {
+        "foo": "bar"
+    },
+    "another-marketplace": {
+        "foo": "bar"
+    }
+}

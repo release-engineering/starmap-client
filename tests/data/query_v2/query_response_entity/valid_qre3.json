@@ -1,0 +1,43 @@
+{
+    "cloud": "test",
+    "mappings": {
+        "test-marketplace": {
+            "destinations": [
+                {
+                    "destination": "test-destination/foo/bar",
+                    "overwrite": false,
+                    "restrict_version": false
+                },
+                {
+                    "destination": "second-test-destination/foo/bar",
+                    "overwrite": true,
+                    "restrict_version": false
+                }
+            ],
+            "provider": null,
+            "meta": {
+                "foo": "bar"
+            }
+        },
+        "another-marketplace": {
+            "destinations": [
+                {
+                    "destination": "aaaaaaaaaaaaaaa",
+                    "overwrite": false,
+                    "restrict_version": false
+                },
+                {
+                    "destination": "bbbbbbbbbbbbb",
+                    "overwrite": true,
+                    "restrict_version": false
+                }
+            ],
+            "provider": null,
+            "meta": {
+                "foo": "bar"
+            }
+        }
+    },
+    "workflow": "stratosphere",
+    "name": "sample-product"
+}

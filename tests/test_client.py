@@ -46,7 +46,7 @@ class TestStarmapClient(TestCase):
         mock.patch.stopall()
 
     def test_query_image_success(self):
-        fpath = "tests/data/query/valid_quer1.json"
+        fpath = "tests/data/query_v1/valid_quer1.json"
         self.mock_resp_success.json.return_value = load_json(fpath)
         self.mock_session.get.return_value = self.mock_resp_success
 
@@ -59,7 +59,7 @@ class TestStarmapClient(TestCase):
         self.assertEqual(res, QueryResponse.from_json(load_json(fpath)))
 
     def test_in_memory_query_image(self):
-        fpath = "tests/data/query/valid_quer1.json"
+        fpath = "tests/data/query_v1/valid_quer1.json"
         data = [QueryResponse.from_json(load_json(fpath))]
         provider = InMemoryMapProvider(data)
 
@@ -84,7 +84,7 @@ class TestStarmapClient(TestCase):
         self.assertIsNone(res)
 
     def test_query_image_by_name(self):
-        fpath = "tests/data/query/valid_quer1.json"
+        fpath = "tests/data/query_v1/valid_quer1.json"
         self.mock_resp_success.json.return_value = load_json(fpath)
         self.mock_session.get.return_value = self.mock_resp_success
 
@@ -97,7 +97,7 @@ class TestStarmapClient(TestCase):
         self.assertEqual(res, QueryResponse.from_json(load_json(fpath)))
 
     def test_in_memory_query_image_by_name(self):
-        fpath = "tests/data/query/valid_quer1.json"
+        fpath = "tests/data/query_v1/valid_quer1.json"
         data = [QueryResponse.from_json(load_json(fpath))]
         provider = InMemoryMapProvider(data)
 
@@ -108,7 +108,7 @@ class TestStarmapClient(TestCase):
         self.assertEqual(res, data[0])
 
     def test_query_image_by_name_version(self):
-        fpath = "tests/data/query/valid_quer1.json"
+        fpath = "tests/data/query_v1/valid_quer1.json"
         self.mock_resp_success.json.return_value = load_json(fpath)
         self.mock_session.get.return_value = self.mock_resp_success
 
@@ -337,7 +337,7 @@ class TestStarmapClient(TestCase):
 
 def test_offline_client():
     """Ensure the cient can be used offline with a local provider."""
-    fpath = "tests/data/query/valid_quer1.json"
+    fpath = "tests/data/query_v1/valid_quer1.json"
     qr = QueryResponse.from_json(load_json(fpath))
 
     # The provider will have the QueryResponse from fpath

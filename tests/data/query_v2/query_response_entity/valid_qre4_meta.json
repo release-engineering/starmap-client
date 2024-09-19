@@ -1,0 +1,10 @@
+{
+    "test-storage": {
+        "foo": "bar",
+        "lorem": "ipsum"
+    },
+    "another-storage": {
+        "foo": "bar",
+        "lorem": "ipsum"
+    }
+}

@@ -1,0 +1,166 @@
+{
+    "mappings": {
+        "test-storage": [
+            {
+                "destination": "test-destination/foo/bar",
+                "overwrite": false,
+                "restrict_version": false,
+                "meta": {
+                    "billing-code-config": {
+                        "test-access": {
+                            "codes": [
+                                "code-000"
+                            ],
+                            "image_name": "test",
+                            "image_types": [
+                                "access"
+                            ],
+                            "name": "Access2"
+                        },
+                        "test-marketplace": {
+                            "codes": [],
+                            "image_name": "test",
+                            "image_types": [
+                                "marketplace"
+                            ],
+                            "name": "Marketplace"
+                        },
+                        "test-hourly": {
+                            "codes": [
+                                "code-0002"
+                            ],
+                            "image_name": "rhel",
+                            "image_types": [
+                                "hourly"
+                            ],
+                            "name": "Hourly2"
+                        }
+                    },
+                    "foo": "bar",
+                    "lorem": "ipsum"
+                }
+            },
+            {
+                "destination": "second-test-destination/foo/bar",
+                "overwrite": true,
+                "restrict_version": false,
+                "meta": {
+                    "billing-code-config": {
+                        "test-access": {
+                            "codes": [
+                                "code-000"
+                            ],
+                            "image_name": "test",
+                            "image_types": [
+                                "access"
+                            ],
+                            "name": "Access2"
+                        },
+                        "test-marketplace": {
+                            "codes": [],
+                            "image_name": "test",
+                            "image_types": [
+                                "marketplace"
+                            ],
+                            "name": "Marketplace"
+                        },
+                        "test-hourly": {
+                            "codes": [
+                                "code-0002"
+                            ],
+                            "image_name": "rhel",
+                            "image_types": [
+                                "hourly"
+                            ],
+                            "name": "Hourly2"
+                        }
+                    },
+                    "foo": "bar",
+                    "lorem": "ipsum"
+                }
+            }
+        ],
+        "another-storage": [
+            {
+                "destination": "aaaaaaaaaaaaaaa",
+                "overwrite": false,
+                "restrict_version": false,
+                "meta": {
+                    "billing-code-config": {
+                        "test-access": {
+                            "codes": [
+                                "code-000"
+                            ],
+                            "image_name": "test",
+                            "image_types": [
+                                "access"
+                            ],
+                            "name": "Access2"
+                        },
+                        "test-marketplace": {
+                            "codes": [],
+                            "image_name": "test",
+                            "image_types": [
+                                "marketplace"
+                            ],
+                            "name": "Marketplace"
+                        },
+                        "test-hourly": {
+                            "codes": [
+                                "code-0002"
+                            ],
+                            "image_name": "rhel",
+                            "image_types": [
+                                "hourly"
+                            ],
+                            "name": "Hourly2"
+                        }
+                    },
+                    "foo": "bar",
+                    "lorem": "ipsum"
+                }
+            },
+            {
+                "destination": "bbbbbbbbbbbbb",
+                "overwrite": true,
+                "restrict_version": false,
+                "meta": {
+                    "billing-code-config": {
+                        "test-access": {
+                            "codes": [
+                                "code-000"
+                            ],
+                            "image_name": "test",
+                            "image_types": [
+                                "access"
+                            ],
+                            "name": "Access2"
+                        },
+                        "test-marketplace": {
+                            "codes": [],
+                            "image_name": "test",
+                            "image_types": [
+                                "marketplace"
+                            ],
+                            "name": "Marketplace"
+                        },
+                        "test-hourly": {
+                            "codes": [
+                                "code-0002"
+                            ],
+                            "image_name": "rhel",
+                            "image_types": [
+                                "hourly"
+                            ],
+                            "name": "Hourly2"
+                        }
+                    },
+                    "foo": "bar",
+                    "lorem": "ipsum"
+                }
+            }
+        ]
+    },
+    "workflow": "community",
+    "name": "sample-product"
+}

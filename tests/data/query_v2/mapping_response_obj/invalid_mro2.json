@@ -1,0 +1,4 @@
+{
+    "destinations": true,
+    "error": "Expected destinations to be a list, got \"<class 'bool'>\""
+}

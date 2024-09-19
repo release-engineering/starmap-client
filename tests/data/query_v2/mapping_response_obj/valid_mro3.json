@@ -1,0 +1,11 @@
+{
+    "destinations": [
+        {
+            "architecture": "x86_64",
+            "destination": "fake_destination",
+            "overwrite": false,
+            "restrict_version": true,
+            "meta": {"description": "Description on destination level."}
+        }
+    ]
+}
