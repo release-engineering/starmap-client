@@ -1,6 +1,6 @@
 # SPDX-License-Identifier: GPL-3.0-or-later
 import logging
-from typing import Any, Dict, Iterator, List, Optional
+from typing import Any, Dict, Iterator, List, Optional, Type, Union
 
 from starmap_client.models import (
     Destination,
@@ -8,12 +8,21 @@ from starmap_client.models import (
     PaginatedRawData,
     Policy,
     QueryResponse,
-    Workflow,
+    QueryResponseContainer,
 )
 from starmap_client.providers import StarmapProvider
 from starmap_client.session import StarmapBaseSession, StarmapSession
 
 log = logging.getLogger(__name__)
+
+
+Q = Union[QueryResponse, QueryResponseContainer]
+
+API_QUERY_RESPONSE: Dict[str, Type[Q]] = {
+    "v1": QueryResponse,
+    "v2": QueryResponseContainer,
+    "default": QueryResponseContainer,
+}
 
 
 class StarmapClient(object):
@@ -25,7 +34,7 @@ class StarmapClient(object):
     def __init__(
         self,
         url: Optional[str] = None,
-        api_version: str = "v1",
+        api_version: str = "v2",
         session: Optional[StarmapBaseSession] = None,
         session_params: Optional[Dict[str, Any]] = None,
         provider: Optional[StarmapProvider] = None,
@@ -38,7 +47,7 @@ class StarmapClient(object):
                 URL of the StArMap endpoint. Required when session is not set.
 
             api_version (str, optional)
-                The StArMap API version. Defaults to `v1`.
+                The StArMap API version. Defaults to `v2`.
             session (StarmapBaseSession, optional)
                 Defines the session object to use. Defaults to `StarmapSession` when not set
             session_params (dict, optional)
@@ -54,10 +63,11 @@ class StarmapClient(object):
         session_params = session_params or {}
         url = url or ""  # just to make mypy happy. The URL is mandatory if session is not defined
         self.session = session or StarmapSession(url, api_version, **session_params)
+        self.api_version = api_version
         self._provider = provider
         self._policies: List[Policy] = []
 
-    def _query(self, params: Dict[str, Any]) -> Optional[QueryResponse]:
+    def _query(self, params: Dict[str, Any]) -> Optional[Q]:
         qr = None
         if self._provider:
             qr = self._provider.query(params)
@@ -71,41 +81,40 @@ class StarmapClient(object):
             log.error(f"Marketplace mappings not defined for {params}")
             return None
         rsp.raise_for_status()
-        return QueryResponse.from_json(json=rsp.json())
+        converter = API_QUERY_RESPONSE.get(self.api_version, API_QUERY_RESPONSE["default"])
+        return converter.from_json(json=rsp.json())
 
-    def query_image(
-        self, nvr: str, workflow: Workflow = Workflow.stratosphere
-    ) -> Optional[QueryResponse]:
+    def query_image(self, nvr: str, **kwargs) -> Optional[Q]:
         """
         Query StArMap using an image NVR.
 
         Args:
             nvr (str): The image archive name or NVR.
-            workflow(Workflow, optional): The desired workflow to retrieve the mappings from.
+            workflow(Workflow, optional): The desired workflow to retrieve the mappings (APIv1 Only)
 
         Returns:
-            QueryResponse: The query result when found or None.
+            Q: The query result when found or None.
         """
-        return self._query(params={"image": nvr, "workflow": workflow.value})
+        return self._query(params={"image": nvr, **kwargs})
 
     def query_image_by_name(
         self,
         name: str,
         version: Optional[str] = None,
-        workflow: Workflow = Workflow.stratosphere,
-    ) -> Optional[QueryResponse]:
+        **kwargs,
+    ) -> Optional[Q]:
         """
         Query StArMap using an image NVR.
 
         Args:
             name (str): The image name from NVR.
             version (str, optional): The version from NVR.
-            workflow (Workflow, optional): The desired workflow to retrieve the mappings from.
+            workflow(Workflow, optional): The desired workflow to retrieve the mappings (APIv1 Only)
 
         Returns:
-            QueryResponse: The query result when found or None.
+            Q: The query result when found or None.
         """
-        params = {"name": name, "workflow": workflow.value}
+        params = {"name": name, **kwargs}
         if version:
             params.update({"version": version})
         return self._query(params=params)

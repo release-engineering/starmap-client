@@ -16,6 +16,7 @@ from starmap_client.utils import assert_is_dict, dict_merge
 
 __all__ = [
     'BillingCodeRule',
+    'BillingImageType',
     'Destination',
     'Mapping',
     'Policy',
@@ -24,6 +25,7 @@ __all__ = [
     'QueryResponseContainer',
     'PaginatedRawData',
     'PaginationMetadata',
+    'Workflow',
 ]
 
 
