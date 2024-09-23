@@ -60,6 +60,10 @@ class StarmapClient(object):
             raise ValueError(
                 "Cannot initialize the client without defining either an \"url\" or \"session\"."
             )
+        if provider and provider.api != api_version:
+            raise ValueError(
+                f"API mismatch: Provider has API {provider.api} but the client expects: {api_version}"  # noqa: E501
+            )
         session_params = session_params or {}
         url = url or ""  # just to make mypy happy. The URL is mandatory if session is not defined
         self.session = session or StarmapSession(url, api_version, **session_params)
@@ -72,7 +76,7 @@ class StarmapClient(object):
         if self._provider:
             qr = self._provider.query(params)
         rsp = qr or self.session.get("/query", params=params)
-        if isinstance(rsp, QueryResponse):
+        if isinstance(rsp, QueryResponse) or isinstance(rsp, QueryResponseContainer):
             log.debug(
                 "Returning response from the local provider %s", self._provider.__class__.__name__
             )

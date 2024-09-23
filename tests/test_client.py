@@ -16,7 +16,7 @@ from starmap_client.models import (
     QueryResponse,
     QueryResponseContainer,
 )
-from starmap_client.providers import InMemoryMapProvider
+from starmap_client.providers import InMemoryMapProviderV1, InMemoryMapProviderV2
 from starmap_client.session import StarmapMockSession
 
 
@@ -82,7 +82,7 @@ class TestStarmapClient(TestCase):
     def test_in_memory_query_image_APIv1(self):
         fpath = "tests/data/query_v1/valid_quer1.json"
         data = [QueryResponse.from_json(load_json(fpath))]
-        provider = InMemoryMapProvider(data)
+        provider = InMemoryMapProviderV1(data)
 
         self.svc_v1 = StarmapClient("https://test.starmap.com", api_version="v1", provider=provider)
 
@@ -90,7 +90,30 @@ class TestStarmapClient(TestCase):
         self.mock_session_v1.get.assert_not_called()
         self.assertEqual(res, data[0])
 
-    # TODO: test_in_memory_query_image_APIv2
+    def test_in_memory_query_image_APIv2(self):
+        fpath = "tests/data/query_v2/query_response_container/valid_qrc1.json"
+        data = QueryResponseContainer.from_json(load_json(fpath))
+        provider = InMemoryMapProviderV2(data)
+
+        self.svc_v2 = StarmapClient("https://test.starmap.com", api_version="v2", provider=provider)
+
+        res = self.svc_v2.query_image("product-test-1.0-1.raw.xz", workflow="stratosphere")
+        self.mock_session_v1.get.assert_not_called()
+        self.assertEqual(res.responses, [data.responses[0]])
+
+    def test_in_memory_api_mismatch(self):
+        fpath = "tests/data/query_v1/valid_quer1.json"
+        data = [QueryResponse.from_json(load_json(fpath))]
+        provider_v1 = InMemoryMapProviderV1(data)
+
+        fpath = "tests/data/query_v2/query_response_container/valid_qrc1.json"
+        data = QueryResponseContainer.from_json(load_json(fpath))
+        provider_v2 = InMemoryMapProviderV2(data)
+
+        err = "API mismatch: Provider has API v[1-2] but the client expects: v[1-2]"
+        with pytest.raises(ValueError, match=err):
+            StarmapClient("foo", api_version="v2", provider=provider_v1)
+            StarmapClient("foo", api_version="v1", provider=provider_v2)
 
     def test_query_image_not_found(self):
         self.mock_session_v1.get.return_value = self.mock_resp_not_found
@@ -132,7 +155,7 @@ class TestStarmapClient(TestCase):
     def test_in_memory_query_image_by_name_APIv1(self):
         fpath = "tests/data/query_v1/valid_quer1.json"
         data = [QueryResponse.from_json(load_json(fpath))]
-        provider = InMemoryMapProvider(data)
+        provider = InMemoryMapProviderV1(data)
 
         self.svc_v1 = StarmapClient("https://test.starmap.com", api_version="v1", provider=provider)
 
@@ -140,7 +163,16 @@ class TestStarmapClient(TestCase):
         self.mock_session_v1.get.assert_not_called()
         self.assertEqual(res, data[0])
 
-    # TODO: test_in_memory_query_image_by_name_APIv2
+    def test_in_memory_query_image_by_name_APIv2(self):
+        fpath = "tests/data/query_v2/query_response_container/valid_qrc1.json"
+        data = QueryResponseContainer.from_json(load_json(fpath))
+        provider = InMemoryMapProviderV2(data)
+
+        self.svc_v2 = StarmapClient("https://test.starmap.com", api_version="v2", provider=provider)
+
+        res = self.svc_v2.query_image_by_name(name="product-test", workflow="stratosphere")
+        self.mock_session_v1.get.assert_not_called()
+        self.assertEqual(res.responses, [data.responses[0]])
 
     def test_query_image_by_name_version_APIv1(self):
         fpath = "tests/data/query_v1/valid_quer1.json"
@@ -394,13 +426,13 @@ def test_offline_client():
     qr = QueryResponse.from_json(load_json(fpath))
 
     # The provider will have the QueryResponse from fpath
-    provider = InMemoryMapProvider([qr])
+    provider = InMemoryMapProviderV1([qr])
 
     # The session will prevent StarmapClient to request a real server
     session = StarmapMockSession("fake.starmap.url", "v1")
 
     # Offline client
-    svc = StarmapClient(session=session, provider=provider)
+    svc = StarmapClient(session=session, api_version="v1", provider=provider)
 
     assert session.json_data == {}
     assert session.status_code == 404
