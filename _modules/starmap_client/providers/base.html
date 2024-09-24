@@ -1,22 +1,23 @@
 <!DOCTYPE html>
 
-<html lang="en">
+<html lang="en" data-content_root="../../../">
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>starmap_client.providers.base &#8212; StArMap Client  documentation</title>
-    <link rel="stylesheet" type="text/css" href="../../../_static/pygments.css?v=4f649999" />
-    <link rel="stylesheet" type="text/css" href="../../../_static/alabaster.css?v=1fc5d657" />
-    <script data-url_root="../../../" id="documentation_options" src="../../../_static/documentation_options.js?v=b3ba4146"></script>
-    <script src="../../../_static/doctools.js?v=888ff710"></script>
-    <script src="../../../_static/sphinx_highlight.js?v=4825356b"></script>
+    <link rel="stylesheet" type="text/css" href="../../../_static/pygments.css?v=d1102ebc" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/alabaster.css?v=32913b9a" />
+    <script src="../../../_static/documentation_options.js?v=5929fcd5"></script>
+    <script src="../../../_static/doctools.js?v=9a2dae69"></script>
+    <script src="../../../_static/sphinx_highlight.js?v=dc90522c"></script>
     <link rel="index" title="Index" href="../../../genindex.html" />
     <link rel="search" title="Search" href="../../../search.html" />
    
   <link rel="stylesheet" href="../../../_static/custom.css" type="text/css" />
   
+
   
-  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9" />
+  
 
   </head><body>
   
@@ -35,10 +36,14 @@
 <span class="kn">from</span> <span class="nn">starmap_client.models</span> <span class="kn">import</span> <span class="n">QueryResponse</span>
 
 
-<div class="viewcode-block" id="StarmapProvider"><a class="viewcode-back" href="../../../provider/provider.html#starmap_client.providers.StarmapProvider">[docs]</a><span class="k">class</span> <span class="nc">StarmapProvider</span><span class="p">(</span><span class="n">ABC</span><span class="p">):</span>
+<div class="viewcode-block" id="StarmapProvider">
+<a class="viewcode-back" href="../../../provider/provider.html#starmap_client.providers.StarmapProvider">[docs]</a>
+<span class="k">class</span> <span class="nc">StarmapProvider</span><span class="p">(</span><span class="n">ABC</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Define the interface for a local mappings provider.&quot;&quot;&quot;</span>
 
-<div class="viewcode-block" id="StarmapProvider.query"><a class="viewcode-back" href="../../../provider/provider.html#starmap_client.providers.StarmapProvider.query">[docs]</a>    <span class="nd">@abstractmethod</span>
+<div class="viewcode-block" id="StarmapProvider.query">
+<a class="viewcode-back" href="../../../provider/provider.html#starmap_client.providers.StarmapProvider.query">[docs]</a>
+    <span class="nd">@abstractmethod</span>
     <span class="k">def</span> <span class="nf">query</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">params</span><span class="p">:</span> <span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Any</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="n">Optional</span><span class="p">[</span><span class="n">QueryResponse</span><span class="p">]:</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;Retrieve the mapping without using the server.</span>
 
@@ -52,25 +57,33 @@
 <span class="sd">            The requested mapping when found.</span>
 <span class="sd">        &quot;&quot;&quot;</span></div>
 
-<div class="viewcode-block" id="StarmapProvider.list_content"><a class="viewcode-back" href="../../../provider/provider.html#starmap_client.providers.StarmapProvider.list_content">[docs]</a>    <span class="nd">@abstractmethod</span>
+
+<div class="viewcode-block" id="StarmapProvider.list_content">
+<a class="viewcode-back" href="../../../provider/provider.html#starmap_client.providers.StarmapProvider.list_content">[docs]</a>
+    <span class="nd">@abstractmethod</span>
     <span class="k">def</span> <span class="nf">list_content</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">List</span><span class="p">[</span><span class="n">QueryResponse</span><span class="p">]:</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;Return a list with all stored QueryResponse objects.&quot;&quot;&quot;</span></div>
 
-<div class="viewcode-block" id="StarmapProvider.store"><a class="viewcode-back" href="../../../provider/provider.html#starmap_client.providers.StarmapProvider.store">[docs]</a>    <span class="nd">@abstractmethod</span>
+
+<div class="viewcode-block" id="StarmapProvider.store">
+<a class="viewcode-back" href="../../../provider/provider.html#starmap_client.providers.StarmapProvider.store">[docs]</a>
+    <span class="nd">@abstractmethod</span>
     <span class="k">def</span> <span class="nf">store</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">query_response</span><span class="p">:</span> <span class="n">QueryResponse</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;Store a single query_response into the local provider.</span>
 
 <span class="sd">        Args:</span>
 <span class="sd">            query_response (query_response):</span>
 <span class="sd">                The object to store.</span>
-<span class="sd">        &quot;&quot;&quot;</span></div></div>
+<span class="sd">        &quot;&quot;&quot;</span></div>
+</div>
+
 </pre></div>
 
           </div>
           
         </div>
       </div>
-      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+      <div class="sphinxsidebar" role="navigation" aria-label="Main">
         <div class="sphinxsidebarwrapper">
 <h1 class="logo"><a href="../../../index.html">StArMap Client</a></h1>
 
@@ -110,7 +123,7 @@
   </ul></li>
 </ul>
 </div>
-<div id="searchbox" style="display: none" role="search">
+<search id="searchbox" style="display: none" role="search">
   <h3 id="searchlabel">Quick search</h3>
     <div class="searchformwrapper">
     <form class="search" action="../../../search.html" method="get">
@@ -118,7 +131,7 @@
       <input type="submit" value="Go" />
     </form>
     </div>
-</div>
+</search>
 <script>document.getElementById('searchbox').style.display = "block"</script>
 
 
@@ -133,11 +146,11 @@
       <div class="clearer"></div>
     </div>
     <div class="footer">
-      &copy;2023, Jonathan Gangi.
+      &#169;2023, Jonathan Gangi.
       
       |
-      Powered by <a href="http://sphinx-doc.org/">Sphinx 7.1.2</a>
-      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.13</a>
+      Powered by <a href="https://www.sphinx-doc.org/">Sphinx 7.4.7</a>
+      &amp; <a href="https://alabaster.readthedocs.io">Alabaster 0.7.16</a>
       
     </div>
 

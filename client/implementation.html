@@ -1,23 +1,24 @@
 <!DOCTYPE html>
 
-<html lang="en">
+<html lang="en" data-content_root="../">
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
     <title>Implementation &#8212; StArMap Client  documentation</title>
-    <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=4f649999" />
-    <link rel="stylesheet" type="text/css" href="../_static/alabaster.css?v=1fc5d657" />
-    <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js?v=b3ba4146"></script>
-    <script src="../_static/doctools.js?v=888ff710"></script>
-    <script src="../_static/sphinx_highlight.js?v=4825356b"></script>
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=d1102ebc" />
+    <link rel="stylesheet" type="text/css" href="../_static/alabaster.css?v=32913b9a" />
+    <script src="../_static/documentation_options.js?v=5929fcd5"></script>
+    <script src="../_static/doctools.js?v=9a2dae69"></script>
+    <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
    
   <link rel="stylesheet" href="../_static/custom.css" type="text/css" />
   
+
   
-  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9" />
+  
 
   </head><body>
   
@@ -30,20 +31,20 @@
           <div class="body" role="main">
             
   <section id="implementation">
-<h1>Implementation<a class="headerlink" href="#implementation" title="Permalink to this heading">¶</a></h1>
+<h1>Implementation<a class="headerlink" href="#implementation" title="Link to this heading">¶</a></h1>
 <dl class="py class">
 <dt class="sig sig-object py" id="starmap_client.StarmapClient">
-<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">starmap_client.</span></span><span class="sig-name descname"><span class="pre">StarmapClient</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">url</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">api_version</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'v1'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">session</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">session_params</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">provider</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/starmap_client/client.html#StarmapClient"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#starmap_client.StarmapClient" title="Permalink to this definition">¶</a></dt>
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">starmap_client.</span></span><span class="sig-name descname"><span class="pre">StarmapClient</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">url</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">api_version</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'v1'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">session</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">session_params</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">provider</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/starmap_client/client.html#StarmapClient"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#starmap_client.StarmapClient" title="Link to this definition">¶</a></dt>
 <dd><p>Implement the StArMap client.</p>
 <dl class="py attribute">
 <dt class="sig sig-object py" id="starmap_client.StarmapClient.POLICIES_PER_PAGE">
-<span class="sig-name descname"><span class="pre">POLICIES_PER_PAGE</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">100</span></em><a class="headerlink" href="#starmap_client.StarmapClient.POLICIES_PER_PAGE" title="Permalink to this definition">¶</a></dt>
+<span class="sig-name descname"><span class="pre">POLICIES_PER_PAGE</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">100</span></em><a class="headerlink" href="#starmap_client.StarmapClient.POLICIES_PER_PAGE" title="Link to this definition">¶</a></dt>
 <dd><p>Number of policies to retrieve per call.</p>
 </dd></dl>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="starmap_client.StarmapClient.__init__">
-<span class="sig-name descname"><span class="pre">__init__</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">url</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">api_version</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'v1'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">session</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">session_params</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">provider</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/starmap_client/client.html#StarmapClient.__init__"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#starmap_client.StarmapClient.__init__" title="Permalink to this definition">¶</a></dt>
+<span class="sig-name descname"><span class="pre">__init__</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">url</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">api_version</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'v1'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">session</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">session_params</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">provider</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/starmap_client/client.html#StarmapClient.__init__"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#starmap_client.StarmapClient.__init__" title="Link to this definition">¶</a></dt>
 <dd><p>Create a new StArMapClient.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
@@ -61,7 +62,7 @@ first and if no mapping is found the subsequent request will be made to the serv
 
 <dl class="py method">
 <dt class="sig sig-object py" id="starmap_client.StarmapClient.query_image">
-<span class="sig-name descname"><span class="pre">query_image</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">nvr</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">workflow</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">Workflow.stratosphere</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/starmap_client/client.html#StarmapClient.query_image"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#starmap_client.StarmapClient.query_image" title="Permalink to this definition">¶</a></dt>
+<span class="sig-name descname"><span class="pre">query_image</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">nvr</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">workflow</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">Workflow.stratosphere</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/starmap_client/client.html#StarmapClient.query_image"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#starmap_client.StarmapClient.query_image" title="Link to this definition">¶</a></dt>
 <dd><p>Query StArMap using an image NVR.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
@@ -81,7 +82,7 @@ first and if no mapping is found the subsequent request will be made to the serv
 
 <dl class="py method">
 <dt class="sig sig-object py" id="starmap_client.StarmapClient.query_image_by_name">
-<span class="sig-name descname"><span class="pre">query_image_by_name</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">name</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">version</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">workflow</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">Workflow.stratosphere</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/starmap_client/client.html#StarmapClient.query_image_by_name"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#starmap_client.StarmapClient.query_image_by_name" title="Permalink to this definition">¶</a></dt>
+<span class="sig-name descname"><span class="pre">query_image_by_name</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">name</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">version</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">workflow</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">Workflow.stratosphere</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/starmap_client/client.html#StarmapClient.query_image_by_name"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#starmap_client.StarmapClient.query_image_by_name" title="Link to this definition">¶</a></dt>
 <dd><p>Query StArMap using an image NVR.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
@@ -102,13 +103,13 @@ first and if no mapping is found the subsequent request will be made to the serv
 
 <dl class="py property">
 <dt class="sig sig-object py" id="starmap_client.StarmapClient.policies">
-<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">policies</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Iterator" title="(in Python v3.12)"><span class="pre">Iterator</span></a><span class="p"><span class="pre">[</span></span><a class="reference internal" href="../model/models.html#starmap_client.models.Policy" title="starmap_client.models.Policy"><span class="pre">Policy</span></a><span class="p"><span class="pre">]</span></span></em><a class="headerlink" href="#starmap_client.StarmapClient.policies" title="Permalink to this definition">¶</a></dt>
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">policies</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Iterator" title="(in Python v3.12)"><span class="pre">Iterator</span></a><span class="p"><span class="pre">[</span></span><a class="reference internal" href="../model/models.html#starmap_client.models.Policy" title="starmap_client.models.Policy"><span class="pre">Policy</span></a><span class="p"><span class="pre">]</span></span></em><a class="headerlink" href="#starmap_client.StarmapClient.policies" title="Link to this definition">¶</a></dt>
 <dd><p>Iterate over all Policies registered in StArMap.</p>
 </dd></dl>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="starmap_client.StarmapClient.list_policies">
-<span class="sig-name descname"><span class="pre">list_policies</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/starmap_client/client.html#StarmapClient.list_policies"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#starmap_client.StarmapClient.list_policies" title="Permalink to this definition">¶</a></dt>
+<span class="sig-name descname"><span class="pre">list_policies</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/starmap_client/client.html#StarmapClient.list_policies"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#starmap_client.StarmapClient.list_policies" title="Link to this definition">¶</a></dt>
 <dd><p>List all Policies present in StArMap.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Returns<span class="colon">:</span></dt>
@@ -122,7 +123,7 @@ first and if no mapping is found the subsequent request will be made to the serv
 
 <dl class="py method">
 <dt class="sig sig-object py" id="starmap_client.StarmapClient.get_policy">
-<span class="sig-name descname"><span class="pre">get_policy</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">policy_id</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/starmap_client/client.html#StarmapClient.get_policy"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#starmap_client.StarmapClient.get_policy" title="Permalink to this definition">¶</a></dt>
+<span class="sig-name descname"><span class="pre">get_policy</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">policy_id</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/starmap_client/client.html#StarmapClient.get_policy"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#starmap_client.StarmapClient.get_policy" title="Link to this definition">¶</a></dt>
 <dd><p>Retrieve a single policy by its ID.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
@@ -139,7 +140,7 @@ first and if no mapping is found the subsequent request will be made to the serv
 
 <dl class="py method">
 <dt class="sig sig-object py" id="starmap_client.StarmapClient.list_mappings">
-<span class="sig-name descname"><span class="pre">list_mappings</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">policy_id</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/starmap_client/client.html#StarmapClient.list_mappings"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#starmap_client.StarmapClient.list_mappings" title="Permalink to this definition">¶</a></dt>
+<span class="sig-name descname"><span class="pre">list_mappings</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">policy_id</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/starmap_client/client.html#StarmapClient.list_mappings"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#starmap_client.StarmapClient.list_mappings" title="Link to this definition">¶</a></dt>
 <dd><p>List all mappings for a given Policy ID.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
@@ -156,7 +157,7 @@ first and if no mapping is found the subsequent request will be made to the serv
 
 <dl class="py method">
 <dt class="sig sig-object py" id="starmap_client.StarmapClient.get_mapping">
-<span class="sig-name descname"><span class="pre">get_mapping</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">mapping_id</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/starmap_client/client.html#StarmapClient.get_mapping"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#starmap_client.StarmapClient.get_mapping" title="Permalink to this definition">¶</a></dt>
+<span class="sig-name descname"><span class="pre">get_mapping</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">mapping_id</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/starmap_client/client.html#StarmapClient.get_mapping"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#starmap_client.StarmapClient.get_mapping" title="Link to this definition">¶</a></dt>
 <dd><p>Retrieve a single Marketplace Mapping by its ID.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
@@ -173,7 +174,7 @@ first and if no mapping is found the subsequent request will be made to the serv
 
 <dl class="py method">
 <dt class="sig sig-object py" id="starmap_client.StarmapClient.list_destinations">
-<span class="sig-name descname"><span class="pre">list_destinations</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">mapping_id</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/starmap_client/client.html#StarmapClient.list_destinations"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#starmap_client.StarmapClient.list_destinations" title="Permalink to this definition">¶</a></dt>
+<span class="sig-name descname"><span class="pre">list_destinations</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">mapping_id</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/starmap_client/client.html#StarmapClient.list_destinations"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#starmap_client.StarmapClient.list_destinations" title="Link to this definition">¶</a></dt>
 <dd><p>List all destinations for a given Marketplace Mapping ID.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
@@ -190,7 +191,7 @@ first and if no mapping is found the subsequent request will be made to the serv
 
 <dl class="py method">
 <dt class="sig sig-object py" id="starmap_client.StarmapClient.get_destination">
-<span class="sig-name descname"><span class="pre">get_destination</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">destination_id</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/starmap_client/client.html#StarmapClient.get_destination"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#starmap_client.StarmapClient.get_destination" title="Permalink to this definition">¶</a></dt>
+<span class="sig-name descname"><span class="pre">get_destination</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">destination_id</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/starmap_client/client.html#StarmapClient.get_destination"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#starmap_client.StarmapClient.get_destination" title="Link to this definition">¶</a></dt>
 <dd><p>Retrieve a single Destination by its ID.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
@@ -214,7 +215,7 @@ first and if no mapping is found the subsequent request will be made to the serv
           
         </div>
       </div>
-      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+      <div class="sphinxsidebar" role="navigation" aria-label="Main">
         <div class="sphinxsidebarwrapper">
 <h1 class="logo"><a href="../index.html">StArMap Client</a></h1>
 
@@ -252,7 +253,7 @@ first and if no mapping is found the subsequent request will be made to the serv
   </ul></li>
 </ul>
 </div>
-<div id="searchbox" style="display: none" role="search">
+<search id="searchbox" style="display: none" role="search">
   <h3 id="searchlabel">Quick search</h3>
     <div class="searchformwrapper">
     <form class="search" action="../search.html" method="get">
@@ -260,7 +261,7 @@ first and if no mapping is found the subsequent request will be made to the serv
       <input type="submit" value="Go" />
     </form>
     </div>
-</div>
+</search>
 <script>document.getElementById('searchbox').style.display = "block"</script>
 
 
@@ -275,11 +276,11 @@ first and if no mapping is found the subsequent request will be made to the serv
       <div class="clearer"></div>
     </div>
     <div class="footer">
-      &copy;2023, Jonathan Gangi.
+      &#169;2023, Jonathan Gangi.
       
       |
-      Powered by <a href="http://sphinx-doc.org/">Sphinx 7.1.2</a>
-      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.13</a>
+      Powered by <a href="https://www.sphinx-doc.org/">Sphinx 7.4.7</a>
+      &amp; <a href="https://alabaster.readthedocs.io">Alabaster 0.7.16</a>
       
       |
       <a href="../_sources/client/implementation.rst.txt"
