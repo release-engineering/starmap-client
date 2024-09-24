@@ -14,7 +14,7 @@ used by [release-engineering](https://github.com/release-engineering) publishing
 
 The `StArMap Client` is a client library to communicate with the _StArMap_ service, which is used to map a VM image build to its respective cloud marketplace(s) destination(s).
 
-It's written to support applications running on `Python >= 3.8`.
+It's written to support applications running on `Python >= 3.9`.
 
 This library has a minimum set of requirements (namely `attrs` and `requests`) and can be installed and used in any supported environment.
 
@@ -62,7 +62,7 @@ Querying the destinations of an image:
 
 The versions listed below are the one which were tested and work. Other versions can work as well.
 
-- Install or create a `virtualenv` for `python` >= 3.8
+- Install or create a `virtualenv` for `python` >= 3.9
 - Install `tox` >= 3.25
 
 ### Dependency Management
