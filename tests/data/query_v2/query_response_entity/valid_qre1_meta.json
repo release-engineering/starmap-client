@@ -1,0 +1,10 @@
+{
+    "test-emea": {
+        "description": "EMEA description",
+        "foo": "bar"
+    },
+    "test-na": {
+        "description": "NA description",
+        "foo": "bar"
+    }
+}

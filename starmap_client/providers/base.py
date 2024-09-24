@@ -1,14 +1,19 @@
 from abc import ABC, abstractmethod
-from typing import Any, Dict, List, Optional
+from typing import Any, Dict, Generic, List, Optional, TypeVar
 
-from starmap_client.models import QueryResponse
+from starmap_client.models import QueryResponse, QueryResponseContainer, QueryResponseEntity
+
+T = TypeVar("T", QueryResponse, QueryResponseContainer, QueryResponseEntity)
 
 
-class StarmapProvider(ABC):
+class StarmapProvider(ABC, Generic[T]):
     """Define the interface for a local mappings provider."""
 
+    api = "default"
+    """The provider's API level implementation."""
+
     @abstractmethod
-    def query(self, params: Dict[str, Any]) -> Optional[QueryResponse]:
+    def query(self, params: Dict[str, Any]) -> Optional[T]:
         """Retrieve the mapping without using the server.
 
         It relies in the local provider to retrieve the correct mapping
@@ -22,14 +27,14 @@ class StarmapProvider(ABC):
         """
 
     @abstractmethod
-    def list_content(self) -> List[QueryResponse]:
-        """Return a list with all stored QueryResponse objects."""
+    def list_content(self) -> List[T]:
+        """Return a list with all stored responses."""
 
     @abstractmethod
-    def store(self, query_response: QueryResponse) -> None:
-        """Store a single query_response into the local provider.
+    def store(self, response: T) -> None:
+        """Store a single response into the local provider.
 
         Args:
-            query_response (query_response):
+            response (response):
                 The object to store.
         """

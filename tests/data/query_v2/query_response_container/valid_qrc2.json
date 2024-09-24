@@ -1,0 +1,78 @@
+[
+    {
+        "cloud": "test",
+        "mappings": {
+            "test-emea": {
+                "destinations": [
+                    {
+                        "architecture": "x86_64",
+                        "destination": "destination1",
+                        "overwrite": false,
+                        "restrict_version": true
+                    }
+                ],
+                "meta": {
+                    "description": "EMEA description"
+                },
+                "provider": null
+            },
+            "test-na": {
+                "destinations": [
+                    {
+                        "architecture": "x86_64",
+                        "destination": "destination2",
+                        "overwrite": false,
+                        "restrict_version": true
+                    }
+                ],
+                "meta": {
+                    "description": "NA description"
+                },
+                "provider": null
+            }
+        },
+        "meta": {
+            "foo": "bar"
+        },
+        "name": "product-test",
+        "workflow": "stratosphere"
+    },
+    {
+        "cloud": "anothertest",
+        "mappings": {
+            "anothertest-emea": {
+                "destinations": [
+                    {
+                        "architecture": "x86_64",
+                        "destination": "destination3",
+                        "overwrite": false,
+                        "restrict_version": true
+                    }
+                ],
+                "meta": {
+                    "description": "EMEA description"
+                },
+                "provider": null
+            },
+            "anothertest-na": {
+                "destinations": [
+                    {
+                        "architecture": "x86_64",
+                        "destination": "destination4",
+                        "overwrite": false,
+                        "restrict_version": true
+                    }
+                ],
+                "meta": {
+                    "description": "NA description"
+                },
+                "provider": null
+            }
+        },
+        "meta": {
+            "foo": "bar"
+        },
+        "name": "product-test",
+        "workflow": "stratosphere"
+    }
+]

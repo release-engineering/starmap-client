@@ -1,0 +1,36 @@
+{
+    "cloud": "test",
+    "mappings": {
+        "test-emea": {
+            "destinations": [
+                {
+                    "architecture": "x86_64",
+                    "destination": "destination1",
+                    "overwrite": false,
+                    "restrict_version": true
+                }
+            ],
+            "meta": {
+                "description": "EMEA description"
+            },
+            "provider": null
+        },
+        "test-na": {
+            "destinations": [
+                {
+                    "architecture": "x86_64",
+                    "destination": "destination2",
+                    "overwrite": false,
+                    "restrict_version": true
+                }
+            ],
+            "meta": {
+                "description": "NA description"
+            },
+            "provider": null
+        }
+    },
+    "meta": {"foo": "bar"},
+    "name": "product-test",
+    "workflow": "stratosphere"
+}

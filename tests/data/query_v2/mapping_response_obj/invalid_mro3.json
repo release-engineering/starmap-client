@@ -1,0 +1,13 @@
+{
+    "destinations": [
+        {
+            "architecture": "x86_64",
+            "destination": "fake_destination",
+            "overwrite": false,
+            "restrict_version": true
+        }
+    ],
+    "meta": [],
+    "provider": "AWS",
+    "error": "Expected dictionary, got <class 'list'>: \\[\\]"
+}
