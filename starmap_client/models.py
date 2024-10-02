@@ -56,8 +56,10 @@ class Workflow(str, Enum):
     """Define the valid workflows for StArMap."""
 
     community = "community"
+    """Workflow ``community``."""
 
     stratosphere = "stratosphere"
+    """Workflow ``stratosphere`` for marketplaces."""
 
 
 @frozen
@@ -285,8 +287,13 @@ class BillingImageType(str, Enum):
     """Define the image type for :class:`~BillingCodeRule` for APIv2."""
 
     access = "access"
+    """Billing type ``access``."""
+
     hourly = "hourly"
+    """Billing type ``hourly``."""
+
     marketplace = "marketplace"
+    """Billing type ``marketplace``."""
 
 
 @frozen
@@ -316,7 +323,7 @@ class BillingCodeRule(StarmapJSONDecodeMixin):
 
 
 @frozen
-class MappingResponseObject(StarmapJSONDecodeMixin, MetaMixin):
+class MappingResponseObject(MetaMixin, StarmapJSONDecodeMixin):
     """Represent a single mapping response from :class:`~QueryResponseObject` for APIv2."""
 
     destinations: List[Destination] = field(
@@ -361,7 +368,7 @@ class MappingResponseObject(StarmapJSONDecodeMixin, MetaMixin):
 
 
 @frozen
-class QueryResponseEntity(StarmapJSONDecodeMixin, MetaMixin):
+class QueryResponseEntity(MetaMixin, StarmapJSONDecodeMixin):
     """Represent a single query response entity from StArMap APIv2."""
 
     name: str = field(validator=instance_of(str))
