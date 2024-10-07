@@ -57,7 +57,7 @@ according to the parameters.</p>
 <dd class="field-odd"><p><strong>params</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#dict" title="(in Python v3.12)"><em>dict</em></a>) – The request params to retrieve the mapping.</p>
 </dd>
 <dt class="field-even">Return type<span class="colon">:</span></dt>
-<dd class="field-even"><p><span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Optional" title="(in Python v3.12)"><code class="xref py py-data docutils literal notranslate"><span class="pre">Optional</span></code></a>[<a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.TypeVar" title="(in Python v3.12)"><code class="xref py py-class docutils literal notranslate"><span class="pre">TypeVar</span></code></a>(<code class="docutils literal notranslate"><span class="pre">T</span></code>, <a class="reference internal" href="../model/models.html#starmap_client.models.QueryResponse" title="starmap_client.models.QueryResponse"><code class="xref py py-class docutils literal notranslate"><span class="pre">QueryResponse</span></code></a>, <code class="xref py py-class docutils literal notranslate"><span class="pre">QueryResponseContainer</span></code>, <code class="xref py py-class docutils literal notranslate"><span class="pre">QueryResponseEntity</span></code>)]</span></p>
+<dd class="field-even"><p><span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Optional" title="(in Python v3.12)"><code class="xref py py-data docutils literal notranslate"><span class="pre">Optional</span></code></a>[<a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.TypeVar" title="(in Python v3.12)"><code class="xref py py-class docutils literal notranslate"><span class="pre">TypeVar</span></code></a>(<code class="docutils literal notranslate"><span class="pre">T</span></code>, <a class="reference internal" href="../model/models.html#starmap_client.models.QueryResponse" title="starmap_client.models.QueryResponse"><code class="xref py py-class docutils literal notranslate"><span class="pre">QueryResponse</span></code></a>, <a class="reference internal" href="../model/models.html#starmap_client.models.QueryResponseContainer" title="starmap_client.models.QueryResponseContainer"><code class="xref py py-class docutils literal notranslate"><span class="pre">QueryResponseContainer</span></code></a>, <a class="reference internal" href="../model/models.html#starmap_client.models.QueryResponseEntity" title="starmap_client.models.QueryResponseEntity"><code class="xref py py-class docutils literal notranslate"><span class="pre">QueryResponseEntity</span></code></a>)]</span></p>
 </dd>
 <dt class="field-odd">Returns<span class="colon">:</span></dt>
 <dd class="field-odd"><p>The requested mapping when found.</p>
@@ -71,7 +71,7 @@ according to the parameters.</p>
 <dd><p>Return a list with all stored responses.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Return type<span class="colon">:</span></dt>
-<dd class="field-odd"><p><span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.List" title="(in Python v3.12)"><code class="xref py py-class docutils literal notranslate"><span class="pre">List</span></code></a>[<a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.TypeVar" title="(in Python v3.12)"><code class="xref py py-class docutils literal notranslate"><span class="pre">TypeVar</span></code></a>(<code class="docutils literal notranslate"><span class="pre">T</span></code>, <a class="reference internal" href="../model/models.html#starmap_client.models.QueryResponse" title="starmap_client.models.QueryResponse"><code class="xref py py-class docutils literal notranslate"><span class="pre">QueryResponse</span></code></a>, <code class="xref py py-class docutils literal notranslate"><span class="pre">QueryResponseContainer</span></code>, <code class="xref py py-class docutils literal notranslate"><span class="pre">QueryResponseEntity</span></code>)]</span></p>
+<dd class="field-odd"><p><span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.List" title="(in Python v3.12)"><code class="xref py py-class docutils literal notranslate"><span class="pre">List</span></code></a>[<a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.TypeVar" title="(in Python v3.12)"><code class="xref py py-class docutils literal notranslate"><span class="pre">TypeVar</span></code></a>(<code class="docutils literal notranslate"><span class="pre">T</span></code>, <a class="reference internal" href="../model/models.html#starmap_client.models.QueryResponse" title="starmap_client.models.QueryResponse"><code class="xref py py-class docutils literal notranslate"><span class="pre">QueryResponse</span></code></a>, <a class="reference internal" href="../model/models.html#starmap_client.models.QueryResponseContainer" title="starmap_client.models.QueryResponseContainer"><code class="xref py py-class docutils literal notranslate"><span class="pre">QueryResponseContainer</span></code></a>, <a class="reference internal" href="../model/models.html#starmap_client.models.QueryResponseEntity" title="starmap_client.models.QueryResponseEntity"><code class="xref py py-class docutils literal notranslate"><span class="pre">QueryResponseEntity</span></code></a>)]</span></p>
 </dd>
 </dl>
 </dd></dl>
@@ -97,6 +97,136 @@ according to the parameters.</p>
 <h2>Implementations<a class="headerlink" href="#implementations" title="Link to this heading">¶</a></h2>
 <section id="memory-based">
 <h3>Memory Based<a class="headerlink" href="#memory-based" title="Link to this heading">¶</a></h3>
+<section id="apiv2">
+<h4>APIv2<a class="headerlink" href="#apiv2" title="Link to this heading">¶</a></h4>
+<dl class="py class">
+<dt class="sig sig-object py" id="starmap_client.providers.InMemoryMapProviderV2">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">starmap_client.providers.</span></span><span class="sig-name descname"><span class="pre">InMemoryMapProviderV2</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">container</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/starmap_client/providers/memory.html#InMemoryMapProviderV2"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#starmap_client.providers.InMemoryMapProviderV2" title="Link to this definition">¶</a></dt>
+<dd><p>Provide in memory (RAM) QueryResponseContainer objects for APIv2.</p>
+<dl class="py method">
+<dt class="sig sig-object py" id="starmap_client.providers.InMemoryMapProviderV2.__init__">
+<span class="sig-name descname"><span class="pre">__init__</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">container</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/starmap_client/providers/memory.html#InMemoryMapProviderV2.__init__"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#starmap_client.providers.InMemoryMapProviderV2.__init__" title="Link to this definition">¶</a></dt>
+<dd><p>Crete a new InMemoryMapProvider object.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>container</strong> (<a class="reference internal" href="../model/models.html#starmap_client.models.QueryResponseContainer" title="starmap_client.models.QueryResponseContainer"><em>QueryResponseContainer</em></a>) – QueryResponseContainer object to load into memory. It will be
+used by query to return the correct response based on name
+and workflow.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="starmap_client.providers.InMemoryMapProviderV2.query">
+<span class="sig-name descname"><span class="pre">query</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">params</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/starmap_client/providers/memory.html#InMemoryMapProviderV2.query"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#starmap_client.providers.InMemoryMapProviderV2.query" title="Link to this definition">¶</a></dt>
+<dd><p>Retrieve the mapping without using the server.</p>
+<p>It relies in the local provider to retrieve the correct mappings
+according to the parameters.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>params</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#dict" title="(in Python v3.12)"><em>dict</em></a>) – The request params to retrieve the mapping.</p>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p><span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Optional" title="(in Python v3.12)"><code class="xref py py-data docutils literal notranslate"><span class="pre">Optional</span></code></a>[<a class="reference internal" href="../model/models.html#starmap_client.models.QueryResponseContainer" title="starmap_client.models.QueryResponseContainer"><code class="xref py py-class docutils literal notranslate"><span class="pre">QueryResponseContainer</span></code></a>]</span></p>
+</dd>
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>The requested container with mappings when found.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="starmap_client.providers.InMemoryMapProviderV2.list_content">
+<span class="sig-name descname"><span class="pre">list_content</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/starmap_client/providers/memory.html#InMemoryMapProviderV2.list_content"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#starmap_client.providers.InMemoryMapProviderV2.list_content" title="Link to this definition">¶</a></dt>
+<dd><p>Return a the responses stored in the container.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.List" title="(in Python v3.12)"><code class="xref py py-class docutils literal notranslate"><span class="pre">List</span></code></a>[<a class="reference internal" href="../model/models.html#starmap_client.models.QueryResponseEntity" title="starmap_client.models.QueryResponseEntity"><code class="xref py py-class docutils literal notranslate"><span class="pre">QueryResponseEntity</span></code></a>]</span></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="starmap_client.providers.InMemoryMapProviderV2.store">
+<span class="sig-name descname"><span class="pre">store</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">response</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/starmap_client/providers/memory.html#InMemoryMapProviderV2.store"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#starmap_client.providers.InMemoryMapProviderV2.store" title="Link to this definition">¶</a></dt>
+<dd><p>Store a single response into the local provider’s container.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>container</strong> (<em>container</em>) – The container to store.</p>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p><span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.12)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">None</span></code></a></span></p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+</section>
+<section id="apiv1-deprecated">
+<h4>APIv1 (deprecated)<a class="headerlink" href="#apiv1-deprecated" title="Link to this heading">¶</a></h4>
+<dl class="py class">
+<dt class="sig sig-object py" id="starmap_client.providers.InMemoryMapProviderV1">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">starmap_client.providers.</span></span><span class="sig-name descname"><span class="pre">InMemoryMapProviderV1</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">map_responses</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/starmap_client/providers/memory.html#InMemoryMapProviderV1"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#starmap_client.providers.InMemoryMapProviderV1" title="Link to this definition">¶</a></dt>
+<dd><p>Provide in memory (RAM) QueryResponse mapping objects for APIv1.</p>
+<dl class="py method">
+<dt class="sig sig-object py" id="starmap_client.providers.InMemoryMapProviderV1.__init__">
+<span class="sig-name descname"><span class="pre">__init__</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">map_responses</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/starmap_client/providers/memory.html#InMemoryMapProviderV1.__init__"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#starmap_client.providers.InMemoryMapProviderV1.__init__" title="Link to this definition">¶</a></dt>
+<dd><p>Crete a new InMemoryMapProvider object.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>map_responses</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#list" title="(in Python v3.12)"><em>list</em></a><em>, </em><em>optional</em>) – List of QueryResponse objects to load into memory. They will be
+used by query to fetch the correct response based on name
+and workflow.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="starmap_client.providers.InMemoryMapProviderV1.list_content">
+<span class="sig-name descname"><span class="pre">list_content</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/starmap_client/providers/memory.html#InMemoryMapProviderV1.list_content"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#starmap_client.providers.InMemoryMapProviderV1.list_content" title="Link to this definition">¶</a></dt>
+<dd><p>Return a list of stored content.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.List" title="(in Python v3.12)"><code class="xref py py-class docutils literal notranslate"><span class="pre">List</span></code></a>[<a class="reference internal" href="../model/models.html#starmap_client.models.QueryResponse" title="starmap_client.models.QueryResponse"><code class="xref py py-class docutils literal notranslate"><span class="pre">QueryResponse</span></code></a>]</span></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="starmap_client.providers.InMemoryMapProviderV1.store">
+<span class="sig-name descname"><span class="pre">store</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">response</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/starmap_client/providers/memory.html#InMemoryMapProviderV1.store"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#starmap_client.providers.InMemoryMapProviderV1.store" title="Link to this definition">¶</a></dt>
+<dd><p>Store/replace a single QueryResponse object.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>response</strong> (<a class="reference internal" href="../model/models.html#starmap_client.models.QueryResponse" title="starmap_client.models.QueryResponse"><em>QueryResponse</em></a>) – The object to store.</p>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p><span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.12)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">None</span></code></a></span></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="starmap_client.providers.InMemoryMapProviderV1.query">
+<span class="sig-name descname"><span class="pre">query</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">params</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/starmap_client/providers/memory.html#InMemoryMapProviderV1.query"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#starmap_client.providers.InMemoryMapProviderV1.query" title="Link to this definition">¶</a></dt>
+<dd><p>Return the mapping from memory according to the received params.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>params</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#dict" title="(in Python v3.12)"><em>dict</em></a>) – The request params to retrieve the mapping.</p>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p><span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Optional" title="(in Python v3.12)"><code class="xref py py-data docutils literal notranslate"><span class="pre">Optional</span></code></a>[<a class="reference internal" href="../model/models.html#starmap_client.models.QueryResponse" title="starmap_client.models.QueryResponse"><code class="xref py py-class docutils literal notranslate"><span class="pre">QueryResponse</span></code></a>]</span></p>
+</dd>
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>The requested mapping when found.</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+</section>
 </section>
 </section>
 </section>

@@ -17,11 +17,11 @@ In this mode the :class:`~starmap_client.StarmapClient` will always request data
    from starmap_client import StarmapClient
 
    # Initialize the online client with the URL only
-   client = StarmapClient(url="https://starmap.example.com", api_version="v1")
+   client = StarmapClient(url="https://starmap.example.com", api_version="v2")
 
    # Alternatively you can create the session and inject it
    from starmap_client.session import StarmapSession
-   session = StarmapSession("https://starmap.example.com", api_version="v1", retries=5, backoff_factor=5.0)
+   session = StarmapSession("https://starmap.example.com", api_version="v2", retries=5, backoff_factor=5.0)
    client = StarmapClient(session=session)
    ...
    # Query
@@ -41,18 +41,17 @@ In this mode the :class:`~starmap_client.StarmapClient` will always request data
    import json
    from starmap_client import StarmapClient
    from starmap_client.session import StarmapMockSession
-   from starmap_client.models import QueryResponse
-   from starmap_client.providers import InMemoryMapProvider
+   from starmap_client.models import QueryResponseContainer
+   from starmap_client.providers import InMemoryMapProviderV2
 
-   # Load the QueryResponse models from somewhere
+   # Load the QueryResponseContainer models from somewhere
    with open("path_to_your_data.json", 'r') as f:
       qr_data = json.load(f)
 
    # Create the offline client
-   qr = QueryResponse.from_json(qr_data)
-   responses = [qr]  # in this case it only contains 1 object, but it supports more
-   provider = InMemoryMapProvider(responses)
-   session = StarmapMockSession("fake.starmap.com", "v1")
+   container = QueryResponseContainer.from_json(qr_data)
+   provider = InMemoryMapProviderV2(container)
+   session = StarmapMockSession("fake.starmap.com", "v2")
    client = StarmapClient(session=session, provider=provider)
 
    # Query
@@ -69,17 +68,16 @@ only proceed to query over network if the local provider doesn't have the reques
 
    import json
    from starmap_client import StarmapClient
-   from starmap_client.models import QueryResponse
-   from starmap_client.providers import InMemoryMapProvider
+   from starmap_client.models import QueryResponseContainer
+   from starmap_client.providers import InMemoryMapProviderV2
 
-   # Load the QueryResponse models from somewhere
+   # Load the QueryResponseContainer models from somewhere
    with open("path_to_your_data.json", 'r') as f:
       qr_data = json.load(f)
 
    # Create the offline client
-   qr = QueryResponse.from_json(qr_data)
-   responses = [qr]  # in this case it only contains 1 object, but it supports more
-   provider = InMemoryMapProvider(responses)
+   container = QueryResponseContainer.from_json(qr_data)
+   provider = InMemoryMapProviderV2(container)
    client = StarmapClient(url="https://starmap.example.com", provider=provider)
 
    # Query

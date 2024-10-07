@@ -34,8 +34,8 @@ use it to communicate with ``StArMap``:
     from starmap_client import StarmapClient
     import logging
 
-    # Alternatively you can pass the api_version as well. Defaults to "v1".
-    # client = StarmapClient(url="https://starmap.example.com", api_version="v1")
+    # Alternatively you can pass the api_version as well. Defaults to "v2".
+    # client = StarmapClient(url="https://starmap.example.com", api_version="v2")
     client = StarmapClient(url="https://starmap.example.com")
 
 

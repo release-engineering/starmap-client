@@ -43,10 +43,10 @@
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="model/models.html">Models</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="model/models.html#starmap_client.models.Policy"><code class="docutils literal notranslate"><span class="pre">Policy</span></code></a></li>
-<li class="toctree-l2"><a class="reference internal" href="model/models.html#starmap_client.models.Mapping"><code class="docutils literal notranslate"><span class="pre">Mapping</span></code></a></li>
-<li class="toctree-l2"><a class="reference internal" href="model/models.html#starmap_client.models.Destination"><code class="docutils literal notranslate"><span class="pre">Destination</span></code></a></li>
-<li class="toctree-l2"><a class="reference internal" href="model/models.html#starmap_client.models.QueryResponse"><code class="docutils literal notranslate"><span class="pre">QueryResponse</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="model/models.html#apiv2">APIv2</a></li>
+<li class="toctree-l2"><a class="reference internal" href="model/models.html#apiv1-deprecated">APIv1 (Deprecated)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="model/models.html#common">Common</a></li>
+<li class="toctree-l2"><a class="reference internal" href="model/models.html#utils">Utils</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="session/session.html">Session</a><ul>
@@ -72,8 +72,8 @@ use it to communicate with <code class="docutils literal notranslate"><span clas
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">starmap_client</span> <span class="kn">import</span> <span class="n">StarmapClient</span>
 <span class="kn">import</span> <span class="nn">logging</span>
 
-<span class="c1"># Alternatively you can pass the api_version as well. Defaults to &quot;v1&quot;.</span>
-<span class="c1"># client = StarmapClient(url=&quot;https://starmap.example.com&quot;, api_version=&quot;v1&quot;)</span>
+<span class="c1"># Alternatively you can pass the api_version as well. Defaults to &quot;v2&quot;.</span>
+<span class="c1"># client = StarmapClient(url=&quot;https://starmap.example.com&quot;, api_version=&quot;v2&quot;)</span>
 <span class="n">client</span> <span class="o">=</span> <span class="n">StarmapClient</span><span class="p">(</span><span class="n">url</span><span class="o">=</span><span class="s2">&quot;https://starmap.example.com&quot;</span><span class="p">)</span>
 </pre></div>
 </div>
@@ -112,11 +112,11 @@ query use-cases.</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">starmap_client</span> <span class="kn">import</span> <span class="n">StarmapClient</span>
 
 <span class="c1"># Initialize the online client with the URL only</span>
-<span class="n">client</span> <span class="o">=</span> <span class="n">StarmapClient</span><span class="p">(</span><span class="n">url</span><span class="o">=</span><span class="s2">&quot;https://starmap.example.com&quot;</span><span class="p">,</span> <span class="n">api_version</span><span class="o">=</span><span class="s2">&quot;v1&quot;</span><span class="p">)</span>
+<span class="n">client</span> <span class="o">=</span> <span class="n">StarmapClient</span><span class="p">(</span><span class="n">url</span><span class="o">=</span><span class="s2">&quot;https://starmap.example.com&quot;</span><span class="p">,</span> <span class="n">api_version</span><span class="o">=</span><span class="s2">&quot;v2&quot;</span><span class="p">)</span>
 
 <span class="c1"># Alternatively you can create the session and inject it</span>
 <span class="kn">from</span> <span class="nn">starmap_client.session</span> <span class="kn">import</span> <span class="n">StarmapSession</span>
-<span class="n">session</span> <span class="o">=</span> <span class="n">StarmapSession</span><span class="p">(</span><span class="s2">&quot;https://starmap.example.com&quot;</span><span class="p">,</span> <span class="n">api_version</span><span class="o">=</span><span class="s2">&quot;v1&quot;</span><span class="p">,</span> <span class="n">retries</span><span class="o">=</span><span class="mi">5</span><span class="p">,</span> <span class="n">backoff_factor</span><span class="o">=</span><span class="mf">5.0</span><span class="p">)</span>
+<span class="n">session</span> <span class="o">=</span> <span class="n">StarmapSession</span><span class="p">(</span><span class="s2">&quot;https://starmap.example.com&quot;</span><span class="p">,</span> <span class="n">api_version</span><span class="o">=</span><span class="s2">&quot;v2&quot;</span><span class="p">,</span> <span class="n">retries</span><span class="o">=</span><span class="mi">5</span><span class="p">,</span> <span class="n">backoff_factor</span><span class="o">=</span><span class="mf">5.0</span><span class="p">)</span>
 <span class="n">client</span> <span class="o">=</span> <span class="n">StarmapClient</span><span class="p">(</span><span class="n">session</span><span class="o">=</span><span class="n">session</span><span class="p">)</span>
 <span class="o">...</span>
 <span class="c1"># Query</span>
@@ -132,18 +132,17 @@ query use-cases.</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">json</span>
 <span class="kn">from</span> <span class="nn">starmap_client</span> <span class="kn">import</span> <span class="n">StarmapClient</span>
 <span class="kn">from</span> <span class="nn">starmap_client.session</span> <span class="kn">import</span> <span class="n">StarmapMockSession</span>
-<span class="kn">from</span> <span class="nn">starmap_client.models</span> <span class="kn">import</span> <span class="n">QueryResponse</span>
-<span class="kn">from</span> <span class="nn">starmap_client.providers</span> <span class="kn">import</span> <span class="n">InMemoryMapProvider</span>
+<span class="kn">from</span> <span class="nn">starmap_client.models</span> <span class="kn">import</span> <span class="n">QueryResponseContainer</span>
+<span class="kn">from</span> <span class="nn">starmap_client.providers</span> <span class="kn">import</span> <span class="n">InMemoryMapProviderV2</span>
 
-<span class="c1"># Load the QueryResponse models from somewhere</span>
+<span class="c1"># Load the QueryResponseContainer models from somewhere</span>
 <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="s2">&quot;path_to_your_data.json&quot;</span><span class="p">,</span> <span class="s1">&#39;r&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
    <span class="n">qr_data</span> <span class="o">=</span> <span class="n">json</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="n">f</span><span class="p">)</span>
 
 <span class="c1"># Create the offline client</span>
-<span class="n">qr</span> <span class="o">=</span> <span class="n">QueryResponse</span><span class="o">.</span><span class="n">from_json</span><span class="p">(</span><span class="n">qr_data</span><span class="p">)</span>
-<span class="n">responses</span> <span class="o">=</span> <span class="p">[</span><span class="n">qr</span><span class="p">]</span>  <span class="c1"># in this case it only contains 1 object, but it supports more</span>
-<span class="n">provider</span> <span class="o">=</span> <span class="n">InMemoryMapProvider</span><span class="p">(</span><span class="n">responses</span><span class="p">)</span>
-<span class="n">session</span> <span class="o">=</span> <span class="n">StarmapMockSession</span><span class="p">(</span><span class="s2">&quot;fake.starmap.com&quot;</span><span class="p">,</span> <span class="s2">&quot;v1&quot;</span><span class="p">)</span>
+<span class="n">container</span> <span class="o">=</span> <span class="n">QueryResponseContainer</span><span class="o">.</span><span class="n">from_json</span><span class="p">(</span><span class="n">qr_data</span><span class="p">)</span>
+<span class="n">provider</span> <span class="o">=</span> <span class="n">InMemoryMapProviderV2</span><span class="p">(</span><span class="n">container</span><span class="p">)</span>
+<span class="n">session</span> <span class="o">=</span> <span class="n">StarmapMockSession</span><span class="p">(</span><span class="s2">&quot;fake.starmap.com&quot;</span><span class="p">,</span> <span class="s2">&quot;v2&quot;</span><span class="p">)</span>
 <span class="n">client</span> <span class="o">=</span> <span class="n">StarmapClient</span><span class="p">(</span><span class="n">session</span><span class="o">=</span><span class="n">session</span><span class="p">,</span> <span class="n">provider</span><span class="o">=</span><span class="n">provider</span><span class="p">)</span>
 
 <span class="c1"># Query</span>
@@ -158,17 +157,16 @@ query use-cases.</p>
 only proceed to query over network if the local provider doesn’t have the requested mapping.</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">json</span>
 <span class="kn">from</span> <span class="nn">starmap_client</span> <span class="kn">import</span> <span class="n">StarmapClient</span>
-<span class="kn">from</span> <span class="nn">starmap_client.models</span> <span class="kn">import</span> <span class="n">QueryResponse</span>
-<span class="kn">from</span> <span class="nn">starmap_client.providers</span> <span class="kn">import</span> <span class="n">InMemoryMapProvider</span>
+<span class="kn">from</span> <span class="nn">starmap_client.models</span> <span class="kn">import</span> <span class="n">QueryResponseContainer</span>
+<span class="kn">from</span> <span class="nn">starmap_client.providers</span> <span class="kn">import</span> <span class="n">InMemoryMapProviderV2</span>
 
-<span class="c1"># Load the QueryResponse models from somewhere</span>
+<span class="c1"># Load the QueryResponseContainer models from somewhere</span>
 <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="s2">&quot;path_to_your_data.json&quot;</span><span class="p">,</span> <span class="s1">&#39;r&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
    <span class="n">qr_data</span> <span class="o">=</span> <span class="n">json</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="n">f</span><span class="p">)</span>
 
 <span class="c1"># Create the offline client</span>
-<span class="n">qr</span> <span class="o">=</span> <span class="n">QueryResponse</span><span class="o">.</span><span class="n">from_json</span><span class="p">(</span><span class="n">qr_data</span><span class="p">)</span>
-<span class="n">responses</span> <span class="o">=</span> <span class="p">[</span><span class="n">qr</span><span class="p">]</span>  <span class="c1"># in this case it only contains 1 object, but it supports more</span>
-<span class="n">provider</span> <span class="o">=</span> <span class="n">InMemoryMapProvider</span><span class="p">(</span><span class="n">responses</span><span class="p">)</span>
+<span class="n">container</span> <span class="o">=</span> <span class="n">QueryResponseContainer</span><span class="o">.</span><span class="n">from_json</span><span class="p">(</span><span class="n">qr_data</span><span class="p">)</span>
+<span class="n">provider</span> <span class="o">=</span> <span class="n">InMemoryMapProviderV2</span><span class="p">(</span><span class="n">container</span><span class="p">)</span>
 <span class="n">client</span> <span class="o">=</span> <span class="n">StarmapClient</span><span class="p">(</span><span class="n">url</span><span class="o">=</span><span class="s2">&quot;https://starmap.example.com&quot;</span><span class="p">,</span> <span class="n">provider</span><span class="o">=</span><span class="n">provider</span><span class="p">)</span>
 
 <span class="c1"># Query</span>

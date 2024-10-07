@@ -84,14 +84,21 @@
     <span class="n">nav</span><span class="p">:</span> <span class="n">PaginationMetadata</span>
 
 
+<div class="viewcode-block" id="Workflow">
+<a class="viewcode-back" href="../../model/models.html#starmap_client.models.Workflow">[docs]</a>
 <span class="k">class</span> <span class="nc">Workflow</span><span class="p">(</span><span class="nb">str</span><span class="p">,</span> <span class="n">Enum</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Define the valid workflows for StArMap.&quot;&quot;&quot;</span>
 
     <span class="n">community</span> <span class="o">=</span> <span class="s2">&quot;community&quot;</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Workflow ``community``.&quot;&quot;&quot;</span>
 
     <span class="n">stratosphere</span> <span class="o">=</span> <span class="s2">&quot;stratosphere&quot;</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Workflow ``stratosphere`` for marketplaces.&quot;&quot;&quot;</span></div>
 
 
+
+<div class="viewcode-block" id="StarmapJSONDecodeMixin">
+<a class="viewcode-back" href="../../model/models.html#starmap_client.models.StarmapJSONDecodeMixin">[docs]</a>
 <span class="nd">@frozen</span>
 <span class="k">class</span> <span class="nc">StarmapJSONDecodeMixin</span><span class="p">:</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Implement the default JSON deserialization for StArMap models.&quot;&quot;&quot;</span>
@@ -125,6 +132,8 @@
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">return</span> <span class="n">json</span>
 
+<div class="viewcode-block" id="StarmapJSONDecodeMixin.from_json">
+<a class="viewcode-back" href="../../model/models.html#starmap_client.models.StarmapJSONDecodeMixin.from_json">[docs]</a>
     <span class="nd">@classmethod</span>
     <span class="k">def</span> <span class="nf">from_json</span><span class="p">(</span><span class="bp">cls</span><span class="p">,</span> <span class="n">json</span><span class="p">:</span> <span class="n">Any</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
@@ -144,9 +153,13 @@
         <span class="n">cls_attr</span> <span class="o">=</span> <span class="p">[</span><span class="n">a</span><span class="o">.</span><span class="n">name</span> <span class="k">for</span> <span class="n">a</span> <span class="ow">in</span> <span class="bp">cls</span><span class="o">.</span><span class="n">__attrs_attrs__</span> <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">Attribute</span><span class="p">)]</span>  <span class="c1"># type: ignore</span>
         <span class="k">for</span> <span class="n">a</span> <span class="ow">in</span> <span class="n">cls_attr</span><span class="p">:</span>
             <span class="n">args</span><span class="p">[</span><span class="n">a</span><span class="p">]</span> <span class="o">=</span> <span class="n">json</span><span class="o">.</span><span class="n">pop</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="kc">None</span><span class="p">)</span>
-        <span class="k">return</span> <span class="bp">cls</span><span class="p">(</span><span class="o">**</span><span class="n">args</span><span class="p">)</span>
+        <span class="k">return</span> <span class="bp">cls</span><span class="p">(</span><span class="o">**</span><span class="n">args</span><span class="p">)</span></div>
+</div>
 
 
+
+<div class="viewcode-block" id="MetaMixin">
+<a class="viewcode-back" href="../../model/models.html#starmap_client.models.MetaMixin">[docs]</a>
 <span class="nd">@frozen</span>
 <span class="k">class</span> <span class="nc">MetaMixin</span><span class="p">:</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Mixin for defining the meta attribute and its validator.&quot;&quot;&quot;</span>
@@ -162,7 +175,8 @@
             <span class="k">raise</span> <span class="ne">TypeError</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;The value for </span><span class="se">\&quot;</span><span class="si">{</span><span class="n">attribute</span><span class="o">.</span><span class="n">name</span><span class="si">}</span><span class="se">\&quot;</span><span class="s2"> should be a dictionary.&quot;</span><span class="p">)</span>
         <span class="k">for</span> <span class="n">k</span> <span class="ow">in</span> <span class="n">value</span><span class="o">.</span><span class="n">keys</span><span class="p">():</span>
             <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">k</span><span class="p">,</span> <span class="nb">str</span><span class="p">):</span>
-                <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Invalid key </span><span class="se">\&quot;</span><span class="si">{</span><span class="n">k</span><span class="si">}</span><span class="se">\&quot;</span><span class="s2"> for </span><span class="se">\&quot;</span><span class="si">{</span><span class="n">attribute</span><span class="o">.</span><span class="n">name</span><span class="si">}</span><span class="se">\&quot;</span><span class="s2">. Expected: </span><span class="se">\&quot;</span><span class="s2">str</span><span class="se">\&quot;</span><span class="s2">&quot;</span><span class="p">)</span>
+                <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Invalid key </span><span class="se">\&quot;</span><span class="si">{</span><span class="n">k</span><span class="si">}</span><span class="se">\&quot;</span><span class="s2"> for </span><span class="se">\&quot;</span><span class="si">{</span><span class="n">attribute</span><span class="o">.</span><span class="n">name</span><span class="si">}</span><span class="se">\&quot;</span><span class="s2">. Expected: </span><span class="se">\&quot;</span><span class="s2">str</span><span class="se">\&quot;</span><span class="s2">&quot;</span><span class="p">)</span></div>
+
 
 
 <span class="nd">@frozen</span>
@@ -325,14 +339,24 @@
 <span class="c1"># ============================================ APIv2 ===============================================</span>
 
 
+<div class="viewcode-block" id="BillingImageType">
+<a class="viewcode-back" href="../../model/models.html#starmap_client.models.BillingImageType">[docs]</a>
 <span class="k">class</span> <span class="nc">BillingImageType</span><span class="p">(</span><span class="nb">str</span><span class="p">,</span> <span class="n">Enum</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Define the image type for :class:`~BillingCodeRule` for APIv2.&quot;&quot;&quot;</span>
 
     <span class="n">access</span> <span class="o">=</span> <span class="s2">&quot;access&quot;</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Billing type ``access``.&quot;&quot;&quot;</span>
+
     <span class="n">hourly</span> <span class="o">=</span> <span class="s2">&quot;hourly&quot;</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Billing type ``hourly``.&quot;&quot;&quot;</span>
+
     <span class="n">marketplace</span> <span class="o">=</span> <span class="s2">&quot;marketplace&quot;</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Billing type ``marketplace``.&quot;&quot;&quot;</span></div>
 
 
+
+<div class="viewcode-block" id="BillingCodeRule">
+<a class="viewcode-back" href="../../model/models.html#starmap_client.models.BillingCodeRule">[docs]</a>
 <span class="nd">@frozen</span>
 <span class="k">class</span> <span class="nc">BillingCodeRule</span><span class="p">(</span><span class="n">StarmapJSONDecodeMixin</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Define a single Billing Code Configuration rule for APIv2.&quot;&quot;&quot;</span>
@@ -356,11 +380,14 @@
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Image types list. Supported values are ``access`` and ``hourly``.&quot;&quot;&quot;</span>
 
     <span class="n">name</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;The billing code rule name.&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;The billing code rule name.&quot;&quot;&quot;</span></div>
 
 
+
+<div class="viewcode-block" id="MappingResponseObject">
+<a class="viewcode-back" href="../../model/models.html#starmap_client.models.MappingResponseObject">[docs]</a>
 <span class="nd">@frozen</span>
-<span class="k">class</span> <span class="nc">MappingResponseObject</span><span class="p">(</span><span class="n">StarmapJSONDecodeMixin</span><span class="p">,</span> <span class="n">MetaMixin</span><span class="p">):</span>
+<span class="k">class</span> <span class="nc">MappingResponseObject</span><span class="p">(</span><span class="n">MetaMixin</span><span class="p">,</span> <span class="n">StarmapJSONDecodeMixin</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Represent a single mapping response from :class:`~QueryResponseObject` for APIv2.&quot;&quot;&quot;</span>
 
     <span class="n">destinations</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="n">Destination</span><span class="p">]</span> <span class="o">=</span> <span class="n">field</span><span class="p">(</span>
@@ -401,11 +428,14 @@
             <span class="n">d</span><span class="p">[</span><span class="s2">&quot;provider&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">provider</span>
             <span class="n">converted_destinations</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">Destination</span><span class="o">.</span><span class="n">from_json</span><span class="p">(</span><span class="n">d</span><span class="p">))</span>
         <span class="n">json</span><span class="p">[</span><span class="s2">&quot;destinations&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">converted_destinations</span>
-        <span class="k">return</span> <span class="n">json</span>
+        <span class="k">return</span> <span class="n">json</span></div>
 
 
+
+<div class="viewcode-block" id="QueryResponseEntity">
+<a class="viewcode-back" href="../../model/models.html#starmap_client.models.QueryResponseEntity">[docs]</a>
 <span class="nd">@frozen</span>
-<span class="k">class</span> <span class="nc">QueryResponseEntity</span><span class="p">(</span><span class="n">StarmapJSONDecodeMixin</span><span class="p">,</span> <span class="n">MetaMixin</span><span class="p">):</span>
+<span class="k">class</span> <span class="nc">QueryResponseEntity</span><span class="p">(</span><span class="n">MetaMixin</span><span class="p">,</span> <span class="n">StarmapJSONDecodeMixin</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Represent a single query response entity from StArMap APIv2.&quot;&quot;&quot;</span>
 
     <span class="n">name</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="n">field</span><span class="p">(</span><span class="n">validator</span><span class="o">=</span><span class="n">instance_of</span><span class="p">(</span><span class="nb">str</span><span class="p">))</span>
@@ -447,6 +477,8 @@
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;Return all ``MappingResponseObject`` stored in ``mappings``.&quot;&quot;&quot;</span>
         <span class="k">return</span> <span class="nb">list</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">mappings</span><span class="o">.</span><span class="n">values</span><span class="p">())</span>
 
+<div class="viewcode-block" id="QueryResponseEntity.get_mapping_for_account">
+<a class="viewcode-back" href="../../model/models.html#starmap_client.models.QueryResponseEntity.get_mapping_for_account">[docs]</a>
     <span class="k">def</span> <span class="nf">get_mapping_for_account</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">account</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">MappingResponseObject</span><span class="p">:</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;Return a single ``MappingResponseObject`` for a given account name.</span>
 
@@ -460,8 +492,11 @@
         <span class="n">obj</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">mappings</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">account</span><span class="p">,</span> <span class="kc">None</span><span class="p">)</span>
         <span class="k">if</span> <span class="ow">not</span> <span class="n">obj</span><span class="p">:</span>
             <span class="k">raise</span> <span class="ne">KeyError</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;No mappings found for account name </span><span class="si">{</span><span class="n">account</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
-        <span class="k">return</span> <span class="n">obj</span>
+        <span class="k">return</span> <span class="n">obj</span></div>
 
+
+<div class="viewcode-block" id="QueryResponseEntity.to_classic_query_response">
+<a class="viewcode-back" href="../../model/models.html#starmap_client.models.QueryResponseEntity.to_classic_query_response">[docs]</a>
     <span class="k">def</span> <span class="nf">to_classic_query_response</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">QueryResponse</span><span class="p">:</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;Return the representation of this object as a :class:`~QueryResponse` from APIv1.&quot;&quot;&quot;</span>
 
@@ -481,7 +516,8 @@
         <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">billing_code_config</span><span class="p">:</span>
             <span class="n">add_bc_to_dst_meta</span><span class="p">(</span><span class="n">clouds</span><span class="p">)</span>
 
-        <span class="k">return</span> <span class="n">QueryResponse</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">name</span><span class="p">,</span> <span class="n">workflow</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">workflow</span><span class="p">,</span> <span class="n">clouds</span><span class="o">=</span><span class="n">clouds</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">QueryResponse</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">name</span><span class="p">,</span> <span class="n">workflow</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">workflow</span><span class="p">,</span> <span class="n">clouds</span><span class="o">=</span><span class="n">clouds</span><span class="p">)</span></div>
+
 
     <span class="nd">@staticmethod</span>
     <span class="k">def</span> <span class="nf">_unify_meta_with_mappings</span><span class="p">(</span><span class="n">json</span><span class="p">:</span> <span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Any</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
@@ -517,9 +553,12 @@
         <span class="bp">cls</span><span class="o">.</span><span class="n">_unify_meta_with_mappings</span><span class="p">(</span><span class="n">json</span><span class="p">)</span>
         <span class="n">parse_entity_build_obj</span><span class="p">(</span><span class="s2">&quot;mappings&quot;</span><span class="p">,</span> <span class="n">MappingResponseObject</span><span class="p">)</span>
         <span class="n">parse_entity_build_obj</span><span class="p">(</span><span class="s2">&quot;billing_code_config&quot;</span><span class="p">,</span> <span class="n">BillingCodeRule</span><span class="p">)</span>
-        <span class="k">return</span> <span class="n">json</span>
+        <span class="k">return</span> <span class="n">json</span></div>
 
 
+
+<div class="viewcode-block" id="QueryResponseContainer">
+<a class="viewcode-back" href="../../model/models.html#starmap_client.models.QueryResponseContainer">[docs]</a>
 <span class="nd">@frozen</span>
 <span class="k">class</span> <span class="nc">QueryResponseContainer</span><span class="p">:</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Represent a full query response from APIv2.&quot;&quot;&quot;</span>
@@ -531,6 +570,8 @@
     <span class="p">)</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;List with all responses from a Query V2 mapping.&quot;&quot;&quot;</span>
 
+<div class="viewcode-block" id="QueryResponseContainer.from_json">
+<a class="viewcode-back" href="../../model/models.html#starmap_client.models.QueryResponseContainer.from_json">[docs]</a>
     <span class="nd">@classmethod</span>
     <span class="k">def</span> <span class="nf">from_json</span><span class="p">(</span><span class="bp">cls</span><span class="p">,</span> <span class="n">json</span><span class="p">:</span> <span class="n">Any</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
@@ -546,8 +587,11 @@
             <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Expected root to be a list, got </span><span class="se">\&quot;</span><span class="si">{</span><span class="nb">type</span><span class="p">(</span><span class="n">json</span><span class="p">)</span><span class="si">}</span><span class="se">\&quot;</span><span class="s2">.&quot;</span><span class="p">)</span>
 
         <span class="n">responses</span> <span class="o">=</span> <span class="p">[</span><span class="n">QueryResponseEntity</span><span class="o">.</span><span class="n">from_json</span><span class="p">(</span><span class="n">qre</span><span class="p">)</span> <span class="k">for</span> <span class="n">qre</span> <span class="ow">in</span> <span class="n">json</span><span class="p">]</span>
-        <span class="k">return</span> <span class="bp">cls</span><span class="p">(</span><span class="n">responses</span><span class="p">)</span>
+        <span class="k">return</span> <span class="bp">cls</span><span class="p">(</span><span class="n">responses</span><span class="p">)</span></div>
 
+
+<div class="viewcode-block" id="QueryResponseContainer.filter_by_name">
+<a class="viewcode-back" href="../../model/models.html#starmap_client.models.QueryResponseContainer.filter_by_name">[docs]</a>
     <span class="k">def</span> <span class="nf">filter_by_name</span><span class="p">(</span>
         <span class="bp">self</span><span class="p">,</span> <span class="n">name</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">responses</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">List</span><span class="p">[</span><span class="n">QueryResponseEntity</span><span class="p">]]</span> <span class="o">=</span> <span class="kc">None</span>
     <span class="p">)</span> <span class="o">-&gt;</span> <span class="n">List</span><span class="p">[</span><span class="n">QueryResponseEntity</span><span class="p">]:</span>
@@ -564,8 +608,11 @@
         <span class="k">if</span> <span class="n">responses</span> <span class="o">==</span> <span class="p">[]:</span>
             <span class="k">return</span> <span class="n">responses</span>
         <span class="n">rsp</span> <span class="o">=</span> <span class="n">responses</span> <span class="ow">or</span> <span class="bp">self</span><span class="o">.</span><span class="n">responses</span>
-        <span class="k">return</span> <span class="p">[</span><span class="n">x</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">rsp</span> <span class="k">if</span> <span class="n">x</span><span class="o">.</span><span class="n">name</span> <span class="o">==</span> <span class="n">name</span><span class="p">]</span>
+        <span class="k">return</span> <span class="p">[</span><span class="n">x</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">rsp</span> <span class="k">if</span> <span class="n">x</span><span class="o">.</span><span class="n">name</span> <span class="o">==</span> <span class="n">name</span><span class="p">]</span></div>
 
+
+<div class="viewcode-block" id="QueryResponseContainer.filter_by_workflow">
+<a class="viewcode-back" href="../../model/models.html#starmap_client.models.QueryResponseContainer.filter_by_workflow">[docs]</a>
     <span class="k">def</span> <span class="nf">filter_by_workflow</span><span class="p">(</span>
         <span class="bp">self</span><span class="p">,</span> <span class="n">workflow</span><span class="p">:</span> <span class="n">Workflow</span><span class="p">,</span> <span class="n">responses</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">List</span><span class="p">[</span><span class="n">QueryResponseEntity</span><span class="p">]]</span> <span class="o">=</span> <span class="kc">None</span>
     <span class="p">)</span> <span class="o">-&gt;</span> <span class="n">List</span><span class="p">[</span><span class="n">QueryResponseEntity</span><span class="p">]:</span>
@@ -582,8 +629,11 @@
         <span class="k">if</span> <span class="n">responses</span> <span class="o">==</span> <span class="p">[]:</span>
             <span class="k">return</span> <span class="n">responses</span>
         <span class="n">rsp</span> <span class="o">=</span> <span class="n">responses</span> <span class="ow">or</span> <span class="bp">self</span><span class="o">.</span><span class="n">responses</span>
-        <span class="k">return</span> <span class="p">[</span><span class="n">x</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">rsp</span> <span class="k">if</span> <span class="n">x</span><span class="o">.</span><span class="n">workflow</span> <span class="o">==</span> <span class="n">workflow</span><span class="p">]</span>
+        <span class="k">return</span> <span class="p">[</span><span class="n">x</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">rsp</span> <span class="k">if</span> <span class="n">x</span><span class="o">.</span><span class="n">workflow</span> <span class="o">==</span> <span class="n">workflow</span><span class="p">]</span></div>
 
+
+<div class="viewcode-block" id="QueryResponseContainer.filter_by_cloud">
+<a class="viewcode-back" href="../../model/models.html#starmap_client.models.QueryResponseContainer.filter_by_cloud">[docs]</a>
     <span class="k">def</span> <span class="nf">filter_by_cloud</span><span class="p">(</span>
         <span class="bp">self</span><span class="p">,</span> <span class="n">cloud</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">responses</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">List</span><span class="p">[</span><span class="n">QueryResponseEntity</span><span class="p">]]</span> <span class="o">=</span> <span class="kc">None</span>
     <span class="p">)</span> <span class="o">-&gt;</span> <span class="n">List</span><span class="p">[</span><span class="n">QueryResponseEntity</span><span class="p">]:</span>
@@ -600,8 +650,11 @@
         <span class="k">if</span> <span class="n">responses</span> <span class="o">==</span> <span class="p">[]:</span>
             <span class="k">return</span> <span class="n">responses</span>
         <span class="n">rsp</span> <span class="o">=</span> <span class="n">responses</span> <span class="ow">or</span> <span class="bp">self</span><span class="o">.</span><span class="n">responses</span>
-        <span class="k">return</span> <span class="p">[</span><span class="n">x</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">rsp</span> <span class="k">if</span> <span class="n">x</span><span class="o">.</span><span class="n">cloud</span> <span class="o">==</span> <span class="n">cloud</span><span class="p">]</span>
+        <span class="k">return</span> <span class="p">[</span><span class="n">x</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">rsp</span> <span class="k">if</span> <span class="n">x</span><span class="o">.</span><span class="n">cloud</span> <span class="o">==</span> <span class="n">cloud</span><span class="p">]</span></div>
 
+
+<div class="viewcode-block" id="QueryResponseContainer.filter_by">
+<a class="viewcode-back" href="../../model/models.html#starmap_client.models.QueryResponseContainer.filter_by">[docs]</a>
     <span class="k">def</span> <span class="nf">filter_by</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">List</span><span class="p">[</span><span class="n">QueryResponseEntity</span><span class="p">]:</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;Return a sublist of the responses with the selected filters.&quot;&quot;&quot;</span>
         <span class="n">filters</span> <span class="o">=</span> <span class="p">{</span>
@@ -612,7 +665,9 @@
         <span class="n">res</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">responses</span>
         <span class="k">for</span> <span class="n">k</span><span class="p">,</span> <span class="n">v</span> <span class="ow">in</span> <span class="n">kwargs</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
             <span class="n">res</span> <span class="o">=</span> <span class="n">filters</span><span class="p">[</span><span class="n">k</span><span class="p">](</span><span class="n">v</span><span class="p">,</span> <span class="n">responses</span><span class="o">=</span><span class="n">res</span><span class="p">)</span>
-        <span class="k">return</span> <span class="n">res</span>
+        <span class="k">return</span> <span class="n">res</span></div>
+</div>
+
 </pre></div>
 
           </div>
