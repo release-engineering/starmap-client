@@ -49,10 +49,10 @@
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><strong>url</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.12)"><em>str</em></a><em>, </em><em>optional</em>) – URL of the StArMap endpoint. Required when session is not set.</p></li>
-<li><p><strong>api_version</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.12)"><em>str</em></a><em>, </em><em>optional</em>) – The StArMap API version. Defaults to <cite>v2</cite>.</p></li>
+<li><p><strong>url</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.13)"><em>str</em></a><em>, </em><em>optional</em>) – URL of the StArMap endpoint. Required when session is not set.</p></li>
+<li><p><strong>api_version</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.13)"><em>str</em></a><em>, </em><em>optional</em>) – The StArMap API version. Defaults to <cite>v2</cite>.</p></li>
 <li><p><strong>session</strong> (<a class="reference internal" href="../session/session.html#starmap_client.session.StarmapBaseSession" title="starmap_client.session.StarmapBaseSession"><em>StarmapBaseSession</em></a><em>, </em><em>optional</em>) – Defines the session object to use. Defaults to <cite>StarmapSession</cite> when not set</p></li>
-<li><p><strong>session_params</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#dict" title="(in Python v3.12)"><em>dict</em></a><em>, </em><em>optional</em>) – Additional keyword arguments for StarmapSession</p></li>
+<li><p><strong>session_params</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#dict" title="(in Python v3.13)"><em>dict</em></a><em>, </em><em>optional</em>) – Additional keyword arguments for StarmapSession</p></li>
 <li><p><strong>provider</strong> (<a class="reference internal" href="../provider/provider.html#starmap_client.providers.StarmapProvider" title="starmap_client.providers.StarmapProvider"><em>StarmapProvider</em></a><em>, </em><em>optional</em>) – Object responsible to provide mappings locally. When set the client will be query it
 first and if no mapping is found the subsequent request will be made to the server.</p></li>
 </ul>
@@ -67,7 +67,7 @@ first and if no mapping is found the subsequent request will be made to the serv
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><strong>nvr</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.12)"><em>str</em></a>) – The image archive name or NVR.</p></li>
+<li><p><strong>nvr</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.13)"><em>str</em></a>) – The image archive name or NVR.</p></li>
 <li><p><strong>workflow</strong> (<a class="reference internal" href="../model/models.html#starmap_client.models.Workflow" title="starmap_client.models.Workflow"><em>Workflow</em></a><em>, </em><em>optional</em>) – The desired workflow to retrieve the mappings (APIv1 Only)</p></li>
 </ul>
 </dd>
@@ -87,8 +87,8 @@ first and if no mapping is found the subsequent request will be made to the serv
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><strong>name</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.12)"><em>str</em></a>) – The image name from NVR.</p></li>
-<li><p><strong>version</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.12)"><em>str</em></a><em>, </em><em>optional</em>) – The version from NVR.</p></li>
+<li><p><strong>name</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.13)"><em>str</em></a>) – The image name from NVR.</p></li>
+<li><p><strong>version</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.13)"><em>str</em></a><em>, </em><em>optional</em>) – The version from NVR.</p></li>
 <li><p><strong>workflow</strong> (<a class="reference internal" href="../model/models.html#starmap_client.models.Workflow" title="starmap_client.models.Workflow"><em>Workflow</em></a><em>, </em><em>optional</em>) – The desired workflow to retrieve the mappings (APIv1 Only)</p></li>
 </ul>
 </dd>
@@ -103,7 +103,7 @@ first and if no mapping is found the subsequent request will be made to the serv
 
 <dl class="py property">
 <dt class="sig sig-object py" id="starmap_client.StarmapClient.policies">
-<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">policies</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Iterator" title="(in Python v3.12)"><span class="pre">Iterator</span></a><span class="p"><span class="pre">[</span></span><a class="reference internal" href="../model/models.html#starmap_client.models.Policy" title="starmap_client.models.Policy"><span class="pre">Policy</span></a><span class="p"><span class="pre">]</span></span></em><a class="headerlink" href="#starmap_client.StarmapClient.policies" title="Link to this definition">¶</a></dt>
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">policies</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Iterator" title="(in Python v3.13)"><span class="pre">Iterator</span></a><span class="p"><span class="pre">[</span></span><a class="reference internal" href="../model/models.html#starmap_client.models.Policy" title="starmap_client.models.Policy"><span class="pre">Policy</span></a><span class="p"><span class="pre">]</span></span></em><a class="headerlink" href="#starmap_client.StarmapClient.policies" title="Link to this definition">¶</a></dt>
 <dd><p>Iterate over all Policies registered in StArMap.</p>
 </dd></dl>
 
@@ -116,7 +116,7 @@ first and if no mapping is found the subsequent request will be made to the serv
 <dd class="field-odd"><p>List with all policies present in StArMap.</p>
 </dd>
 <dt class="field-even">Return type<span class="colon">:</span></dt>
-<dd class="field-even"><p><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#list" title="(in Python v3.12)">list</a>(<a class="reference internal" href="../model/models.html#starmap_client.models.Policy" title="starmap_client.models.Policy">Policy</a>)</p>
+<dd class="field-even"><p><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#list" title="(in Python v3.13)">list</a>(<a class="reference internal" href="../model/models.html#starmap_client.models.Policy" title="starmap_client.models.Policy">Policy</a>)</p>
 </dd>
 </dl>
 </dd></dl>
@@ -127,7 +127,7 @@ first and if no mapping is found the subsequent request will be made to the serv
 <dd><p>Retrieve a single policy by its ID.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
-<dd class="field-odd"><p><strong>policy_id</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.12)"><em>str</em></a>) – The Policy ID to retrieve from StArMap.</p>
+<dd class="field-odd"><p><strong>policy_id</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.13)"><em>str</em></a>) – The Policy ID to retrieve from StArMap.</p>
 </dd>
 <dt class="field-even">Returns<span class="colon">:</span></dt>
 <dd class="field-even"><p>The requested Policy when found.</p>
@@ -144,10 +144,10 @@ first and if no mapping is found the subsequent request will be made to the serv
 <dd><p>List all mappings for a given Policy ID.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
-<dd class="field-odd"><p><strong>policy_id</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.12)"><em>str</em></a>) – Policy ID to list the mappings.</p>
+<dd class="field-odd"><p><strong>policy_id</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.13)"><em>str</em></a>) – Policy ID to list the mappings.</p>
 </dd>
 <dt class="field-even">Return type<span class="colon">:</span></dt>
-<dd class="field-even"><p><span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.List" title="(in Python v3.12)"><code class="xref py py-class docutils literal notranslate"><span class="pre">List</span></code></a>[<a class="reference internal" href="../model/models.html#starmap_client.models.Mapping" title="starmap_client.models.Mapping"><code class="xref py py-class docutils literal notranslate"><span class="pre">Mapping</span></code></a>]</span></p>
+<dd class="field-even"><p><span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.List" title="(in Python v3.13)"><code class="xref py py-class docutils literal notranslate"><span class="pre">List</span></code></a>[<a class="reference internal" href="../model/models.html#starmap_client.models.Mapping" title="starmap_client.models.Mapping"><code class="xref py py-class docutils literal notranslate"><span class="pre">Mapping</span></code></a>]</span></p>
 </dd>
 <dt class="field-odd">Returns<span class="colon">:</span></dt>
 <dd class="field-odd"><p>List with the Mappings for the requested Policy.</p>
@@ -161,10 +161,10 @@ first and if no mapping is found the subsequent request will be made to the serv
 <dd><p>Retrieve a single Marketplace Mapping by its ID.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
-<dd class="field-odd"><p><strong>mapping_id</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.12)"><em>str</em></a>) – The Markeplace Mapping ID to retrieve from StArmAp.</p>
+<dd class="field-odd"><p><strong>mapping_id</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.13)"><em>str</em></a>) – The Markeplace Mapping ID to retrieve from StArmAp.</p>
 </dd>
 <dt class="field-even">Return type<span class="colon">:</span></dt>
-<dd class="field-even"><p><span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Optional" title="(in Python v3.12)"><code class="xref py py-data docutils literal notranslate"><span class="pre">Optional</span></code></a>[<a class="reference internal" href="../model/models.html#starmap_client.models.Mapping" title="starmap_client.models.Mapping"><code class="xref py py-class docutils literal notranslate"><span class="pre">Mapping</span></code></a>]</span></p>
+<dd class="field-even"><p><span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Optional" title="(in Python v3.13)"><code class="xref py py-data docutils literal notranslate"><span class="pre">Optional</span></code></a>[<a class="reference internal" href="../model/models.html#starmap_client.models.Mapping" title="starmap_client.models.Mapping"><code class="xref py py-class docutils literal notranslate"><span class="pre">Mapping</span></code></a>]</span></p>
 </dd>
 <dt class="field-odd">Returns<span class="colon">:</span></dt>
 <dd class="field-odd"><p>The requested Marketplace Mapping when found.</p>
@@ -178,10 +178,10 @@ first and if no mapping is found the subsequent request will be made to the serv
 <dd><p>List all destinations for a given Marketplace Mapping ID.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
-<dd class="field-odd"><p><strong>mapping_id</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.12)"><em>str</em></a>) – Marketplace Mapping ID to list the mappings.</p>
+<dd class="field-odd"><p><strong>mapping_id</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.13)"><em>str</em></a>) – Marketplace Mapping ID to list the mappings.</p>
 </dd>
 <dt class="field-even">Return type<span class="colon">:</span></dt>
-<dd class="field-even"><p><span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.List" title="(in Python v3.12)"><code class="xref py py-class docutils literal notranslate"><span class="pre">List</span></code></a>[<a class="reference internal" href="../model/models.html#starmap_client.models.Destination" title="starmap_client.models.Destination"><code class="xref py py-class docutils literal notranslate"><span class="pre">Destination</span></code></a>]</span></p>
+<dd class="field-even"><p><span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.List" title="(in Python v3.13)"><code class="xref py py-class docutils literal notranslate"><span class="pre">List</span></code></a>[<a class="reference internal" href="../model/models.html#starmap_client.models.Destination" title="starmap_client.models.Destination"><code class="xref py py-class docutils literal notranslate"><span class="pre">Destination</span></code></a>]</span></p>
 </dd>
 <dt class="field-odd">Returns<span class="colon">:</span></dt>
 <dd class="field-odd"><p>List with the Destinations for the requested Mapping.</p>
@@ -195,10 +195,10 @@ first and if no mapping is found the subsequent request will be made to the serv
 <dd><p>Retrieve a single Destination by its ID.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
-<dd class="field-odd"><p><strong>destination_id</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.12)"><em>str</em></a>) – The Destination ID to retrieve from StArmAp.</p>
+<dd class="field-odd"><p><strong>destination_id</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.13)"><em>str</em></a>) – The Destination ID to retrieve from StArmAp.</p>
 </dd>
 <dt class="field-even">Return type<span class="colon">:</span></dt>
-<dd class="field-even"><p><span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Optional" title="(in Python v3.12)"><code class="xref py py-data docutils literal notranslate"><span class="pre">Optional</span></code></a>[<a class="reference internal" href="../model/models.html#starmap_client.models.Destination" title="starmap_client.models.Destination"><code class="xref py py-class docutils literal notranslate"><span class="pre">Destination</span></code></a>]</span></p>
+<dd class="field-even"><p><span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Optional" title="(in Python v3.13)"><code class="xref py py-data docutils literal notranslate"><span class="pre">Optional</span></code></a>[<a class="reference internal" href="../model/models.html#starmap_client.models.Destination" title="starmap_client.models.Destination"><code class="xref py py-class docutils literal notranslate"><span class="pre">Destination</span></code></a>]</span></p>
 </dd>
 <dt class="field-odd">Returns<span class="colon">:</span></dt>
 <dd class="field-odd"><p>The requested Destination when found.</p>
