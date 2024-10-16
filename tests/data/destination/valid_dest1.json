@@ -1,7 +1,8 @@
 {
     "destination": "test-destination/foo/bar",
     "overwrite": false,
-    "restrict_version": false,
+    "restrict_version": true,
     "restrict_major": 1,
-    "restrict_minor": 1
+    "restrict_minor": 1,
+    "ami_version_template": "{major}.{minor}.{patch}"
 }
