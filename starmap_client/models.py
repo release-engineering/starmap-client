@@ -168,6 +168,10 @@ class Destination(StarmapBaseData):
     restrict_minor: Optional[int] = field(validator=optional(instance_of(int)))
     """How many minor versions are allowed in product"""
 
+    ami_version_template: Optional[str] = field(validator=optional(instance_of(str)))
+    """Ami versioning template. Available options are major,minor,patch, or version.
+    Such as {major}.{minor}. If version is used it'll use the already available version."""
+
     provider: Optional[str] = field(validator=optional(instance_of(str)))
     """Represent the RHSM provider name for the community workflow."""
 
