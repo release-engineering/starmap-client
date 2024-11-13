@@ -24,6 +24,16 @@ def test_assert_is_dict() -> None:
         ({"1": 1, "3": 3}, {"2": 2}, {"1": 1, "2": 2, "3": 3}),
         ({"1": 1, "3": 3}, {"2": 2, "3": 4}, {"1": 1, "2": 2, "3": 4}),
         ({"A": True, "B": True, "C": True}, {"B": False}, {"A": True, "B": False, "C": True}),
+        (
+            {"dic1": {"foo": "bar"}, "dic2": {"key": "value"}},
+            {"dic1": {"bar": "foo"}},
+            {"dic1": {"foo": "bar", "bar": "foo"}, "dic2": {"key": "value"}},
+        ),
+        (
+            {"dic1": {"foo": "bar"}},
+            {"dic1": {"bar": "foo"}, "dic2": {"key": "value"}},
+            {"dic1": {"foo": "bar", "bar": "foo"}, "dic2": {"key": "value"}},
+        ),
     ],
 )
 def test_dict_merge(a: Dict[str, Any], b: Dict[str, Any], expected: Dict[str, Any]) -> None:

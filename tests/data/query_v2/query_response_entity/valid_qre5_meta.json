@@ -1,0 +1,34 @@
+{
+    "test-marketplace": {
+        "destination": "key",
+        "combined": {
+            "package": "package",
+            "mapping": "mapping",
+            "destination": "destination"
+        },
+        "global": "key",
+        "mapping": "key",
+        "merged": {
+            "name": "destination"
+        }
+    },
+    "another-marketplace": {
+        "destination": "key",
+        "combined": {
+            "package": "package",
+            "mapping": "mapping",
+            "destination": "destination"
+        },
+        "global": "key",
+        "mapping": "key",
+        "merged": {
+            "name": "destination"
+        },
+        "another": {
+            "foo": "bar"
+        },
+        "last": {
+            "test": true
+        }
+    }
+}
