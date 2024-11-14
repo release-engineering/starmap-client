@@ -3,7 +3,7 @@ from setuptools import setup, find_packages
 setup(
     name='starmap-client',
     description='Client for StArMap',
-    version='2.1.0',
+    version='2.1.1',
     keywords='stratosphere content artifact mapping cli',
     author='Jonathan Gangi',
     author_email='jgangi@redhat.com',
