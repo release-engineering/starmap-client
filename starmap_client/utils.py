@@ -20,4 +20,16 @@ def dict_merge(a: Dict[str, Any], b: Dict[str, Any]) -> Dict[str, Any]:
     """
     for x in [a, b]:
         assert_is_dict(x)
+
+    # Process the inner values before merging
+    for k, v in a.items():
+        # Merge two inner dictionaries
+        if b.get(k) and all([isinstance(x, dict) for x in [v, b.get(k)]]):
+            b[k] = dict_merge(v, b[k])
+
+        # Merge left inner dictionary
+        elif isinstance(v, dict) and not b.get(k):
+            b[k] = dict_merge(v, {})
+
+    # Default merge of dictionaries
     return a | b

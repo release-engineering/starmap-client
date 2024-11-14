@@ -1,0 +1,109 @@
+{
+    "cloud": "test",
+    "meta": {
+        "global": "key",
+        "combined": {
+            "package": "package"
+        },
+        "merged": {
+            "name": "package"
+        }
+    },
+    "mappings": {
+        "test-marketplace": {
+            "destinations": [
+                {
+                    "destination": "test-destination/foo/bar",
+                    "overwrite": false,
+                    "restrict_version": false,
+                    "meta": {
+                        "destination": "key",
+                        "combined": {
+                            "destination": "destination"
+                        },
+                        "merged": {
+                            "name": "destination"
+                        }
+                    }
+                },
+                {
+                    "destination": "second-test-destination/foo/bar",
+                    "overwrite": true,
+                    "restrict_version": false,
+                    "meta": {
+                        "destination": "key",
+                        "combined": {
+                            "destination": "destination"
+                        },
+                        "merged": {
+                            "name": "destination"
+                        }
+                    }
+                }
+            ],
+            "provider": null,
+            "meta": {
+                "mapping": "key",
+                "combined": {
+                    "mapping": "mapping"
+                },
+                "merged": {
+                    "name": "mapping"
+                }
+            }
+        },
+        "another-marketplace": {
+            "destinations": [
+                {
+                    "destination": "aaaaaaaaaaaaaaa",
+                    "overwrite": false,
+                    "restrict_version": false,
+                    "meta": {
+                        "destination": "key",
+                        "combined": {
+                            "destination": "destination"
+                        },
+                        "merged": {
+                            "name": "destination"
+                        },
+                        "last": {
+                            "test": true
+                        }
+                    }
+                },
+                {
+                    "destination": "bbbbbbbbbbbbb",
+                    "overwrite": true,
+                    "restrict_version": false,
+                    "meta": {
+                        "destination": "key",
+                        "combined": {
+                            "destination": "destination"
+                        },
+                        "merged": {
+                            "name": "destination"
+                        },
+                        "last": {
+                            "test": true
+                        }
+                    }
+                }
+            ],
+            "provider": null,
+            "meta": {
+                "mapping": "key",
+                "combined": {
+                    "mapping": "mapping"
+                },
+                "merged": {
+                    "name": "mapping"
+                },
+                "another": {
+                    "foo": "bar"
+                }
+            }
+        }
+    },
+    "workflow": "stratosphere",
+    "name": "sample-product"
+}

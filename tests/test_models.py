@@ -262,6 +262,11 @@ class TestV2MappingResponseObject:
                 "tests/data/query_v2/mapping_response_obj/valid_mro3_meta.json",
                 None,
             ),
+            (
+                "tests/data/query_v2/mapping_response_obj/valid_mro4.json",
+                "tests/data/query_v2/mapping_response_obj/valid_mro4_meta.json",
+                None,
+            ),
         ],
     )
     def test_valid_mapping_response_obj(self, json_file, meta, provider) -> None:
@@ -310,6 +315,10 @@ class TestV2QueryResponseEntity:
                 "tests/data/query_v2/query_response_entity/valid_qre4.json",
                 "tests/data/query_v2/query_response_entity/valid_qre4_meta.json",
             ),
+            (
+                "tests/data/query_v2/query_response_entity/valid_qre5.json",
+                "tests/data/query_v2/query_response_entity/valid_qre5_meta.json",
+            ),
         ],
     )
     def test_valid_query_response_entity(self, json_file, meta) -> None:
@@ -318,9 +327,13 @@ class TestV2QueryResponseEntity:
         expected_meta_dict = load_json(meta)
 
         q = QueryResponseEntity.from_json(data)
-        for account_name in q.account_names:
-            assert q.mappings[account_name].meta == expected_meta_dict[account_name]
 
+        # Test the merged meta attributes on destinations
+        for account_name in q.account_names:
+            for dest in q.mappings[account_name].destinations:
+                assert dest.meta == expected_meta_dict[account_name]
+
+        # Test the billing_code_config
         if q.billing_code_config:
             bc_asdict = {k: asdict(v) for k, v in q.billing_code_config.items()}
             assert bc_asdict == d["billing-code-config"]

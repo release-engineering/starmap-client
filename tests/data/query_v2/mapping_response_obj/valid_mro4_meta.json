@@ -1,0 +1,11 @@
+{
+    "destination": "key",
+    "combined": {
+        "mapping": "mapping",
+        "destination": "destination"
+    },
+    "mapping": "key",
+    "merged": {
+        "name": "destination"
+    }
+}
