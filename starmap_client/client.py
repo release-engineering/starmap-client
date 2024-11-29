@@ -1,28 +1,18 @@
 # SPDX-License-Identifier: GPL-3.0-or-later
 import logging
-from typing import Any, Dict, Iterator, List, Optional, Type, Union
+from typing import Any, Dict, Iterator, List, Optional
 
 from starmap_client.models import (
     Destination,
     Mapping,
     PaginatedRawData,
     Policy,
-    QueryResponse,
     QueryResponseContainer,
 )
 from starmap_client.providers import StarmapProvider
 from starmap_client.session import StarmapBaseSession, StarmapSession
 
 log = logging.getLogger(__name__)
-
-
-Q = Union[QueryResponse, QueryResponseContainer]
-
-API_QUERY_RESPONSE: Dict[str, Type[Q]] = {
-    "v1": QueryResponse,
-    "v2": QueryResponseContainer,
-    "default": QueryResponseContainer,
-}
 
 
 class StarmapClient(object):
@@ -71,12 +61,12 @@ class StarmapClient(object):
         self._provider = provider
         self._policies: List[Policy] = []
 
-    def _query(self, params: Dict[str, Any]) -> Optional[Q]:
+    def _query(self, params: Dict[str, Any]) -> Optional[QueryResponseContainer]:
         qr = None
         if self._provider:
             qr = self._provider.query(params)
         rsp = qr or self.session.get("/query", params=params)
-        if isinstance(rsp, QueryResponse) or isinstance(rsp, QueryResponseContainer):
+        if isinstance(rsp, QueryResponseContainer):
             log.debug(
                 "Returning response from the local provider %s", self._provider.__class__.__name__
             )
@@ -85,10 +75,9 @@ class StarmapClient(object):
             log.error(f"Marketplace mappings not defined for {params}")
             return None
         rsp.raise_for_status()
-        converter = API_QUERY_RESPONSE.get(self.api_version, API_QUERY_RESPONSE["default"])
-        return converter.from_json(json=rsp.json())
+        return QueryResponseContainer.from_json(json=rsp.json())
 
-    def query_image(self, nvr: str, **kwargs) -> Optional[Q]:
+    def query_image(self, nvr: str, **kwargs) -> Optional[QueryResponseContainer]:
         """
         Query StArMap using an image NVR.
 
@@ -97,7 +86,7 @@ class StarmapClient(object):
             workflow(Workflow, optional): The desired workflow to retrieve the mappings (APIv1 Only)
 
         Returns:
-            Q: The query result when found or None.
+            QueryResponseContainer: The query result when found or None.
         """
         return self._query(params={"image": nvr, **kwargs})
 
@@ -106,17 +95,16 @@ class StarmapClient(object):
         name: str,
         version: Optional[str] = None,
         **kwargs,
-    ) -> Optional[Q]:
+    ) -> Optional[QueryResponseContainer]:
         """
         Query StArMap using an image NVR.
 
         Args:
             name (str): The image name from NVR.
             version (str, optional): The version from NVR.
-            workflow(Workflow, optional): The desired workflow to retrieve the mappings (APIv1 Only)
 
         Returns:
-            Q: The query result when found or None.
+            QueryResponseContainer: The query result when found or None.
         """
         params = {"name": name, **kwargs}
         if version:

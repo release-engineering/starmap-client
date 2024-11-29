@@ -1,9 +1,9 @@
 from abc import ABC, abstractmethod
 from typing import Any, Dict, Generic, List, Optional, TypeVar
 
-from starmap_client.models import QueryResponse, QueryResponseContainer, QueryResponseEntity
+from starmap_client.models import QueryResponseContainer, QueryResponseEntity
 
-T = TypeVar("T", QueryResponse, QueryResponseContainer, QueryResponseEntity)
+T = TypeVar("T", QueryResponseContainer, QueryResponseEntity)
 
 
 class StarmapProvider(ABC, Generic[T]):
