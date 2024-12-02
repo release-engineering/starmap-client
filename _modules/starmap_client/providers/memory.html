@@ -32,89 +32,9 @@
   <h1>Source code for starmap_client.providers.memory</h1><div class="highlight"><pre>
 <span></span><span class="kn">from</span> <span class="nn">typing</span> <span class="kn">import</span> <span class="n">Any</span><span class="p">,</span> <span class="n">Dict</span><span class="p">,</span> <span class="n">List</span><span class="p">,</span> <span class="n">Optional</span>
 
-<span class="kn">from</span> <span class="nn">starmap_client.models</span> <span class="kn">import</span> <span class="n">QueryResponse</span><span class="p">,</span> <span class="n">QueryResponseContainer</span><span class="p">,</span> <span class="n">QueryResponseEntity</span>
+<span class="kn">from</span> <span class="nn">starmap_client.models</span> <span class="kn">import</span> <span class="n">QueryResponseContainer</span><span class="p">,</span> <span class="n">QueryResponseEntity</span>
 <span class="kn">from</span> <span class="nn">starmap_client.providers.base</span> <span class="kn">import</span> <span class="n">StarmapProvider</span>
 <span class="kn">from</span> <span class="nn">starmap_client.providers.utils</span> <span class="kn">import</span> <span class="n">get_image_name</span>
-
-
-<div class="viewcode-block" id="InMemoryMapProviderV1">
-<a class="viewcode-back" href="../../../provider/provider.html#starmap_client.providers.InMemoryMapProviderV1">[docs]</a>
-<span class="k">class</span> <span class="nc">InMemoryMapProviderV1</span><span class="p">(</span><span class="n">StarmapProvider</span><span class="p">):</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;Provide in memory (RAM) QueryResponse mapping objects for APIv1.&quot;&quot;&quot;</span>
-
-    <span class="n">api</span> <span class="o">=</span> <span class="s2">&quot;v1&quot;</span>
-
-<div class="viewcode-block" id="InMemoryMapProviderV1.__init__">
-<a class="viewcode-back" href="../../../provider/provider.html#starmap_client.providers.InMemoryMapProviderV1.__init__">[docs]</a>
-    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span>
-        <span class="bp">self</span><span class="p">,</span> <span class="n">map_responses</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">List</span><span class="p">[</span><span class="n">QueryResponse</span><span class="p">]]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span>
-    <span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;Crete a new InMemoryMapProvider object.</span>
-
-<span class="sd">        Args:</span>
-<span class="sd">            map_responses (list, optional)</span>
-<span class="sd">                List of QueryResponse objects to load into memory. They will be</span>
-<span class="sd">                used by query to fetch the correct response based on name</span>
-<span class="sd">                and workflow.</span>
-<span class="sd">        &quot;&quot;&quot;</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">_separator</span> <span class="o">=</span> <span class="nb">str</span><span class="p">(</span><span class="n">kwargs</span><span class="o">.</span><span class="n">pop</span><span class="p">(</span><span class="s2">&quot;separator&quot;</span><span class="p">,</span> <span class="s2">&quot;+&quot;</span><span class="p">))</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">_content</span><span class="p">:</span> <span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">QueryResponse</span><span class="p">]</span> <span class="o">=</span> <span class="p">{}</span>
-        <span class="nb">super</span><span class="p">(</span><span class="n">StarmapProvider</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="fm">__init__</span><span class="p">()</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">_boostrap</span><span class="p">(</span><span class="n">map_responses</span><span class="p">)</span></div>
-
-
-    <span class="k">def</span> <span class="nf">_boostrap</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">map_responses</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">List</span><span class="p">[</span><span class="n">QueryResponse</span><span class="p">]])</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;Initialize the internal content dictionary.</span>
-
-<span class="sd">        Args:</span>
-<span class="sd">            map_responses (list, optional)</span>
-<span class="sd">                List of QueryResponse objects to load into memory.</span>
-<span class="sd">        &quot;&quot;&quot;</span>
-        <span class="k">if</span> <span class="ow">not</span> <span class="n">map_responses</span><span class="p">:</span>
-            <span class="k">return</span> <span class="kc">None</span>
-
-        <span class="c1"># The in memory content is made of a combination of name and workflow</span>
-        <span class="k">for</span> <span class="nb">map</span> <span class="ow">in</span> <span class="n">map_responses</span><span class="p">:</span>
-            <span class="n">key</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="nb">map</span><span class="o">.</span><span class="n">name</span><span class="si">}{</span><span class="bp">self</span><span class="o">.</span><span class="n">_separator</span><span class="si">}{</span><span class="nb">map</span><span class="o">.</span><span class="n">workflow</span><span class="o">.</span><span class="n">value</span><span class="si">}</span><span class="s2">&quot;</span>
-            <span class="bp">self</span><span class="o">.</span><span class="n">_content</span><span class="p">[</span><span class="n">key</span><span class="p">]</span> <span class="o">=</span> <span class="nb">map</span>
-
-<div class="viewcode-block" id="InMemoryMapProviderV1.list_content">
-<a class="viewcode-back" href="../../../provider/provider.html#starmap_client.providers.InMemoryMapProviderV1.list_content">[docs]</a>
-    <span class="k">def</span> <span class="nf">list_content</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">List</span><span class="p">[</span><span class="n">QueryResponse</span><span class="p">]:</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;Return a list of stored content.&quot;&quot;&quot;</span>
-        <span class="k">return</span> <span class="nb">list</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_content</span><span class="o">.</span><span class="n">values</span><span class="p">())</span></div>
-
-
-<div class="viewcode-block" id="InMemoryMapProviderV1.store">
-<a class="viewcode-back" href="../../../provider/provider.html#starmap_client.providers.InMemoryMapProviderV1.store">[docs]</a>
-    <span class="k">def</span> <span class="nf">store</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">response</span><span class="p">:</span> <span class="n">QueryResponse</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;Store/replace a single QueryResponse object.</span>
-
-<span class="sd">        Args:</span>
-<span class="sd">            response (QueryResponse):</span>
-<span class="sd">                The object to store.</span>
-<span class="sd">        &quot;&quot;&quot;</span>
-        <span class="n">key</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">response</span><span class="o">.</span><span class="n">name</span><span class="si">}{</span><span class="bp">self</span><span class="o">.</span><span class="n">_separator</span><span class="si">}{</span><span class="n">response</span><span class="o">.</span><span class="n">workflow</span><span class="o">.</span><span class="n">value</span><span class="si">}</span><span class="s2">&quot;</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">_content</span><span class="p">[</span><span class="n">key</span><span class="p">]</span> <span class="o">=</span> <span class="n">response</span></div>
-
-
-<div class="viewcode-block" id="InMemoryMapProviderV1.query">
-<a class="viewcode-back" href="../../../provider/provider.html#starmap_client.providers.InMemoryMapProviderV1.query">[docs]</a>
-    <span class="k">def</span> <span class="nf">query</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">params</span><span class="p">:</span> <span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Any</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="n">Optional</span><span class="p">[</span><span class="n">QueryResponse</span><span class="p">]:</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;Return the mapping from memory according to the received params.</span>
-
-<span class="sd">        Args:</span>
-<span class="sd">            params (dict):</span>
-<span class="sd">                The request params to retrieve the mapping.</span>
-<span class="sd">        Returns:</span>
-<span class="sd">            The requested mapping when found.</span>
-<span class="sd">        &quot;&quot;&quot;</span>
-        <span class="n">name</span> <span class="o">=</span> <span class="n">params</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;name&quot;</span><span class="p">)</span> <span class="ow">or</span> <span class="n">get_image_name</span><span class="p">(</span><span class="n">params</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;image&quot;</span><span class="p">))</span>
-        <span class="n">workflow</span> <span class="o">=</span> <span class="nb">str</span><span class="p">(</span><span class="n">params</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;workflow&quot;</span><span class="p">,</span> <span class="s2">&quot;&quot;</span><span class="p">))</span>
-        <span class="n">search_key</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">name</span><span class="si">}{</span><span class="bp">self</span><span class="o">.</span><span class="n">_separator</span><span class="si">}{</span><span class="n">workflow</span><span class="si">}</span><span class="s2">&quot;</span>
-        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_content</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">search_key</span><span class="p">)</span></div>
-</div>
-
 
 
 <div class="viewcode-block" id="InMemoryMapProviderV2">

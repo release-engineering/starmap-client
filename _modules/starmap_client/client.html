@@ -32,29 +32,19 @@
   <h1>Source code for starmap_client.client</h1><div class="highlight"><pre>
 <span></span><span class="c1"># SPDX-License-Identifier: GPL-3.0-or-later</span>
 <span class="kn">import</span> <span class="nn">logging</span>
-<span class="kn">from</span> <span class="nn">typing</span> <span class="kn">import</span> <span class="n">Any</span><span class="p">,</span> <span class="n">Dict</span><span class="p">,</span> <span class="n">Iterator</span><span class="p">,</span> <span class="n">List</span><span class="p">,</span> <span class="n">Optional</span><span class="p">,</span> <span class="n">Type</span><span class="p">,</span> <span class="n">Union</span>
+<span class="kn">from</span> <span class="nn">typing</span> <span class="kn">import</span> <span class="n">Any</span><span class="p">,</span> <span class="n">Dict</span><span class="p">,</span> <span class="n">Iterator</span><span class="p">,</span> <span class="n">List</span><span class="p">,</span> <span class="n">Optional</span>
 
 <span class="kn">from</span> <span class="nn">starmap_client.models</span> <span class="kn">import</span> <span class="p">(</span>
     <span class="n">Destination</span><span class="p">,</span>
     <span class="n">Mapping</span><span class="p">,</span>
     <span class="n">PaginatedRawData</span><span class="p">,</span>
     <span class="n">Policy</span><span class="p">,</span>
-    <span class="n">QueryResponse</span><span class="p">,</span>
     <span class="n">QueryResponseContainer</span><span class="p">,</span>
 <span class="p">)</span>
 <span class="kn">from</span> <span class="nn">starmap_client.providers</span> <span class="kn">import</span> <span class="n">StarmapProvider</span>
 <span class="kn">from</span> <span class="nn">starmap_client.session</span> <span class="kn">import</span> <span class="n">StarmapBaseSession</span><span class="p">,</span> <span class="n">StarmapSession</span>
 
 <span class="n">log</span> <span class="o">=</span> <span class="n">logging</span><span class="o">.</span><span class="n">getLogger</span><span class="p">(</span><span class="vm">__name__</span><span class="p">)</span>
-
-
-<span class="n">Q</span> <span class="o">=</span> <span class="n">Union</span><span class="p">[</span><span class="n">QueryResponse</span><span class="p">,</span> <span class="n">QueryResponseContainer</span><span class="p">]</span>
-
-<span class="n">API_QUERY_RESPONSE</span><span class="p">:</span> <span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Type</span><span class="p">[</span><span class="n">Q</span><span class="p">]]</span> <span class="o">=</span> <span class="p">{</span>
-    <span class="s2">&quot;v1&quot;</span><span class="p">:</span> <span class="n">QueryResponse</span><span class="p">,</span>
-    <span class="s2">&quot;v2&quot;</span><span class="p">:</span> <span class="n">QueryResponseContainer</span><span class="p">,</span>
-    <span class="s2">&quot;default&quot;</span><span class="p">:</span> <span class="n">QueryResponseContainer</span><span class="p">,</span>
-<span class="p">}</span>
 
 
 <div class="viewcode-block" id="StarmapClient">
@@ -108,12 +98,12 @@
         <span class="bp">self</span><span class="o">.</span><span class="n">_policies</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="n">Policy</span><span class="p">]</span> <span class="o">=</span> <span class="p">[]</span></div>
 
 
-    <span class="k">def</span> <span class="nf">_query</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">params</span><span class="p">:</span> <span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Any</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="n">Optional</span><span class="p">[</span><span class="n">Q</span><span class="p">]:</span>
+    <span class="k">def</span> <span class="nf">_query</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">params</span><span class="p">:</span> <span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Any</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="n">Optional</span><span class="p">[</span><span class="n">QueryResponseContainer</span><span class="p">]:</span>
         <span class="n">qr</span> <span class="o">=</span> <span class="kc">None</span>
         <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">_provider</span><span class="p">:</span>
             <span class="n">qr</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_provider</span><span class="o">.</span><span class="n">query</span><span class="p">(</span><span class="n">params</span><span class="p">)</span>
         <span class="n">rsp</span> <span class="o">=</span> <span class="n">qr</span> <span class="ow">or</span> <span class="bp">self</span><span class="o">.</span><span class="n">session</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;/query&quot;</span><span class="p">,</span> <span class="n">params</span><span class="o">=</span><span class="n">params</span><span class="p">)</span>
-        <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">rsp</span><span class="p">,</span> <span class="n">QueryResponse</span><span class="p">)</span> <span class="ow">or</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">rsp</span><span class="p">,</span> <span class="n">QueryResponseContainer</span><span class="p">):</span>
+        <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">rsp</span><span class="p">,</span> <span class="n">QueryResponseContainer</span><span class="p">):</span>
             <span class="n">log</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span>
                 <span class="s2">&quot;Returning response from the local provider </span><span class="si">%s</span><span class="s2">&quot;</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">_provider</span><span class="o">.</span><span class="vm">__class__</span><span class="o">.</span><span class="vm">__name__</span>
             <span class="p">)</span>
@@ -122,12 +112,11 @@
             <span class="n">log</span><span class="o">.</span><span class="n">error</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Marketplace mappings not defined for </span><span class="si">{</span><span class="n">params</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
             <span class="k">return</span> <span class="kc">None</span>
         <span class="n">rsp</span><span class="o">.</span><span class="n">raise_for_status</span><span class="p">()</span>
-        <span class="n">converter</span> <span class="o">=</span> <span class="n">API_QUERY_RESPONSE</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">api_version</span><span class="p">,</span> <span class="n">API_QUERY_RESPONSE</span><span class="p">[</span><span class="s2">&quot;default&quot;</span><span class="p">])</span>
-        <span class="k">return</span> <span class="n">converter</span><span class="o">.</span><span class="n">from_json</span><span class="p">(</span><span class="n">json</span><span class="o">=</span><span class="n">rsp</span><span class="o">.</span><span class="n">json</span><span class="p">())</span>
+        <span class="k">return</span> <span class="n">QueryResponseContainer</span><span class="o">.</span><span class="n">from_json</span><span class="p">(</span><span class="n">json</span><span class="o">=</span><span class="n">rsp</span><span class="o">.</span><span class="n">json</span><span class="p">())</span>
 
 <div class="viewcode-block" id="StarmapClient.query_image">
 <a class="viewcode-back" href="../../client/implementation.html#starmap_client.StarmapClient.query_image">[docs]</a>
-    <span class="k">def</span> <span class="nf">query_image</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">nvr</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Optional</span><span class="p">[</span><span class="n">Q</span><span class="p">]:</span>
+    <span class="k">def</span> <span class="nf">query_image</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">nvr</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Optional</span><span class="p">[</span><span class="n">QueryResponseContainer</span><span class="p">]:</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Query StArMap using an image NVR.</span>
 
@@ -136,7 +125,7 @@
 <span class="sd">            workflow(Workflow, optional): The desired workflow to retrieve the mappings (APIv1 Only)</span>
 
 <span class="sd">        Returns:</span>
-<span class="sd">            Q: The query result when found or None.</span>
+<span class="sd">            QueryResponseContainer: The query result when found or None.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_query</span><span class="p">(</span><span class="n">params</span><span class="o">=</span><span class="p">{</span><span class="s2">&quot;image&quot;</span><span class="p">:</span> <span class="n">nvr</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">})</span></div>
 
@@ -148,17 +137,16 @@
         <span class="n">name</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
         <span class="n">version</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
         <span class="o">**</span><span class="n">kwargs</span><span class="p">,</span>
-    <span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Optional</span><span class="p">[</span><span class="n">Q</span><span class="p">]:</span>
+    <span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Optional</span><span class="p">[</span><span class="n">QueryResponseContainer</span><span class="p">]:</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Query StArMap using an image NVR.</span>
 
 <span class="sd">        Args:</span>
 <span class="sd">            name (str): The image name from NVR.</span>
 <span class="sd">            version (str, optional): The version from NVR.</span>
-<span class="sd">            workflow(Workflow, optional): The desired workflow to retrieve the mappings (APIv1 Only)</span>
 
 <span class="sd">        Returns:</span>
-<span class="sd">            Q: The query result when found or None.</span>
+<span class="sd">            QueryResponseContainer: The query result when found or None.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="n">params</span> <span class="o">=</span> <span class="p">{</span><span class="s2">&quot;name&quot;</span><span class="p">:</span> <span class="n">name</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">}</span>
         <span class="k">if</span> <span class="n">version</span><span class="p">:</span>

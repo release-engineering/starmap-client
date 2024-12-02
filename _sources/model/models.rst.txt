@@ -24,12 +24,6 @@ APIv2
    :show-inheritance:
 
 
-APIv1 (Deprecated)
-------------------
-
-.. autoclass:: starmap_client.models.QueryResponse()
-   :members:
-
 Common
 ------
 

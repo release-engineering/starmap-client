@@ -213,17 +213,6 @@
 <p>Raises: KeyError when not found</p>
 </dd></dl>
 
-<dl class="py method">
-<dt class="sig sig-object py" id="starmap_client.models.QueryResponseEntity.to_classic_query_response">
-<span class="sig-name descname"><span class="pre">to_classic_query_response</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/starmap_client/models.html#QueryResponseEntity.to_classic_query_response"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#starmap_client.models.QueryResponseEntity.to_classic_query_response" title="Link to this definition">¶</a></dt>
-<dd><p>Return the representation of this object as a <a class="reference internal" href="#starmap_client.models.QueryResponse" title="starmap_client.models.QueryResponse"><code class="xref py py-class docutils literal notranslate"><span class="pre">QueryResponse</span></code></a> from APIv1.</p>
-<dl class="field-list simple">
-<dt class="field-odd">Return type<span class="colon">:</span></dt>
-<dd class="field-odd"><p><span class="sphinx_autodoc_typehints-type"><a class="reference internal" href="#starmap_client.models.QueryResponse" title="starmap_client.models.QueryResponse"><code class="xref py py-class docutils literal notranslate"><span class="pre">QueryResponse</span></code></a></span></p>
-</dd>
-</dl>
-</dd></dl>
-
 </dd></dl>
 
 <dl class="py class">
@@ -285,39 +274,6 @@
 <dt class="sig sig-object py" id="starmap_client.models.BillingCodeRule.name">
 <span class="sig-name descname"><span class="pre">name</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Optional" title="(in Python v3.13)"><code class="xref py py-data docutils literal notranslate"><span class="pre">Optional</span></code></a><span class="pre">[</span><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.13)"><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code></a><span class="pre">]</span></em><a class="headerlink" href="#starmap_client.models.BillingCodeRule.name" title="Link to this definition">¶</a></dt>
 <dd><p>The billing code rule name.</p>
-</dd></dl>
-
-</dd></dl>
-
-</section>
-<section id="apiv1-deprecated">
-<h2>APIv1 (Deprecated)<a class="headerlink" href="#apiv1-deprecated" title="Link to this heading">¶</a></h2>
-<dl class="py class">
-<dt class="sig sig-object py" id="starmap_client.models.QueryResponse">
-<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">starmap_client.models.</span></span><span class="sig-name descname"><span class="pre">QueryResponse</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">name</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">workflow</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">clouds</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">NOTHING</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/starmap_client/models.html#QueryResponse"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#starmap_client.models.QueryResponse" title="Link to this definition">¶</a></dt>
-<dd><p>Represent a query response from StArMap.</p>
-<p><strong>Attributes:</strong></p>
-<ul class="simple">
-<li><p><a class="reference internal" href="#starmap_client.models.QueryResponse.clouds" title="starmap_client.models.QueryResponse.clouds"><code class="xref py py-meth docutils literal notranslate"><span class="pre">clouds()</span></code></a></p></li>
-<li><p><a class="reference internal" href="#starmap_client.models.QueryResponse.name" title="starmap_client.models.QueryResponse.name"><code class="xref py py-meth docutils literal notranslate"><span class="pre">name()</span></code></a></p></li>
-<li><p><a class="reference internal" href="#starmap_client.models.QueryResponse.workflow" title="starmap_client.models.QueryResponse.workflow"><code class="xref py py-meth docutils literal notranslate"><span class="pre">workflow()</span></code></a></p></li>
-</ul>
-<dl class="py attribute">
-<dt class="sig sig-object py" id="starmap_client.models.QueryResponse.name">
-<span class="sig-name descname"><span class="pre">name</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.13)"><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code></a></em><a class="headerlink" href="#starmap_client.models.QueryResponse.name" title="Link to this definition">¶</a></dt>
-<dd><p>The <a class="reference internal" href="#starmap_client.models.Policy" title="starmap_client.models.Policy"><code class="xref py py-class docutils literal notranslate"><span class="pre">Policy</span></code></a> name.</p>
-</dd></dl>
-
-<dl class="py attribute">
-<dt class="sig sig-object py" id="starmap_client.models.QueryResponse.workflow">
-<span class="sig-name descname"><span class="pre">workflow</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference internal" href="#starmap_client.models.Workflow" title="starmap_client.models.Workflow"><code class="xref py py-class docutils literal notranslate"><span class="pre">Workflow</span></code></a></em><a class="headerlink" href="#starmap_client.models.QueryResponse.workflow" title="Link to this definition">¶</a></dt>
-<dd><p>The <a class="reference internal" href="#starmap_client.models.Policy" title="starmap_client.models.Policy"><code class="xref py py-class docutils literal notranslate"><span class="pre">Policy</span></code></a> workflow.</p>
-</dd></dl>
-
-<dl class="py attribute">
-<dt class="sig sig-object py" id="starmap_client.models.QueryResponse.clouds">
-<span class="sig-name descname"><span class="pre">clouds</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Dict" title="(in Python v3.13)"><code class="xref py py-class docutils literal notranslate"><span class="pre">Dict</span></code></a><span class="pre">[</span><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.13)"><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code></a><span class="pre">,</span> <a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.List" title="(in Python v3.13)"><code class="xref py py-class docutils literal notranslate"><span class="pre">List</span></code></a><span class="pre">[</span><a class="reference internal" href="#starmap_client.models.Destination" title="starmap_client.models.Destination"><code class="xref py py-class docutils literal notranslate"><span class="pre">Destination</span></code></a><span class="pre">]]</span></em><a class="headerlink" href="#starmap_client.models.QueryResponse.clouds" title="Link to this definition">¶</a></dt>
-<dd><p>Dictionary with the cloud marketplaces aliases and their respective Destinations.</p>
 </dd></dl>
 
 </dd></dl>
@@ -581,7 +537,6 @@ Such as {major}.{minor}. If version is used it’ll use the already available ve
 <li class="toctree-l1"><a class="reference internal" href="../client/client.html">Client</a></li>
 <li class="toctree-l1 current"><a class="current reference internal" href="#">Models</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="#apiv2">APIv2</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#apiv1-deprecated">APIv1 (Deprecated)</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#common">Common</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#utils">Utils</a></li>
 </ul>

@@ -31,17 +31,10 @@
             
   <h1>Source code for starmap_client.models</h1><div class="highlight"><pre>
 <span></span><span class="c1"># SPDX-License-Identifier: GPL-3.0-or-later</span>
-<span class="kn">import</span> <span class="nn">sys</span>
-<span class="kn">from</span> <span class="nn">copy</span> <span class="kn">import</span> <span class="n">deepcopy</span>
 <span class="kn">from</span> <span class="nn">enum</span> <span class="kn">import</span> <span class="n">Enum</span>
-<span class="kn">from</span> <span class="nn">typing</span> <span class="kn">import</span> <span class="n">Any</span><span class="p">,</span> <span class="n">Dict</span><span class="p">,</span> <span class="n">List</span><span class="p">,</span> <span class="n">Optional</span><span class="p">,</span> <span class="n">Type</span>
+<span class="kn">from</span> <span class="nn">typing</span> <span class="kn">import</span> <span class="n">Any</span><span class="p">,</span> <span class="n">Dict</span><span class="p">,</span> <span class="n">List</span><span class="p">,</span> <span class="n">Optional</span><span class="p">,</span> <span class="n">Type</span><span class="p">,</span> <span class="n">TypedDict</span>
 
-<span class="k">if</span> <span class="n">sys</span><span class="o">.</span><span class="n">version_info</span> <span class="o">&gt;=</span> <span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="mi">8</span><span class="p">):</span>
-    <span class="kn">from</span> <span class="nn">typing</span> <span class="kn">import</span> <span class="n">TypedDict</span>  <span class="c1"># pragma: no cover</span>
-<span class="k">else</span><span class="p">:</span>
-    <span class="kn">from</span> <span class="nn">typing_extensions</span> <span class="kn">import</span> <span class="n">TypedDict</span>  <span class="c1"># pragma: no cover</span>
-
-<span class="kn">from</span> <span class="nn">attrs</span> <span class="kn">import</span> <span class="n">Attribute</span><span class="p">,</span> <span class="n">Factory</span><span class="p">,</span> <span class="n">asdict</span><span class="p">,</span> <span class="n">evolve</span><span class="p">,</span> <span class="n">field</span><span class="p">,</span> <span class="n">frozen</span>
+<span class="kn">from</span> <span class="nn">attrs</span> <span class="kn">import</span> <span class="n">Attribute</span><span class="p">,</span> <span class="n">field</span><span class="p">,</span> <span class="n">frozen</span>
 <span class="kn">from</span> <span class="nn">attrs.validators</span> <span class="kn">import</span> <span class="n">deep_iterable</span><span class="p">,</span> <span class="n">deep_mapping</span><span class="p">,</span> <span class="n">instance_of</span><span class="p">,</span> <span class="n">min_len</span><span class="p">,</span> <span class="n">optional</span>
 
 <span class="kn">from</span> <span class="nn">starmap_client.utils</span> <span class="kn">import</span> <span class="n">assert_is_dict</span><span class="p">,</span> <span class="n">dict_merge</span>
@@ -52,7 +45,6 @@
     <span class="s1">&#39;Destination&#39;</span><span class="p">,</span>
     <span class="s1">&#39;Mapping&#39;</span><span class="p">,</span>
     <span class="s1">&#39;Policy&#39;</span><span class="p">,</span>
-    <span class="s1">&#39;QueryResponse&#39;</span><span class="p">,</span>
     <span class="s1">&#39;QueryResponseEntity&#39;</span><span class="p">,</span>
     <span class="s1">&#39;QueryResponseContainer&#39;</span><span class="p">,</span>
     <span class="s1">&#39;PaginatedRawData&#39;</span><span class="p">,</span>
@@ -186,7 +178,7 @@
     <span class="nb">id</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="n">field</span><span class="p">(</span><span class="n">validator</span><span class="o">=</span><span class="n">optional</span><span class="p">(</span><span class="n">instance_of</span><span class="p">(</span><span class="nb">str</span><span class="p">)))</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    The unique ID for a StArMap model.</span>
-<span class="sd">    This field is never set on :class:`~starmap_client.models.QueryResponse`.</span>
+<span class="sd">    This field is never set on :class:`~starmap_client.models.QueryResponseEntity`.</span>
 <span class="sd">    &quot;&quot;&quot;</span>
 
 
@@ -289,54 +281,6 @@
 
     <span class="n">workflow</span><span class="p">:</span> <span class="n">Workflow</span> <span class="o">=</span> <span class="n">field</span><span class="p">(</span><span class="n">converter</span><span class="o">=</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="n">Workflow</span><span class="p">(</span><span class="n">x</span><span class="p">))</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;The policy workflow name.&quot;&quot;&quot;</span></div>
-
-
-
-<span class="c1"># ============================================ APIv1 ===============================================</span>
-
-
-<div class="viewcode-block" id="QueryResponse">
-<a class="viewcode-back" href="../../model/models.html#starmap_client.models.QueryResponse">[docs]</a>
-<span class="nd">@frozen</span>
-<span class="k">class</span> <span class="nc">QueryResponse</span><span class="p">(</span><span class="n">StarmapJSONDecodeMixin</span><span class="p">):</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;Represent a query response from StArMap.&quot;&quot;&quot;</span>
-
-    <span class="n">name</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="n">field</span><span class="p">(</span><span class="n">validator</span><span class="o">=</span><span class="n">instance_of</span><span class="p">(</span><span class="nb">str</span><span class="p">))</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;The :class:`~Policy` name.&quot;&quot;&quot;</span>
-
-    <span class="n">workflow</span><span class="p">:</span> <span class="n">Workflow</span> <span class="o">=</span> <span class="n">field</span><span class="p">(</span><span class="n">converter</span><span class="o">=</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="n">Workflow</span><span class="p">(</span><span class="n">x</span><span class="p">))</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;The :class:`~Policy` workflow.&quot;&quot;&quot;</span>
-
-    <span class="n">clouds</span><span class="p">:</span> <span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">List</span><span class="p">[</span><span class="n">Destination</span><span class="p">]]</span> <span class="o">=</span> <span class="n">field</span><span class="p">(</span>
-        <span class="n">default</span><span class="o">=</span><span class="n">Factory</span><span class="p">(</span><span class="nb">dict</span><span class="p">),</span>
-        <span class="n">validator</span><span class="o">=</span><span class="n">deep_mapping</span><span class="p">(</span>
-            <span class="n">key_validator</span><span class="o">=</span><span class="n">instance_of</span><span class="p">(</span><span class="nb">str</span><span class="p">),</span>
-            <span class="n">value_validator</span><span class="o">=</span><span class="n">deep_iterable</span><span class="p">(</span>
-                <span class="n">member_validator</span><span class="o">=</span><span class="n">instance_of</span><span class="p">(</span><span class="n">Destination</span><span class="p">),</span> <span class="n">iterable_validator</span><span class="o">=</span><span class="n">instance_of</span><span class="p">(</span><span class="nb">list</span><span class="p">)</span>
-            <span class="p">),</span>
-            <span class="n">mapping_validator</span><span class="o">=</span><span class="n">instance_of</span><span class="p">(</span><span class="nb">dict</span><span class="p">),</span>
-        <span class="p">),</span>
-    <span class="p">)</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;Dictionary with the cloud marketplaces aliases and their respective Destinations.&quot;&quot;&quot;</span>
-
-    <span class="nd">@classmethod</span>
-    <span class="k">def</span> <span class="nf">_preprocess_json</span><span class="p">(</span><span class="bp">cls</span><span class="p">,</span> <span class="n">json</span><span class="p">:</span> <span class="n">Any</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Any</span><span class="p">]:</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">        Convert the JSON format to the expected by QueryResponse.</span>
-
-<span class="sd">        Params:</span>
-<span class="sd">            json (dict): A JSON containing a StArMap Query response.</span>
-<span class="sd">        Returns:</span>
-<span class="sd">            dict: The modified JSON.</span>
-<span class="sd">        &quot;&quot;&quot;</span>
-        <span class="n">mappings</span> <span class="o">=</span> <span class="n">json</span><span class="o">.</span><span class="n">pop</span><span class="p">(</span><span class="s2">&quot;mappings&quot;</span><span class="p">,</span> <span class="p">{})</span>
-        <span class="k">for</span> <span class="n">c</span> <span class="ow">in</span> <span class="n">mappings</span><span class="o">.</span><span class="n">keys</span><span class="p">():</span>
-            <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">mappings</span><span class="p">[</span><span class="n">c</span><span class="p">],</span> <span class="nb">list</span><span class="p">):</span>
-                <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Expected mappings to be a list, got </span><span class="se">\&quot;</span><span class="si">{</span><span class="nb">type</span><span class="p">(</span><span class="n">mappings</span><span class="p">[</span><span class="n">c</span><span class="p">])</span><span class="si">}</span><span class="se">\&quot;</span><span class="s2">.&quot;</span><span class="p">)</span>
-            <span class="n">dst</span> <span class="o">=</span> <span class="p">[</span><span class="n">Destination</span><span class="o">.</span><span class="n">from_json</span><span class="p">(</span><span class="n">d</span><span class="p">)</span> <span class="k">for</span> <span class="n">d</span> <span class="ow">in</span> <span class="n">mappings</span><span class="p">[</span><span class="n">c</span><span class="p">]]</span>
-            <span class="n">mappings</span><span class="p">[</span><span class="n">c</span><span class="p">]</span> <span class="o">=</span> <span class="n">dst</span>
-        <span class="n">json</span><span class="p">[</span><span class="s2">&quot;clouds&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">mappings</span>
-        <span class="k">return</span> <span class="n">json</span></div>
 
 
 
@@ -497,30 +441,6 @@
         <span class="k">if</span> <span class="ow">not</span> <span class="n">obj</span><span class="p">:</span>
             <span class="k">raise</span> <span class="ne">KeyError</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;No mappings found for account name </span><span class="si">{</span><span class="n">account</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
         <span class="k">return</span> <span class="n">obj</span></div>
-
-
-<div class="viewcode-block" id="QueryResponseEntity.to_classic_query_response">
-<a class="viewcode-back" href="../../model/models.html#starmap_client.models.QueryResponseEntity.to_classic_query_response">[docs]</a>
-    <span class="k">def</span> <span class="nf">to_classic_query_response</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">QueryResponse</span><span class="p">:</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;Return the representation of this object as a :class:`~QueryResponse` from APIv1.&quot;&quot;&quot;</span>
-
-        <span class="k">def</span> <span class="nf">add_bc_to_dst_meta</span><span class="p">(</span><span class="n">clouds</span><span class="p">:</span> <span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">List</span><span class="p">[</span><span class="n">Destination</span><span class="p">]]):</span>
-            <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">billing_code_config</span><span class="p">:</span>
-                <span class="n">bc_data</span> <span class="o">=</span> <span class="p">{</span><span class="n">k</span><span class="p">:</span> <span class="n">asdict</span><span class="p">(</span><span class="n">v</span><span class="p">)</span> <span class="k">for</span> <span class="n">k</span><span class="p">,</span> <span class="n">v</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">billing_code_config</span><span class="o">.</span><span class="n">items</span><span class="p">()}</span>
-                <span class="k">for</span> <span class="n">dst_list</span> <span class="ow">in</span> <span class="n">clouds</span><span class="o">.</span><span class="n">values</span><span class="p">():</span>
-                    <span class="k">for</span> <span class="n">d</span> <span class="ow">in</span> <span class="n">dst_list</span><span class="p">:</span>
-                        <span class="n">meta</span> <span class="o">=</span> <span class="n">d</span><span class="o">.</span><span class="n">meta</span> <span class="ow">or</span> <span class="p">{}</span>
-                        <span class="n">meta</span><span class="p">[</span><span class="s2">&quot;billing-code-config&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">bc_data</span>
-                        <span class="n">d</span> <span class="o">=</span> <span class="n">evolve</span><span class="p">(</span><span class="n">d</span><span class="p">,</span> <span class="n">meta</span><span class="o">=</span><span class="n">meta</span><span class="p">)</span>
-
-        <span class="n">clouds</span><span class="p">:</span> <span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">List</span><span class="p">[</span><span class="n">Destination</span><span class="p">]]</span> <span class="o">=</span> <span class="p">{}</span>
-        <span class="k">for</span> <span class="n">k</span><span class="p">,</span> <span class="n">v</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">mappings</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
-            <span class="n">clouds</span><span class="p">[</span><span class="n">k</span><span class="p">]</span> <span class="o">=</span> <span class="p">[</span><span class="n">deepcopy</span><span class="p">(</span><span class="n">d</span><span class="p">)</span> <span class="k">for</span> <span class="n">d</span> <span class="ow">in</span> <span class="n">v</span><span class="o">.</span><span class="n">destinations</span><span class="p">]</span>
-
-        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">billing_code_config</span><span class="p">:</span>
-            <span class="n">add_bc_to_dst_meta</span><span class="p">(</span><span class="n">clouds</span><span class="p">)</span>
-
-        <span class="k">return</span> <span class="n">QueryResponse</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">name</span><span class="p">,</span> <span class="n">workflow</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">workflow</span><span class="p">,</span> <span class="n">clouds</span><span class="o">=</span><span class="n">clouds</span><span class="p">)</span></div>
 
 
     <span class="nd">@staticmethod</span>
