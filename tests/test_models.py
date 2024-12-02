@@ -11,7 +11,6 @@ from starmap_client.models import (
     Mapping,
     MappingResponseObject,
     Policy,
-    QueryResponse,
     QueryResponseContainer,
     QueryResponseEntity,
     Workflow,
@@ -192,57 +191,6 @@ class TestPolicy:
             p.name = "test"
 
 
-class TestV1QueryResponse:
-    @pytest.mark.parametrize(
-        "json_file",
-        [
-            "tests/data/query_v1/valid_quer1.json",
-            "tests/data/query_v1/valid_quer2.json",
-            "tests/data/query_v1/valid_quer3.json",
-            "tests/data/query_v1/valid_quer4.json",
-            "tests/data/query_v1/valid_quer5.json",
-        ],
-    )
-    def test_valid_query_resp_json(self, json_file: str) -> None:
-        data = load_json(json_file)
-
-        # From JSON should always work
-        res = QueryResponse.from_json(data)
-        assert res
-        assert res.clouds
-        for k, v in res.clouds.items():
-            assert isinstance(k, str), "Cloud names should be string"
-            assert isinstance(v, list), "Value of clouds should be \"List[Destination]\"."
-            for d in v:
-                assert isinstance(d, Destination), "Elements of clouds should be \"Destination\""
-
-        # While constructor is expected to fail when not all parameters are present
-        with pytest.raises(TypeError):
-            QueryResponse(**data)
-
-    @pytest.mark.parametrize(
-        "json_file",
-        [
-            "tests/data/query_v1/invalid_quer1.json",
-            "tests/data/query_v1/invalid_quer2.json",
-        ],
-    )
-    def test_invalid_clouds(self, json_file) -> None:
-        data = load_json(json_file)
-        err = data.pop("error")
-
-        with pytest.raises((TypeError, ValueError), match=err):
-            QueryResponse.from_json(data)
-
-    def test_frozen_query(self):
-        data = load_json("tests/data/query_v1/valid_quer1.json")
-
-        q = QueryResponse.from_json(data)
-
-        with pytest.raises(FrozenInstanceError):
-            q.name = "test"
-
-
 class TestV2MappingResponseObject:
     @pytest.mark.parametrize(
         "json_file,meta,provider",
@@ -353,32 +301,6 @@ class TestV2QueryResponseEntity:
 
         with pytest.raises(KeyError):
             q.get_mapping_for_account("foo-bar")
-
-    @pytest.mark.parametrize(
-        "json_file,old_api_file",
-        [
-            (
-                "tests/data/query_v2/query_response_entity/valid_qre2.json",
-                "tests/data/query_v2/query_response_entity/valid_qre_converted_old_api.json",
-            ),
-            (
-                "tests/data/query_v2/query_response_entity/valid_qre3.json",
-                "tests/data/query_v2/query_response_entity/valid_qre_converted_old_api.json",
-            ),
-            (
-                "tests/data/query_v2/query_response_entity/valid_qre4.json",
-                "tests/data/query_v2/query_response_entity/valid_qre_converted_old_api_community.json",  # noqa: E501
-            ),
-        ],
-    )
-    def test_to_classic_query_response(self, json_file, old_api_file) -> None:
-        old_api_data = load_json(old_api_file)
-        expected_qr = QueryResponse.from_json(old_api_data)
-
-        data = load_json(json_file)
-        q = QueryResponseEntity.from_json(data)
-
-        assert q.to_classic_query_response() == expected_qr
 
 
 class TestV2QueryResponseContainer:

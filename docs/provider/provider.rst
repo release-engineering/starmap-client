@@ -20,10 +20,3 @@ APIv2
 .. autoclass:: starmap_client.providers.InMemoryMapProviderV2
    :members:
    :special-members: __init__
-
-APIv1 (deprecated)
-~~~~~~~~~~~~~~~~~~
-
-.. autoclass:: starmap_client.providers.InMemoryMapProviderV1
-   :members:
-   :special-members: __init__

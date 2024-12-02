@@ -1,15 +1,8 @@
 # SPDX-License-Identifier: GPL-3.0-or-later
-import sys
-from copy import deepcopy
 from enum import Enum
-from typing import Any, Dict, List, Optional, Type
+from typing import Any, Dict, List, Optional, Type, TypedDict
 
-if sys.version_info >= (3, 8):
-    from typing import TypedDict  # pragma: no cover
-else:
-    from typing_extensions import TypedDict  # pragma: no cover
-
-from attrs import Attribute, Factory, asdict, evolve, field, frozen
+from attrs import Attribute, field, frozen
 from attrs.validators import deep_iterable, deep_mapping, instance_of, min_len, optional
 
 from starmap_client.utils import assert_is_dict, dict_merge
@@ -20,7 +13,6 @@ __all__ = [
     'Destination',
     'Mapping',
     'Policy',
-    'QueryResponse',
     'QueryResponseEntity',
     'QueryResponseContainer',
     'PaginatedRawData',
@@ -142,7 +134,7 @@ class StarmapBaseData(MetaMixin, StarmapJSONDecodeMixin):
     id: Optional[str] = field(validator=optional(instance_of(str)))
     """
     The unique ID for a StArMap model.
-    This field is never set on :class:`~starmap_client.models.QueryResponse`.
+    This field is never set on :class:`~starmap_client.models.QueryResponseEntity`.
     """
 
 
@@ -237,51 +229,6 @@ class Policy(StarmapBaseData):
 
     workflow: Workflow = field(converter=lambda x: Workflow(x))
     """The policy workflow name."""
-
-
-# ============================================ APIv1 ===============================================
-
-
-@frozen
-class QueryResponse(StarmapJSONDecodeMixin):
-    """Represent a query response from StArMap."""
-
-    name: str = field(validator=instance_of(str))
-    """The :class:`~Policy` name."""
-
-    workflow: Workflow = field(converter=lambda x: Workflow(x))
-    """The :class:`~Policy` workflow."""
-
-    clouds: Dict[str, List[Destination]] = field(
-        default=Factory(dict),
-        validator=deep_mapping(
-            key_validator=instance_of(str),
-            value_validator=deep_iterable(
-                member_validator=instance_of(Destination), iterable_validator=instance_of(list)
-            ),
-            mapping_validator=instance_of(dict),
-        ),
-    )
-    """Dictionary with the cloud marketplaces aliases and their respective Destinations."""
-
-    @classmethod
-    def _preprocess_json(cls, json: Any) -> Dict[str, Any]:
-        """
-        Convert the JSON format to the expected by QueryResponse.
-
-        Params:
-            json (dict): A JSON containing a StArMap Query response.
-        Returns:
-            dict: The modified JSON.
-        """
-        mappings = json.pop("mappings", {})
-        for c in mappings.keys():
-            if not isinstance(mappings[c], list):
-                raise ValueError(f"Expected mappings to be a list, got \"{type(mappings[c])}\".")
-            dst = [Destination.from_json(d) for d in mappings[c]]
-            mappings[c] = dst
-        json["clouds"] = mappings
-        return json
 
 
 # ============================================ APIv2 ===============================================
@@ -428,27 +375,6 @@ class QueryResponseEntity(MetaMixin, StarmapJSONDecodeMixin):
         if not obj:
             raise KeyError(f"No mappings found for account name {account}")
         return obj
-
-    def to_classic_query_response(self) -> QueryResponse:
-        """Return the representation of this object as a :class:`~QueryResponse` from APIv1."""
-
-        def add_bc_to_dst_meta(clouds: Dict[str, List[Destination]]):
-            if self.billing_code_config:
-                bc_data = {k: asdict(v) for k, v in self.billing_code_config.items()}
-                for dst_list in clouds.values():
-                    for d in dst_list:
-                        meta = d.meta or {}
-                        meta["billing-code-config"] = bc_data
-                        d = evolve(d, meta=meta)
-
-        clouds: Dict[str, List[Destination]] = {}
-        for k, v in self.mappings.items():
-            clouds[k] = [deepcopy(d) for d in v.destinations]
-
-        if self.billing_code_config:
-            add_bc_to_dst_meta(clouds)
-
-        return QueryResponse(name=self.name, workflow=self.workflow, clouds=clouds)
 
     @staticmethod
     def _unify_meta_with_mappings(json: Dict[str, Any]) -> None:
