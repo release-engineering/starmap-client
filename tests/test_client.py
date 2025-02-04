@@ -40,7 +40,9 @@ class TestStarmapClient(TestCase):
         self.mock_resp_success.status_code = 200
         self.mock_resp_not_found = mock.MagicMock()
         self.mock_resp_not_found.status_code = 404
-        self.mock_resp_not_found.raise_for_status.side_effect = HTTPError("Not found")  # noqa: E501
+        self.mock_resp_not_found.raise_for_status.side_effect = HTTPError(
+            "Not found", response=self.mock_resp_not_found
+        )
 
     def tearDown(self) -> None:
         mock.patch.stopall()
@@ -175,8 +177,8 @@ class TestStarmapClient(TestCase):
             },
         }
         page2 = deepcopy(page1)
-        page2["nav"]["next"] = None
-        page2["nav"]["page"] = 2
+        page2["nav"]["next"] = None  # type: ignore[index]
+        page2["nav"]["page"] = 2  # type: ignore[index]
         self.svc_v2.POLICIES_PER_PAGE = 1
         self.mock_resp_success.json.side_effect = [page1, page2]
         self.mock_session_v2.get.return_value = self.mock_resp_success
