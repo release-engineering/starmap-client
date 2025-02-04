@@ -198,13 +198,15 @@
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Whether to replace the existing VM image in the destination or append.&quot;&quot;&quot;</span>
 
     <span class="n">restrict_version</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="n">field</span><span class="p">(</span><span class="n">validator</span><span class="o">=</span><span class="n">instance_of</span><span class="p">(</span><span class="nb">bool</span><span class="p">))</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;Whether to restrict and image and delete it&#39;s AMI and snapshot&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Whether to restrict and image and delete it&#39;s AMI and snapshot. Enabling</span>
+<span class="sd">    the option without values in restrict_major or restrict_minor will restrict</span>
+<span class="sd">    all previous releases for the same X.Y version&quot;&quot;&quot;</span>
 
     <span class="n">restrict_major</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">int</span><span class="p">]</span> <span class="o">=</span> <span class="n">field</span><span class="p">(</span><span class="n">validator</span><span class="o">=</span><span class="n">optional</span><span class="p">(</span><span class="n">instance_of</span><span class="p">(</span><span class="nb">int</span><span class="p">)))</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;How many major versions are allowed in product&quot;&quot;&quot;</span>
 
     <span class="n">restrict_minor</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">int</span><span class="p">]</span> <span class="o">=</span> <span class="n">field</span><span class="p">(</span><span class="n">validator</span><span class="o">=</span><span class="n">optional</span><span class="p">(</span><span class="n">instance_of</span><span class="p">(</span><span class="nb">int</span><span class="p">)))</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;How many minor versions are allowed in product&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;How many minor versions are allowed in product for the same major version&quot;&quot;&quot;</span>
 
     <span class="n">ami_version_template</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="n">field</span><span class="p">(</span><span class="n">validator</span><span class="o">=</span><span class="n">optional</span><span class="p">(</span><span class="n">instance_of</span><span class="p">(</span><span class="nb">str</span><span class="p">)))</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Ami versioning template. Available options are major,minor,patch, or version.</span>
