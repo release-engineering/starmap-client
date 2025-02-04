@@ -152,13 +152,15 @@ class Destination(StarmapBaseData):
     """Whether to replace the existing VM image in the destination or append."""
 
     restrict_version: bool = field(validator=instance_of(bool))
-    """Whether to restrict and image and delete it's AMI and snapshot"""
+    """Whether to restrict and image and delete it's AMI and snapshot. Enabling
+    the option without values in restrict_major or restrict_minor will restrict
+    all previous releases for the same X.Y version"""
 
     restrict_major: Optional[int] = field(validator=optional(instance_of(int)))
     """How many major versions are allowed in product"""
 
     restrict_minor: Optional[int] = field(validator=optional(instance_of(int)))
-    """How many minor versions are allowed in product"""
+    """How many minor versions are allowed in product for the same major version"""
 
     ami_version_template: Optional[str] = field(validator=optional(instance_of(str)))
     """Ami versioning template. Available options are major,minor,patch, or version.
