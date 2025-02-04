@@ -83,20 +83,20 @@ def qre2() -> Dict[str, Any]:
 
 
 @pytest.fixture
-def qrc(qre1, qre2) -> List[Dict[str, Any]]:
+def qrc(qre1: Dict[str, Any], qre2: Dict[str, Any]) -> List[Dict[str, Any]]:
     return [deepcopy(qre1), deepcopy(qre2)]
 
 
 @pytest.fixture
-def qre1_object(qre1) -> QueryResponseEntity:
+def qre1_object(qre1: Any) -> QueryResponseEntity:
     return QueryResponseEntity.from_json(deepcopy(qre1))
 
 
 @pytest.fixture
-def qre2_object(qre2) -> QueryResponseEntity:
+def qre2_object(qre2: Any) -> QueryResponseEntity:
     return QueryResponseEntity.from_json(deepcopy(qre2))
 
 
 @pytest.fixture
-def qrc_object(qrc) -> QueryResponseContainer:
+def qrc_object(qrc: Any) -> QueryResponseContainer:
     return QueryResponseContainer.from_json(qrc)

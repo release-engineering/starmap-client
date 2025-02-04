@@ -1,6 +1,6 @@
 import json
 from copy import deepcopy
-from typing import Any
+from typing import Any, Optional
 
 import pytest
 from attrs import asdict
@@ -63,14 +63,14 @@ class TestDestination:
         with pytest.raises(TypeError, match=err):
             Destination.from_json(data)
 
-    def test_parse_json_not_dict(self):
+    def test_parse_json_not_dict(self) -> None:
         fake_json = ["I", "am", "a", "list"]
         err = "Got an unsupported JSON type: \"<class 'list'>\". Expected: \"<class 'dict'>\'"
 
         with pytest.raises(ValueError, match=err):
             Destination.from_json(fake_json)
 
-    def test_invalid_meta(self):
+    def test_invalid_meta(self) -> None:
         data = load_json("tests/data/destination/valid_dest1.json")
 
         # Test invalid `meta` type
@@ -86,7 +86,7 @@ class TestDestination:
         with pytest.raises(ValueError, match=err):
             Destination.from_json(data)
 
-    def test_frozen_destination(self):
+    def test_frozen_destination(self) -> None:
         data = load_json("tests/data/destination/valid_dest1.json")
 
         d = Destination.from_json(data)
@@ -134,7 +134,7 @@ class TestMapping:
         with pytest.raises((TypeError, ValueError)):
             Mapping.from_json(data)
 
-    def test_frozen_mapping(self):
+    def test_frozen_mapping(self) -> None:
         data = load_json("tests/data/mapping/valid_map1.json")
 
         m = Mapping.from_json(data)
@@ -182,7 +182,7 @@ class TestPolicy:
         with pytest.raises((TypeError, ValueError)):
             Policy.from_json(data)
 
-    def test_frozen_policy(self):
+    def test_frozen_policy(self) -> None:
         data = load_json("tests/data/policy/valid_pol1.json")
 
         p = Policy.from_json(data)
@@ -217,7 +217,9 @@ class TestV2MappingResponseObject:
             ),
         ],
     )
-    def test_valid_mapping_response_obj(self, json_file, meta, provider) -> None:
+    def test_valid_mapping_response_obj(
+        self, json_file: str, meta: str, provider: Optional[str]
+    ) -> None:
         data = load_json(json_file)
         expected_meta = load_json(meta)
 
@@ -235,7 +237,7 @@ class TestV2MappingResponseObject:
             "tests/data/query_v2/mapping_response_obj/invalid_mro3.json",
         ],
     )
-    def test_invalid_clouds(self, json_file) -> None:
+    def test_invalid_clouds(self, json_file: str) -> None:
         data = load_json(json_file)
         err = data.pop("error")
 
@@ -269,7 +271,7 @@ class TestV2QueryResponseEntity:
             ),
         ],
     )
-    def test_valid_query_response_entity(self, json_file, meta) -> None:
+    def test_valid_query_response_entity(self, json_file: str, meta: str) -> None:
         data = load_json(json_file)
         d = deepcopy(data)
         expected_meta_dict = load_json(meta)
@@ -308,7 +310,7 @@ class TestV2QueryResponseContainer:
     @pytest.mark.parametrize(
         "json_file", ["tests/data/query_v2/query_response_container/invalid_qrc1.json"]
     )
-    def test_invalid_query_response_container(self, json_file) -> None:
+    def test_invalid_query_response_container(self, json_file: str) -> None:
         data = load_json(json_file)
         err = f"Expected root to be a list, got \"{type(data)}\""
         with pytest.raises(ValueError, match=err):

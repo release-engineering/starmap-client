@@ -124,7 +124,7 @@ class StarmapMockSession(StarmapSession):
         for m in methods:
             self.register_uri(m, re.compile(f"{base_url}/.*"))  # type: ignore [arg-type]
 
-    def register_uri(self, method: str, uri: str):
+    def register_uri(self, method: str, uri: str) -> None:
         """Register an URI into the ``requests_mock`` adapter.
 
         Args:

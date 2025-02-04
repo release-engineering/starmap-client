@@ -103,7 +103,7 @@ class StarmapJSONDecodeMixin:
         json = cls._preprocess_json(json)
 
         args = {}
-        cls_attr = [a.name for a in cls.__attrs_attrs__ if isinstance(a, Attribute)]  # type: ignore
+        cls_attr = [a.name for a in cls.__attrs_attrs__ if isinstance(a, Attribute)]
         for a in cls_attr:
             args[a] = json.pop(a, None)
         return cls(**args)
