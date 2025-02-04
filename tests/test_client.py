@@ -66,6 +66,7 @@ class TestStarmapClient(TestCase):
         self.svc_v2 = StarmapClient("https://test.starmap.com", api_version="v2", provider=provider)
 
         res = self.svc_v2.query_image("product-test-1.0-1.raw.xz", workflow="stratosphere")
+        assert res
         assert res.responses == [data.responses[0]]
 
     def test_in_memory_api_mismatch(self) -> None:
@@ -109,6 +110,7 @@ class TestStarmapClient(TestCase):
         self.svc_v2 = StarmapClient("https://test.starmap.com", api_version="v2", provider=provider)
 
         res = self.svc_v2.query_image_by_name(name="product-test", workflow="stratosphere")
+        assert res
         self.mock_session_v2.get.assert_not_called()
         assert res.responses == [data.responses[0]]
 
