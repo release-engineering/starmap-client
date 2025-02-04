@@ -63,6 +63,6 @@ def add_attr_index(
     lines.extend(["", ""])
 
 
-def setup(app: Sphinx):
+def setup(app: Sphinx) -> None:
     # entrypoint invoked by sphinx when extension is loaded
     app.connect("autodoc-process-docstring", add_attr_index)

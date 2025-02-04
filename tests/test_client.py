@@ -22,7 +22,7 @@ def load_json(json_file: str) -> Any:
 
 class TestStarmapClient(TestCase):
     @pytest.fixture(autouse=True)
-    def inject_fixtures(self, caplog: LogCaptureFixture):
+    def inject_fixtures(self, caplog: LogCaptureFixture) -> None:
         self._caplog = caplog
 
     def setUp(self) -> None:
@@ -40,12 +40,12 @@ class TestStarmapClient(TestCase):
         self.mock_resp_success.status_code = 200
         self.mock_resp_not_found = mock.MagicMock()
         self.mock_resp_not_found.status_code = 404
-        self.mock_resp_not_found.raise_for_status.side_effect = HTTPError("Not found")  # type: ignore  # noqa: E501
+        self.mock_resp_not_found.raise_for_status.side_effect = HTTPError("Not found")  # noqa: E501
 
-    def tearDown(self):
+    def tearDown(self) -> None:
         mock.patch.stopall()
 
-    def test_query_image_success_APIv2(self):
+    def test_query_image_success_APIv2(self) -> None:
         fpath = "tests/data/query_v2/query_response_container/valid_qrc1.json"
         self.mock_resp_success.json.return_value = load_json(fpath)
         self.mock_session_v2.get.return_value = self.mock_resp_success
@@ -58,7 +58,7 @@ class TestStarmapClient(TestCase):
         # Note: JSON need to be loaded twice as `from_json` pops its original data
         self.assertEqual(res, QueryResponseContainer.from_json(load_json(fpath)))
 
-    def test_in_memory_query_image_APIv2(self):
+    def test_in_memory_query_image_APIv2(self) -> None:
         fpath = "tests/data/query_v2/query_response_container/valid_qrc1.json"
         data = QueryResponseContainer.from_json(load_json(fpath))
         provider = InMemoryMapProviderV2(data)
@@ -68,7 +68,7 @@ class TestStarmapClient(TestCase):
         res = self.svc_v2.query_image("product-test-1.0-1.raw.xz", workflow="stratosphere")
         self.assertEqual(res.responses, [data.responses[0]])
 
-    def test_in_memory_api_mismatch(self):
+    def test_in_memory_api_mismatch(self) -> None:
         fpath = "tests/data/query_v2/query_response_container/valid_qrc1.json"
         data = QueryResponseContainer.from_json(load_json(fpath))
         provider_v2 = InMemoryMapProviderV2(data)
@@ -77,7 +77,7 @@ class TestStarmapClient(TestCase):
         with pytest.raises(ValueError, match=err):
             StarmapClient("foo", api_version="v1", provider=provider_v2)
 
-    def test_query_image_not_found(self):
+    def test_query_image_not_found(self) -> None:
         self.mock_session_v2.get.return_value = self.mock_resp_not_found
         self.mock_session_v2.get.return_value = self.mock_resp_not_found
 
@@ -88,7 +88,7 @@ class TestStarmapClient(TestCase):
                 assert expected_msg in self._caplog.text
                 self.assertIsNone(res)
 
-    def test_query_image_by_name_APIv2(self):
+    def test_query_image_by_name_APIv2(self) -> None:
         fpath = "tests/data/query_v2/query_response_container/valid_qrc1.json"
         self.mock_resp_success.json.return_value = load_json(fpath)
         self.mock_session_v2.get.return_value = self.mock_resp_success
@@ -101,7 +101,7 @@ class TestStarmapClient(TestCase):
         # Note: JSON need to be loaded twice as `from_json` pops its original data
         self.assertEqual(res, QueryResponseContainer.from_json(load_json(fpath)))
 
-    def test_in_memory_query_image_by_name_APIv2(self):
+    def test_in_memory_query_image_by_name_APIv2(self) -> None:
         fpath = "tests/data/query_v2/query_response_container/valid_qrc1.json"
         data = QueryResponseContainer.from_json(load_json(fpath))
         provider = InMemoryMapProviderV2(data)
@@ -112,7 +112,7 @@ class TestStarmapClient(TestCase):
         self.mock_session_v2.get.assert_not_called()
         self.assertEqual(res.responses, [data.responses[0]])
 
-    def test_query_image_by_name_version_APIv2(self):
+    def test_query_image_by_name_version_APIv2(self) -> None:
         fpath = "tests/data/query_v2/query_response_container/valid_qrc1.json"
         self.mock_resp_success.json.return_value = load_json(fpath)
         self.mock_session_v2.get.return_value = self.mock_resp_success
@@ -128,7 +128,7 @@ class TestStarmapClient(TestCase):
         # Note: JSON need to be loaded twice as `from_json` pops its original data
         self.assertEqual(res, QueryResponseContainer.from_json(load_json(fpath)))
 
-    def test_policies_single_page(self):
+    def test_policies_single_page(self) -> None:
         fpath = "tests/data/policy/valid_pol1.json"
         single_page = {
             "items": [load_json(fpath)],
@@ -157,7 +157,7 @@ class TestStarmapClient(TestCase):
         self.mock_session_v2.get.call_count == 1
         self.mock_resp_success.raise_for_status.assert_called_once()
 
-    def test_policies_multi_page(self):
+    def test_policies_multi_page(self) -> None:
         fpath = "tests/data/policy/valid_pol1.json"
         page1 = {
             "items": [load_json(fpath)],
@@ -196,7 +196,7 @@ class TestStarmapClient(TestCase):
         self.mock_session_v2.get.call_count == 2
         self.mock_resp_success.raise_for_status.call_count == 2
 
-    def test_policies_not_found(self):
+    def test_policies_not_found(self) -> None:
         self.svc_v2.POLICIES_PER_PAGE = 1
         self.mock_session_v2.get.return_value = self.mock_resp_not_found
 
@@ -206,7 +206,7 @@ class TestStarmapClient(TestCase):
         assert "No policies registered in StArMap." in self._caplog.text
 
     @mock.patch('starmap_client.StarmapClient.policies')
-    def test_list_policies(self, mock_policies: mock.MagicMock):
+    def test_list_policies(self, mock_policies: mock.MagicMock) -> None:
         fpath = "tests/data/policy/valid_pol1.json"
         pol = Policy.from_json(load_json(fpath))
         pol_list = [pol]
@@ -224,7 +224,7 @@ class TestStarmapClient(TestCase):
         mock_policies.__iter__.assert_called_once()
         self.assertEqual(res, pol_list)
 
-    def test_get_policy(self):
+    def test_get_policy(self) -> None:
         fpath = "tests/data/policy/valid_pol1.json"
         self.mock_resp_success.json.return_value = load_json(fpath)
         self.mock_session_v2.get.return_value = self.mock_resp_success
@@ -236,7 +236,7 @@ class TestStarmapClient(TestCase):
         # Note: JSON need to be loaded twice as `from_json` pops its original data
         self.assertEqual(res, Policy.from_json(load_json(fpath)))
 
-    def test_get_policy_not_found(self):
+    def test_get_policy_not_found(self) -> None:
         self.mock_session_v2.get.return_value = self.mock_resp_not_found
 
         with self._caplog.at_level(logging.ERROR):
@@ -267,7 +267,7 @@ class TestStarmapClient(TestCase):
 
         self.assertEqual(res, [])
 
-    def test_get_mapping(self):
+    def test_get_mapping(self) -> None:
         fpath = "tests/data/mapping/valid_map1.json"
         self.mock_resp_success.json.return_value = load_json(fpath)
         self.mock_session_v2.get.return_value = self.mock_resp_success
@@ -279,7 +279,7 @@ class TestStarmapClient(TestCase):
         # Note: JSON need to be loaded twice as `from_json` pops its original data
         self.assertEqual(res, Mapping.from_json(load_json(fpath)))
 
-    def test_get_mapping_not_found(self):
+    def test_get_mapping_not_found(self) -> None:
         self.mock_session_v2.get.return_value = self.mock_resp_not_found
 
         with self._caplog.at_level(logging.ERROR):
@@ -310,7 +310,7 @@ class TestStarmapClient(TestCase):
 
         self.assertEqual(res, [])
 
-    def test_get_destination(self):
+    def test_get_destination(self) -> None:
         fpath = "tests/data/destination/valid_dest1.json"
         self.mock_resp_success.json.return_value = load_json(fpath)
         self.mock_session_v2.get.return_value = self.mock_resp_success
@@ -322,7 +322,7 @@ class TestStarmapClient(TestCase):
         # Note: JSON need to be loaded twice as `from_json` pops its original data
         self.assertEqual(res, Destination.from_json(load_json(fpath)))
 
-    def test_get_destination_not_found(self):
+    def test_get_destination_not_found(self) -> None:
         self.mock_session_v2.get.return_value = self.mock_resp_not_found
 
         with self._caplog.at_level(logging.ERROR):
@@ -333,13 +333,13 @@ class TestStarmapClient(TestCase):
 
         self.assertIsNone(res)
 
-    def test_client_requires_url_or_session(self):
+    def test_client_requires_url_or_session(self) -> None:
         error = "Cannot initialize the client without defining either an \"url\" or \"session\"."
         with pytest.raises(ValueError, match=error):
             StarmapClient()
 
 
-def test_offline_client():
+def test_offline_client() -> None:
     """Ensure the cient can be used offline with a local provider."""
     fpath = "tests/data/query_v2/query_response_container/valid_qrc2.json"
     qrc = QueryResponseContainer.from_json(load_json(fpath))
