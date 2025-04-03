@@ -39,14 +39,14 @@
 
 <div class="viewcode-block" id="InMemoryMapProviderV2">
 <a class="viewcode-back" href="../../../provider/provider.html#starmap_client.providers.InMemoryMapProviderV2">[docs]</a>
-<span class="k">class</span><span class="w"> </span><span class="nc">InMemoryMapProviderV2</span><span class="p">(</span><span class="n">StarmapProvider</span><span class="p">):</span>
+<span class="k">class</span><span class="w"> </span><span class="nc">InMemoryMapProviderV2</span><span class="p">(</span><span class="n">StarmapProvider</span><span class="p">[</span><span class="n">QueryResponseContainer</span><span class="p">,</span> <span class="n">QueryResponseEntity</span><span class="p">]):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Provide in memory (RAM) QueryResponseContainer objects for APIv2.&quot;&quot;&quot;</span>
 
     <span class="n">api</span> <span class="o">=</span> <span class="s2">&quot;v2&quot;</span>
 
 <div class="viewcode-block" id="InMemoryMapProviderV2.__init__">
 <a class="viewcode-back" href="../../../provider/provider.html#starmap_client.providers.InMemoryMapProviderV2.__init__">[docs]</a>
-    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">container</span><span class="p">:</span> <span class="n">QueryResponseContainer</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">container</span><span class="p">:</span> <span class="n">QueryResponseContainer</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">:</span> <span class="kc">None</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">:</span> <span class="kc">None</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;Crete a new InMemoryMapProvider object.</span>
 
 <span class="sd">        Args:</span>

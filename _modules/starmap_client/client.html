@@ -40,6 +40,7 @@
     <span class="n">PaginatedRawData</span><span class="p">,</span>
     <span class="n">Policy</span><span class="p">,</span>
     <span class="n">QueryResponseContainer</span><span class="p">,</span>
+    <span class="n">QueryResponseEntity</span><span class="p">,</span>
 <span class="p">)</span>
 <span class="kn">from</span><span class="w"> </span><span class="nn">starmap_client.providers</span><span class="w"> </span><span class="kn">import</span> <span class="n">StarmapProvider</span>
 <span class="kn">from</span><span class="w"> </span><span class="nn">starmap_client.session</span><span class="w"> </span><span class="kn">import</span> <span class="n">StarmapBaseSession</span><span class="p">,</span> <span class="n">StarmapSession</span>
@@ -63,7 +64,7 @@
         <span class="n">api_version</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">&quot;v2&quot;</span><span class="p">,</span>
         <span class="n">session</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">StarmapBaseSession</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
         <span class="n">session_params</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Any</span><span class="p">]]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
-        <span class="n">provider</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">StarmapProvider</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+        <span class="n">provider</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">StarmapProvider</span><span class="p">[</span><span class="n">QueryResponseContainer</span><span class="p">,</span> <span class="n">QueryResponseEntity</span><span class="p">]]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
     <span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Create a new StArMapClient.</span>
@@ -116,7 +117,7 @@
 
 <div class="viewcode-block" id="StarmapClient.query_image">
 <a class="viewcode-back" href="../../client/implementation.html#starmap_client.StarmapClient.query_image">[docs]</a>
-    <span class="k">def</span><span class="w"> </span><span class="nf">query_image</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">nvr</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Optional</span><span class="p">[</span><span class="n">QueryResponseContainer</span><span class="p">]:</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">query_image</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">nvr</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">:</span> <span class="n">Any</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Optional</span><span class="p">[</span><span class="n">QueryResponseContainer</span><span class="p">]:</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Query StArMap using an image NVR.</span>
 
@@ -136,7 +137,7 @@
         <span class="bp">self</span><span class="p">,</span>
         <span class="n">name</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
         <span class="n">version</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
-        <span class="o">**</span><span class="n">kwargs</span><span class="p">,</span>
+        <span class="o">**</span><span class="n">kwargs</span><span class="p">:</span> <span class="n">Any</span><span class="p">,</span>
     <span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Optional</span><span class="p">[</span><span class="n">QueryResponseContainer</span><span class="p">]:</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Query StArMap using an image NVR.</span>

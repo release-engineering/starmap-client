@@ -60,8 +60,11 @@
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><p><strong>json</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#list" title="(in Python v3.13)"><em>list</em></a>) – A JSON containing a StArMap APIv2 response.</p>
 </dd>
-<dt class="field-even">Returns<span class="colon">:</span></dt>
-<dd class="field-even"><p>The converted object from JSON.</p>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p><span class="sphinx_autodoc_typehints-type"><a class="reference internal" href="#starmap_client.models.QueryResponseContainer" title="starmap_client.models.QueryResponseContainer"><code class="xref py py-class docutils literal notranslate"><span class="pre">QueryResponseContainer</span></code></a></span></p>
+</dd>
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>The converted object from JSON.</p>
 </dd>
 </dl>
 </dd></dl>
@@ -142,7 +145,7 @@
 <dl class="py class">
 <dt class="sig sig-object py" id="starmap_client.models.QueryResponseEntity">
 <em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">starmap_client.models.</span></span><span class="sig-name descname"><span class="pre">QueryResponseEntity</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">meta</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">name</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">billing_code_config</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">cloud</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">workflow</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">mappings</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/starmap_client/models.html#QueryResponseEntity"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#starmap_client.models.QueryResponseEntity" title="Link to this definition">¶</a></dt>
-<dd><p>Bases: <a class="reference internal" href="#starmap_client.models.MetaMixin" title="starmap_client.models.MetaMixin"><code class="xref py py-class docutils literal notranslate"><span class="pre">MetaMixin</span></code></a>, <a class="reference internal" href="#starmap_client.models.StarmapJSONDecodeMixin" title="starmap_client.models.StarmapJSONDecodeMixin"><code class="xref py py-class docutils literal notranslate"><span class="pre">StarmapJSONDecodeMixin</span></code></a></p>
+<dd><p>Bases: <a class="reference internal" href="#starmap_client.models.MetaMixin" title="starmap_client.models.MetaMixin"><code class="xref py py-class docutils literal notranslate"><span class="pre">MetaMixin</span></code></a>, <a class="reference internal" href="#starmap_client.models.StarmapJSONDecodeMixin" title="starmap_client.models.StarmapJSONDecodeMixin"><code class="xref py py-class docutils literal notranslate"><span class="pre">StarmapJSONDecodeMixin</span></code></a>[<a class="reference internal" href="#starmap_client.models.QueryResponseEntity" title="starmap_client.models.QueryResponseEntity"><code class="xref py py-class docutils literal notranslate"><span class="pre">QueryResponseEntity</span></code></a>]</p>
 <p>Represent a single query response entity from StArMap APIv2.</p>
 <p><strong>Attributes:</strong></p>
 <ul class="simple">
@@ -218,7 +221,7 @@
 <dl class="py class">
 <dt class="sig sig-object py" id="starmap_client.models.MappingResponseObject">
 <em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">starmap_client.models.</span></span><span class="sig-name descname"><span class="pre">MappingResponseObject</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">meta</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">destinations</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">provider</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/starmap_client/models.html#MappingResponseObject"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#starmap_client.models.MappingResponseObject" title="Link to this definition">¶</a></dt>
-<dd><p>Bases: <a class="reference internal" href="#starmap_client.models.MetaMixin" title="starmap_client.models.MetaMixin"><code class="xref py py-class docutils literal notranslate"><span class="pre">MetaMixin</span></code></a>, <a class="reference internal" href="#starmap_client.models.StarmapJSONDecodeMixin" title="starmap_client.models.StarmapJSONDecodeMixin"><code class="xref py py-class docutils literal notranslate"><span class="pre">StarmapJSONDecodeMixin</span></code></a></p>
+<dd><p>Bases: <a class="reference internal" href="#starmap_client.models.MetaMixin" title="starmap_client.models.MetaMixin"><code class="xref py py-class docutils literal notranslate"><span class="pre">MetaMixin</span></code></a>, <a class="reference internal" href="#starmap_client.models.StarmapJSONDecodeMixin" title="starmap_client.models.StarmapJSONDecodeMixin"><code class="xref py py-class docutils literal notranslate"><span class="pre">StarmapJSONDecodeMixin</span></code></a>[<a class="reference internal" href="#starmap_client.models.MappingResponseObject" title="starmap_client.models.MappingResponseObject"><code class="xref py py-class docutils literal notranslate"><span class="pre">MappingResponseObject</span></code></a>]</p>
 <p>Represent a single mapping response from <code class="xref py py-class docutils literal notranslate"><span class="pre">QueryResponseObject</span></code> for APIv2.</p>
 <p><strong>Attributes:</strong></p>
 <ul class="simple">
@@ -243,7 +246,7 @@
 <dl class="py class">
 <dt class="sig sig-object py" id="starmap_client.models.BillingCodeRule">
 <em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">starmap_client.models.</span></span><span class="sig-name descname"><span class="pre">BillingCodeRule</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">codes</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">image_name</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">image_types</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">name</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/starmap_client/models.html#BillingCodeRule"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#starmap_client.models.BillingCodeRule" title="Link to this definition">¶</a></dt>
-<dd><p>Bases: <a class="reference internal" href="#starmap_client.models.StarmapJSONDecodeMixin" title="starmap_client.models.StarmapJSONDecodeMixin"><code class="xref py py-class docutils literal notranslate"><span class="pre">StarmapJSONDecodeMixin</span></code></a></p>
+<dd><p>Bases: <a class="reference internal" href="#starmap_client.models.StarmapJSONDecodeMixin" title="starmap_client.models.StarmapJSONDecodeMixin"><code class="xref py py-class docutils literal notranslate"><span class="pre">StarmapJSONDecodeMixin</span></code></a>[<a class="reference internal" href="#starmap_client.models.BillingCodeRule" title="starmap_client.models.BillingCodeRule"><code class="xref py py-class docutils literal notranslate"><span class="pre">BillingCodeRule</span></code></a>]</p>
 <p>Define a single Billing Code Configuration rule for APIv2.</p>
 <p><strong>Attributes:</strong></p>
 <ul class="simple">
@@ -488,8 +491,11 @@ Such as {major}.{minor}. If version is used it’ll use the already available ve
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><p><strong>json</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#dict" title="(in Python v3.13)"><em>dict</em></a>) – A JSON containing a StArMap response.</p>
 </dd>
-<dt class="field-even">Returns<span class="colon">:</span></dt>
-<dd class="field-even"><p>The converted object from JSON.</p>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p><span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.TypeVar" title="(in Python v3.13)"><code class="xref py py-class docutils literal notranslate"><span class="pre">TypeVar</span></code></a>(<code class="docutils literal notranslate"><span class="pre">T</span></code>)</span></p>
+</dd>
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>The converted object from JSON.</p>
 </dd>
 </dl>
 </dd></dl>

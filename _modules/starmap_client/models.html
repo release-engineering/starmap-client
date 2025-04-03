@@ -31,8 +31,10 @@
             
   <h1>Source code for starmap_client.models</h1><div class="highlight"><pre>
 <span></span><span class="c1"># SPDX-License-Identifier: GPL-3.0-or-later</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">__future__</span><span class="w"> </span><span class="kn">import</span> <span class="n">annotations</span>
+
 <span class="kn">from</span><span class="w"> </span><span class="nn">enum</span><span class="w"> </span><span class="kn">import</span> <span class="n">Enum</span>
-<span class="kn">from</span><span class="w"> </span><span class="nn">typing</span><span class="w"> </span><span class="kn">import</span> <span class="n">Any</span><span class="p">,</span> <span class="n">Dict</span><span class="p">,</span> <span class="n">List</span><span class="p">,</span> <span class="n">Optional</span><span class="p">,</span> <span class="n">Type</span><span class="p">,</span> <span class="n">TypedDict</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">typing</span><span class="w"> </span><span class="kn">import</span> <span class="n">Any</span><span class="p">,</span> <span class="n">Dict</span><span class="p">,</span> <span class="n">Generic</span><span class="p">,</span> <span class="n">List</span><span class="p">,</span> <span class="n">Optional</span><span class="p">,</span> <span class="n">Type</span><span class="p">,</span> <span class="n">TypedDict</span><span class="p">,</span> <span class="n">TypeVar</span><span class="p">,</span> <span class="n">cast</span>
 
 <span class="kn">from</span><span class="w"> </span><span class="nn">attrs</span><span class="w"> </span><span class="kn">import</span> <span class="n">Attribute</span><span class="p">,</span> <span class="n">field</span><span class="p">,</span> <span class="n">frozen</span>
 <span class="kn">from</span><span class="w"> </span><span class="nn">attrs.validators</span><span class="w"> </span><span class="kn">import</span> <span class="n">deep_iterable</span><span class="p">,</span> <span class="n">deep_mapping</span><span class="p">,</span> <span class="n">instance_of</span><span class="p">,</span> <span class="n">min_len</span><span class="p">,</span> <span class="n">optional</span>
@@ -89,10 +91,13 @@
 
 
 
+<span class="n">T</span> <span class="o">=</span> <span class="n">TypeVar</span><span class="p">(</span><span class="s1">&#39;T&#39;</span><span class="p">)</span>
+
+
 <div class="viewcode-block" id="StarmapJSONDecodeMixin">
 <a class="viewcode-back" href="../../model/models.html#starmap_client.models.StarmapJSONDecodeMixin">[docs]</a>
 <span class="nd">@frozen</span>
-<span class="k">class</span><span class="w"> </span><span class="nc">StarmapJSONDecodeMixin</span><span class="p">:</span>
+<span class="k">class</span><span class="w"> </span><span class="nc">StarmapJSONDecodeMixin</span><span class="p">(</span><span class="n">Generic</span><span class="p">[</span><span class="n">T</span><span class="p">]):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Implement the default JSON deserialization for StArMap models.&quot;&quot;&quot;</span>
 
     <span class="nd">@classmethod</span>
@@ -127,7 +132,7 @@
 <div class="viewcode-block" id="StarmapJSONDecodeMixin.from_json">
 <a class="viewcode-back" href="../../model/models.html#starmap_client.models.StarmapJSONDecodeMixin.from_json">[docs]</a>
     <span class="nd">@classmethod</span>
-    <span class="k">def</span><span class="w"> </span><span class="nf">from_json</span><span class="p">(</span><span class="bp">cls</span><span class="p">,</span> <span class="n">json</span><span class="p">:</span> <span class="n">Any</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">from_json</span><span class="p">(</span><span class="bp">cls</span><span class="p">,</span> <span class="n">json</span><span class="p">:</span> <span class="n">Any</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">T</span><span class="p">:</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Convert a JSON dictionary into class object.</span>
 
@@ -138,14 +143,13 @@
 <span class="sd">            The converted object from JSON.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="bp">cls</span><span class="o">.</span><span class="n">_assert_json_dict</span><span class="p">(</span><span class="n">json</span><span class="p">)</span>
-
         <span class="n">json</span> <span class="o">=</span> <span class="bp">cls</span><span class="o">.</span><span class="n">_preprocess_json</span><span class="p">(</span><span class="n">json</span><span class="p">)</span>
 
         <span class="n">args</span> <span class="o">=</span> <span class="p">{}</span>
         <span class="n">cls_attr</span> <span class="o">=</span> <span class="p">[</span><span class="n">a</span><span class="o">.</span><span class="n">name</span> <span class="k">for</span> <span class="n">a</span> <span class="ow">in</span> <span class="bp">cls</span><span class="o">.</span><span class="n">__attrs_attrs__</span> <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">Attribute</span><span class="p">)]</span>
         <span class="k">for</span> <span class="n">a</span> <span class="ow">in</span> <span class="n">cls_attr</span><span class="p">:</span>
             <span class="n">args</span><span class="p">[</span><span class="n">a</span><span class="p">]</span> <span class="o">=</span> <span class="n">json</span><span class="o">.</span><span class="n">pop</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="kc">None</span><span class="p">)</span>
-        <span class="k">return</span> <span class="bp">cls</span><span class="p">(</span><span class="o">**</span><span class="n">args</span><span class="p">)</span></div>
+        <span class="k">return</span> <span class="n">cast</span><span class="p">(</span><span class="n">T</span><span class="p">,</span> <span class="bp">cls</span><span class="p">(</span><span class="o">**</span><span class="n">args</span><span class="p">))</span></div>
 </div>
 
 
@@ -160,7 +164,7 @@
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Dictionary with additional information related to a VM image.&quot;&quot;&quot;</span>
 
     <span class="nd">@meta</span><span class="o">.</span><span class="n">validator</span>
-    <span class="k">def</span><span class="w"> </span><span class="nf">_is_meta_dict_of_str_any</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">attribute</span><span class="p">:</span> <span class="n">Attribute</span><span class="p">,</span> <span class="n">value</span><span class="p">:</span> <span class="n">Any</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">_is_meta_dict_of_str_any</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">attribute</span><span class="p">:</span> <span class="n">Attribute</span><span class="p">[</span><span class="n">Any</span><span class="p">],</span> <span class="n">value</span><span class="p">:</span> <span class="n">Any</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
         <span class="k">if</span> <span class="ow">not</span> <span class="n">value</span><span class="p">:</span>
             <span class="k">return</span> <span class="kc">None</span>
         <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">value</span><span class="p">,</span> <span class="nb">dict</span><span class="p">):</span>
@@ -172,7 +176,7 @@
 
 
 <span class="nd">@frozen</span>
-<span class="k">class</span><span class="w"> </span><span class="nc">StarmapBaseData</span><span class="p">(</span><span class="n">MetaMixin</span><span class="p">,</span> <span class="n">StarmapJSONDecodeMixin</span><span class="p">):</span>
+<span class="k">class</span><span class="w"> </span><span class="nc">StarmapBaseData</span><span class="p">(</span><span class="n">MetaMixin</span><span class="p">,</span> <span class="n">StarmapJSONDecodeMixin</span><span class="p">[</span><span class="n">T</span><span class="p">]):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Represent the common data present in StArMap entities.&quot;&quot;&quot;</span>
 
     <span class="nb">id</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="n">field</span><span class="p">(</span><span class="n">validator</span><span class="o">=</span><span class="n">optional</span><span class="p">(</span><span class="n">instance_of</span><span class="p">(</span><span class="nb">str</span><span class="p">)))</span>
@@ -185,7 +189,7 @@
 <div class="viewcode-block" id="Destination">
 <a class="viewcode-back" href="../../model/models.html#starmap_client.models.Destination">[docs]</a>
 <span class="nd">@frozen</span>
-<span class="k">class</span><span class="w"> </span><span class="nc">Destination</span><span class="p">(</span><span class="n">StarmapBaseData</span><span class="p">):</span>
+<span class="k">class</span><span class="w"> </span><span class="nc">Destination</span><span class="p">(</span><span class="n">StarmapBaseData</span><span class="p">[</span><span class="s2">&quot;Destination&quot;</span><span class="p">]):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Represent a destination entry from Mapping.&quot;&quot;&quot;</span>
 
     <span class="n">architecture</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="n">field</span><span class="p">(</span><span class="n">validator</span><span class="o">=</span><span class="n">optional</span><span class="p">(</span><span class="n">instance_of</span><span class="p">(</span><span class="nb">str</span><span class="p">)))</span>
@@ -228,10 +232,14 @@
 
 
 
+<span class="k">def</span><span class="w"> </span><span class="nf">_to_to_dist_destination</span><span class="p">(</span><span class="n">x</span><span class="p">:</span> <span class="n">Any</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">List</span><span class="p">[</span><span class="n">Destination</span><span class="p">]:</span>
+    <span class="k">return</span> <span class="p">[</span><span class="n">Destination</span><span class="o">.</span><span class="n">from_json</span><span class="p">(</span><span class="n">d</span><span class="p">)</span> <span class="k">for</span> <span class="n">d</span> <span class="ow">in</span> <span class="n">x</span><span class="p">]</span> <span class="k">if</span> <span class="n">x</span> <span class="k">else</span> <span class="p">[]</span>
+
+
 <div class="viewcode-block" id="Mapping">
 <a class="viewcode-back" href="../../model/models.html#starmap_client.models.Mapping">[docs]</a>
 <span class="nd">@frozen</span>
-<span class="k">class</span><span class="w"> </span><span class="nc">Mapping</span><span class="p">(</span><span class="n">StarmapBaseData</span><span class="p">):</span>
+<span class="k">class</span><span class="w"> </span><span class="nc">Mapping</span><span class="p">(</span><span class="n">StarmapBaseData</span><span class="p">[</span><span class="s2">&quot;Mapping&quot;</span><span class="p">]):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Represent a marketplace Mapping from Policy.&quot;&quot;&quot;</span>
 
     <span class="n">destinations</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="n">Destination</span><span class="p">]</span> <span class="o">=</span> <span class="n">field</span><span class="p">(</span>
@@ -241,7 +249,7 @@
                 <span class="n">member_validator</span><span class="o">=</span><span class="n">instance_of</span><span class="p">(</span><span class="n">Destination</span><span class="p">),</span> <span class="n">iterable_validator</span><span class="o">=</span><span class="n">instance_of</span><span class="p">(</span><span class="nb">list</span><span class="p">)</span>
             <span class="p">),</span>
         <span class="p">],</span>
-        <span class="n">converter</span><span class="o">=</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="p">[</span><span class="n">Destination</span><span class="o">.</span><span class="n">from_json</span><span class="p">(</span><span class="n">d</span><span class="p">)</span> <span class="k">for</span> <span class="n">d</span> <span class="ow">in</span> <span class="n">x</span><span class="p">]</span> <span class="k">if</span> <span class="n">x</span> <span class="k">else</span> <span class="p">[],</span>
+        <span class="n">converter</span><span class="o">=</span><span class="n">_to_to_dist_destination</span><span class="p">,</span>
     <span class="p">)</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;List of destinations for the marketplace account.&quot;&quot;&quot;</span>
 
@@ -261,10 +269,18 @@
 
 
 
+<span class="k">def</span><span class="w"> </span><span class="nf">_to_list_mappings</span><span class="p">(</span><span class="n">x</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="n">Any</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="n">List</span><span class="p">[</span><span class="n">Mapping</span><span class="p">]:</span>
+    <span class="k">return</span> <span class="p">[</span><span class="n">Mapping</span><span class="o">.</span><span class="n">from_json</span><span class="p">(</span><span class="n">m</span><span class="p">)</span> <span class="k">for</span> <span class="n">m</span> <span class="ow">in</span> <span class="n">x</span><span class="p">]</span> <span class="k">if</span> <span class="n">x</span> <span class="k">else</span> <span class="p">[]</span>
+
+
+<span class="k">def</span><span class="w"> </span><span class="nf">_to_workflow</span><span class="p">(</span><span class="n">x</span><span class="p">:</span> <span class="n">Any</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Workflow</span><span class="p">:</span>
+    <span class="k">return</span> <span class="n">Workflow</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+
+
 <div class="viewcode-block" id="Policy">
 <a class="viewcode-back" href="../../model/models.html#starmap_client.models.Policy">[docs]</a>
 <span class="nd">@frozen</span>
-<span class="k">class</span><span class="w"> </span><span class="nc">Policy</span><span class="p">(</span><span class="n">StarmapBaseData</span><span class="p">):</span>
+<span class="k">class</span><span class="w"> </span><span class="nc">Policy</span><span class="p">(</span><span class="n">StarmapBaseData</span><span class="p">[</span><span class="s2">&quot;Policy&quot;</span><span class="p">]):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Represent a StArMap policy.&quot;&quot;&quot;</span>
 
     <span class="n">mappings</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="n">Mapping</span><span class="p">]</span> <span class="o">=</span> <span class="n">field</span><span class="p">(</span>
@@ -274,14 +290,14 @@
                 <span class="n">member_validator</span><span class="o">=</span><span class="n">instance_of</span><span class="p">(</span><span class="n">Mapping</span><span class="p">),</span> <span class="n">iterable_validator</span><span class="o">=</span><span class="n">instance_of</span><span class="p">(</span><span class="nb">list</span><span class="p">)</span>
             <span class="p">),</span>
         <span class="p">],</span>
-        <span class="n">converter</span><span class="o">=</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="p">[</span><span class="n">Mapping</span><span class="o">.</span><span class="n">from_json</span><span class="p">(</span><span class="n">m</span><span class="p">)</span> <span class="k">for</span> <span class="n">m</span> <span class="ow">in</span> <span class="n">x</span><span class="p">]</span> <span class="k">if</span> <span class="n">x</span> <span class="k">else</span> <span class="p">[],</span>
+        <span class="n">converter</span><span class="o">=</span><span class="n">_to_list_mappings</span><span class="p">,</span>
     <span class="p">)</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;List of marketplace mappings which the Policy applies to.&quot;&quot;&quot;</span>
 
     <span class="n">name</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="n">field</span><span class="p">(</span><span class="n">validator</span><span class="o">=</span><span class="n">instance_of</span><span class="p">(</span><span class="nb">str</span><span class="p">))</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;The Koji Package name representing also the Policy name.&quot;&quot;&quot;</span>
 
-    <span class="n">workflow</span><span class="p">:</span> <span class="n">Workflow</span> <span class="o">=</span> <span class="n">field</span><span class="p">(</span><span class="n">converter</span><span class="o">=</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="n">Workflow</span><span class="p">(</span><span class="n">x</span><span class="p">))</span>
+    <span class="n">workflow</span><span class="p">:</span> <span class="n">Workflow</span> <span class="o">=</span> <span class="n">field</span><span class="p">(</span><span class="n">converter</span><span class="o">=</span><span class="n">_to_workflow</span><span class="p">)</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;The policy workflow name.&quot;&quot;&quot;</span></div>
 
 
@@ -305,10 +321,14 @@
 
 
 
+<span class="k">def</span><span class="w"> </span><span class="nf">_to_list_billing_image_type</span><span class="p">(</span><span class="n">x</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="n">Any</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="n">List</span><span class="p">[</span><span class="n">BillingImageType</span><span class="p">]:</span>
+    <span class="k">return</span> <span class="p">[</span><span class="n">BillingImageType</span><span class="p">[</span><span class="n">d</span><span class="p">]</span> <span class="k">for</span> <span class="n">d</span> <span class="ow">in</span> <span class="n">x</span><span class="p">]</span>
+
+
 <div class="viewcode-block" id="BillingCodeRule">
 <a class="viewcode-back" href="../../model/models.html#starmap_client.models.BillingCodeRule">[docs]</a>
 <span class="nd">@frozen</span>
-<span class="k">class</span><span class="w"> </span><span class="nc">BillingCodeRule</span><span class="p">(</span><span class="n">StarmapJSONDecodeMixin</span><span class="p">):</span>
+<span class="k">class</span><span class="w"> </span><span class="nc">BillingCodeRule</span><span class="p">(</span><span class="n">StarmapJSONDecodeMixin</span><span class="p">[</span><span class="s2">&quot;BillingCodeRule&quot;</span><span class="p">]):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Define a single Billing Code Configuration rule for APIv2.&quot;&quot;&quot;</span>
 
     <span class="n">codes</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="n">field</span><span class="p">(</span>
@@ -322,7 +342,7 @@
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;The image name to match the rule.&quot;&quot;&quot;</span>
 
     <span class="n">image_types</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="n">BillingImageType</span><span class="p">]</span> <span class="o">=</span> <span class="n">field</span><span class="p">(</span>
-        <span class="n">converter</span><span class="o">=</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="p">[</span><span class="n">BillingImageType</span><span class="p">[</span><span class="n">d</span><span class="p">]</span> <span class="k">for</span> <span class="n">d</span> <span class="ow">in</span> <span class="n">x</span><span class="p">],</span>
+        <span class="n">converter</span><span class="o">=</span><span class="n">_to_list_billing_image_type</span><span class="p">,</span>
         <span class="n">validator</span><span class="o">=</span><span class="n">deep_iterable</span><span class="p">(</span>
             <span class="n">member_validator</span><span class="o">=</span><span class="n">instance_of</span><span class="p">(</span><span class="n">BillingImageType</span><span class="p">),</span> <span class="n">iterable_validator</span><span class="o">=</span><span class="n">instance_of</span><span class="p">(</span><span class="nb">list</span><span class="p">)</span>
         <span class="p">),</span>
@@ -337,7 +357,7 @@
 <div class="viewcode-block" id="MappingResponseObject">
 <a class="viewcode-back" href="../../model/models.html#starmap_client.models.MappingResponseObject">[docs]</a>
 <span class="nd">@frozen</span>
-<span class="k">class</span><span class="w"> </span><span class="nc">MappingResponseObject</span><span class="p">(</span><span class="n">MetaMixin</span><span class="p">,</span> <span class="n">StarmapJSONDecodeMixin</span><span class="p">):</span>
+<span class="k">class</span><span class="w"> </span><span class="nc">MappingResponseObject</span><span class="p">(</span><span class="n">MetaMixin</span><span class="p">,</span> <span class="n">StarmapJSONDecodeMixin</span><span class="p">[</span><span class="s2">&quot;MappingResponseObject&quot;</span><span class="p">]):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Represent a single mapping response from :class:`~QueryResponseObject` for APIv2.&quot;&quot;&quot;</span>
 
     <span class="n">destinations</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="n">Destination</span><span class="p">]</span> <span class="o">=</span> <span class="n">field</span><span class="p">(</span>
@@ -361,7 +381,7 @@
             <span class="n">d</span><span class="p">[</span><span class="s2">&quot;meta&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">dict_merge</span><span class="p">(</span><span class="n">meta</span><span class="p">,</span> <span class="n">d</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;meta&quot;</span><span class="p">,</span> <span class="p">{}))</span>
 
     <span class="nd">@classmethod</span>
-    <span class="k">def</span><span class="w"> </span><span class="nf">_preprocess_json</span><span class="p">(</span><span class="bp">cls</span><span class="p">,</span> <span class="n">json</span><span class="p">:</span> <span class="n">Any</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Any</span><span class="p">]:</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">_preprocess_json</span><span class="p">(</span><span class="bp">cls</span><span class="p">,</span> <span class="n">json</span><span class="p">:</span> <span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Any</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Any</span><span class="p">]:</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Properly adjust the Destinations list for building this object.</span>
 
@@ -385,7 +405,7 @@
 <div class="viewcode-block" id="QueryResponseEntity">
 <a class="viewcode-back" href="../../model/models.html#starmap_client.models.QueryResponseEntity">[docs]</a>
 <span class="nd">@frozen</span>
-<span class="k">class</span><span class="w"> </span><span class="nc">QueryResponseEntity</span><span class="p">(</span><span class="n">MetaMixin</span><span class="p">,</span> <span class="n">StarmapJSONDecodeMixin</span><span class="p">):</span>
+<span class="k">class</span><span class="w"> </span><span class="nc">QueryResponseEntity</span><span class="p">(</span><span class="n">MetaMixin</span><span class="p">,</span> <span class="n">StarmapJSONDecodeMixin</span><span class="p">[</span><span class="s2">&quot;QueryResponseEntity&quot;</span><span class="p">]):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Represent a single query response entity from StArMap APIv2.&quot;&quot;&quot;</span>
 
     <span class="n">name</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="n">field</span><span class="p">(</span><span class="n">validator</span><span class="o">=</span><span class="n">instance_of</span><span class="p">(</span><span class="nb">str</span><span class="p">))</span>
@@ -405,7 +425,7 @@
     <span class="n">cloud</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="n">field</span><span class="p">(</span><span class="n">validator</span><span class="o">=</span><span class="n">instance_of</span><span class="p">(</span><span class="nb">str</span><span class="p">))</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;The cloud name where the destinations are meant to.&quot;&quot;&quot;</span>
 
-    <span class="n">workflow</span><span class="p">:</span> <span class="n">Workflow</span> <span class="o">=</span> <span class="n">field</span><span class="p">(</span><span class="n">converter</span><span class="o">=</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="n">Workflow</span><span class="p">(</span><span class="n">x</span><span class="p">))</span>
+    <span class="n">workflow</span><span class="p">:</span> <span class="n">Workflow</span> <span class="o">=</span> <span class="n">field</span><span class="p">(</span><span class="n">converter</span><span class="o">=</span><span class="n">_to_workflow</span><span class="p">)</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;The :class:`~Policy` workflow.&quot;&quot;&quot;</span>
 
     <span class="n">mappings</span><span class="p">:</span> <span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">MappingResponseObject</span><span class="p">]</span> <span class="o">=</span> <span class="n">field</span><span class="p">(</span>
@@ -465,7 +485,7 @@
 <span class="sd">        &quot;&quot;&quot;</span>  <span class="c1"># noqa: D202 E501</span>
 
         <span class="k">def</span><span class="w"> </span><span class="nf">parse_entity_build_obj</span><span class="p">(</span>
-            <span class="n">entity_name</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">converter_type</span><span class="p">:</span> <span class="n">Type</span><span class="p">[</span><span class="n">StarmapJSONDecodeMixin</span><span class="p">]</span>
+            <span class="n">entity_name</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">converter_type</span><span class="p">:</span> <span class="n">Type</span><span class="p">[</span><span class="n">StarmapJSONDecodeMixin</span><span class="p">[</span><span class="n">T</span><span class="p">]]</span>
         <span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
             <span class="n">entity</span> <span class="o">=</span> <span class="n">json</span><span class="o">.</span><span class="n">pop</span><span class="p">(</span><span class="n">entity_name</span><span class="p">,</span> <span class="p">{})</span>
             <span class="k">for</span> <span class="n">k</span> <span class="ow">in</span> <span class="n">entity</span><span class="o">.</span><span class="n">keys</span><span class="p">():</span>
@@ -499,7 +519,7 @@
 <div class="viewcode-block" id="QueryResponseContainer.from_json">
 <a class="viewcode-back" href="../../model/models.html#starmap_client.models.QueryResponseContainer.from_json">[docs]</a>
     <span class="nd">@classmethod</span>
-    <span class="k">def</span><span class="w"> </span><span class="nf">from_json</span><span class="p">(</span><span class="bp">cls</span><span class="p">,</span> <span class="n">json</span><span class="p">:</span> <span class="n">Any</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">from_json</span><span class="p">(</span><span class="bp">cls</span><span class="p">,</span> <span class="n">json</span><span class="p">:</span> <span class="n">Any</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">QueryResponseContainer</span><span class="p">:</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Convert the APIv2 response JSON into this object.</span>
 
@@ -581,7 +601,7 @@
 
 <div class="viewcode-block" id="QueryResponseContainer.filter_by">
 <a class="viewcode-back" href="../../model/models.html#starmap_client.models.QueryResponseContainer.filter_by">[docs]</a>
-    <span class="k">def</span><span class="w"> </span><span class="nf">filter_by</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">List</span><span class="p">[</span><span class="n">QueryResponseEntity</span><span class="p">]:</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">filter_by</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">:</span> <span class="n">Any</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">List</span><span class="p">[</span><span class="n">QueryResponseEntity</span><span class="p">]:</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;Return a sublist of the responses with the selected filters.&quot;&quot;&quot;</span>
         <span class="n">filters</span> <span class="o">=</span> <span class="p">{</span>
             <span class="s2">&quot;name&quot;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">filter_by_name</span><span class="p">,</span>
