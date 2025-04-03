@@ -92,7 +92,7 @@ class TestDestination:
         d = Destination.from_json(data)
 
         with pytest.raises(FrozenInstanceError):
-            d.architecture = "test"
+            d.architecture = "test"  # type: ignore[misc]
 
 
 class TestMapping:
@@ -140,7 +140,7 @@ class TestMapping:
         m = Mapping.from_json(data)
 
         with pytest.raises(FrozenInstanceError):
-            m.marketplace_account = "test"
+            m.marketplace_account = "test"  # type: ignore[misc]
 
 
 class TestPolicy:
@@ -188,7 +188,7 @@ class TestPolicy:
         p = Policy.from_json(data)
 
         with pytest.raises(FrozenInstanceError):
-            p.name = "test"
+            p.name = "test"  # type: ignore[misc]
 
 
 class TestV2MappingResponseObject:

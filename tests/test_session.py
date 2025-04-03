@@ -15,7 +15,7 @@ class TestStarmapSession(TestCase):
         # Mock requests.Session()
         self.mock_requests = mock.patch.object(self.session, 'session').start()
 
-    def _assert_requested_with(self, method: str, path: str, **kwargs) -> None:
+    def _assert_requested_with(self, method: str, path: str, **kwargs: Any) -> None:
         headers = {
             "Accept": "application/json",
         }

@@ -1,6 +1,8 @@
 # SPDX-License-Identifier: GPL-3.0-or-later
+from __future__ import annotations
+
 from enum import Enum
-from typing import Any, Dict, List, Optional, Type, TypedDict
+from typing import Any, Dict, Generic, List, Optional, Type, TypedDict, TypeVar, cast
 
 from attrs import Attribute, field, frozen
 from attrs.validators import deep_iterable, deep_mapping, instance_of, min_len, optional
@@ -54,8 +56,11 @@ class Workflow(str, Enum):
     """Workflow ``stratosphere`` for marketplaces."""
 
 
+T = TypeVar('T')
+
+
 @frozen
-class StarmapJSONDecodeMixin:
+class StarmapJSONDecodeMixin(Generic[T]):
     """Implement the default JSON deserialization for StArMap models."""
 
     @classmethod
@@ -88,7 +93,7 @@ class StarmapJSONDecodeMixin:
         return json
 
     @classmethod
-    def from_json(cls, json: Any):
+    def from_json(cls, json: Any) -> T:
         """
         Convert a JSON dictionary into class object.
 
@@ -99,14 +104,13 @@ class StarmapJSONDecodeMixin:
             The converted object from JSON.
         """
         cls._assert_json_dict(json)
-
         json = cls._preprocess_json(json)
 
         args = {}
         cls_attr = [a.name for a in cls.__attrs_attrs__ if isinstance(a, Attribute)]
         for a in cls_attr:
             args[a] = json.pop(a, None)
-        return cls(**args)
+        return cast(T, cls(**args))
 
 
 @frozen
@@ -117,7 +121,7 @@ class MetaMixin:
     """Dictionary with additional information related to a VM image."""
 
     @meta.validator
-    def _is_meta_dict_of_str_any(self, attribute: Attribute, value: Any):
+    def _is_meta_dict_of_str_any(self, attribute: Attribute[Any], value: Any) -> None:
         if not value:
             return None
         if not isinstance(value, dict):
@@ -128,7 +132,7 @@ class MetaMixin:
 
 
 @frozen
-class StarmapBaseData(MetaMixin, StarmapJSONDecodeMixin):
+class StarmapBaseData(MetaMixin, StarmapJSONDecodeMixin[T]):
     """Represent the common data present in StArMap entities."""
 
     id: Optional[str] = field(validator=optional(instance_of(str)))
@@ -139,7 +143,7 @@ class StarmapBaseData(MetaMixin, StarmapJSONDecodeMixin):
 
 
 @frozen
-class Destination(StarmapBaseData):
+class Destination(StarmapBaseData["Destination"]):
     """Represent a destination entry from Mapping."""
 
     architecture: Optional[str] = field(validator=optional(instance_of(str)))
@@ -181,8 +185,12 @@ class Destination(StarmapBaseData):
     """Dictionary with custom tags to be set on cloud marketplaces resources."""
 
 
+def _to_to_dist_destination(x: Any) -> List[Destination]:
+    return [Destination.from_json(d) for d in x] if x else []
+
+
 @frozen
-class Mapping(StarmapBaseData):
+class Mapping(StarmapBaseData["Mapping"]):
     """Represent a marketplace Mapping from Policy."""
 
     destinations: List[Destination] = field(
@@ -192,7 +200,7 @@ class Mapping(StarmapBaseData):
                 member_validator=instance_of(Destination), iterable_validator=instance_of(list)
             ),
         ],
-        converter=lambda x: [Destination.from_json(d) for d in x] if x else [],
+        converter=_to_to_dist_destination,
     )
     """List of destinations for the marketplace account."""
 
@@ -211,8 +219,16 @@ class Mapping(StarmapBaseData):
     It can't be set together with ``version_fnmatch``."""
 
 
+def _to_list_mappings(x: List[Any]) -> List[Mapping]:
+    return [Mapping.from_json(m) for m in x] if x else []
+
+
+def _to_workflow(x: Any) -> Workflow:
+    return Workflow(x)
+
+
 @frozen
-class Policy(StarmapBaseData):
+class Policy(StarmapBaseData["Policy"]):
     """Represent a StArMap policy."""
 
     mappings: List[Mapping] = field(
@@ -222,14 +238,14 @@ class Policy(StarmapBaseData):
                 member_validator=instance_of(Mapping), iterable_validator=instance_of(list)
             ),
         ],
-        converter=lambda x: [Mapping.from_json(m) for m in x] if x else [],
+        converter=_to_list_mappings,
     )
     """List of marketplace mappings which the Policy applies to."""
 
     name: str = field(validator=instance_of(str))
     """The Koji Package name representing also the Policy name."""
 
-    workflow: Workflow = field(converter=lambda x: Workflow(x))
+    workflow: Workflow = field(converter=_to_workflow)
     """The policy workflow name."""
 
 
@@ -249,8 +265,12 @@ class BillingImageType(str, Enum):
     """Billing type ``marketplace``."""
 
 
+def _to_list_billing_image_type(x: List[Any]) -> List[BillingImageType]:
+    return [BillingImageType[d] for d in x]
+
+
 @frozen
-class BillingCodeRule(StarmapJSONDecodeMixin):
+class BillingCodeRule(StarmapJSONDecodeMixin["BillingCodeRule"]):
     """Define a single Billing Code Configuration rule for APIv2."""
 
     codes: List[str] = field(
@@ -264,7 +284,7 @@ class BillingCodeRule(StarmapJSONDecodeMixin):
     """The image name to match the rule."""
 
     image_types: List[BillingImageType] = field(
-        converter=lambda x: [BillingImageType[d] for d in x],
+        converter=_to_list_billing_image_type,
         validator=deep_iterable(
             member_validator=instance_of(BillingImageType), iterable_validator=instance_of(list)
         ),
@@ -276,7 +296,7 @@ class BillingCodeRule(StarmapJSONDecodeMixin):
 
 
 @frozen
-class MappingResponseObject(MetaMixin, StarmapJSONDecodeMixin):
+class MappingResponseObject(MetaMixin, StarmapJSONDecodeMixin["MappingResponseObject"]):
     """Represent a single mapping response from :class:`~QueryResponseObject` for APIv2."""
 
     destinations: List[Destination] = field(
@@ -300,7 +320,7 @@ class MappingResponseObject(MetaMixin, StarmapJSONDecodeMixin):
             d["meta"] = dict_merge(meta, d.get("meta", {}))
 
     @classmethod
-    def _preprocess_json(cls, json: Any) -> Dict[str, Any]:
+    def _preprocess_json(cls, json: Dict[str, Any]) -> Dict[str, Any]:
         """
         Properly adjust the Destinations list for building this object.
 
@@ -321,7 +341,7 @@ class MappingResponseObject(MetaMixin, StarmapJSONDecodeMixin):
 
 
 @frozen
-class QueryResponseEntity(MetaMixin, StarmapJSONDecodeMixin):
+class QueryResponseEntity(MetaMixin, StarmapJSONDecodeMixin["QueryResponseEntity"]):
     """Represent a single query response entity from StArMap APIv2."""
 
     name: str = field(validator=instance_of(str))
@@ -341,7 +361,7 @@ class QueryResponseEntity(MetaMixin, StarmapJSONDecodeMixin):
     cloud: str = field(validator=instance_of(str))
     """The cloud name where the destinations are meant to."""
 
-    workflow: Workflow = field(converter=lambda x: Workflow(x))
+    workflow: Workflow = field(converter=_to_workflow)
     """The :class:`~Policy` workflow."""
 
     mappings: Dict[str, MappingResponseObject] = field(
@@ -398,7 +418,7 @@ class QueryResponseEntity(MetaMixin, StarmapJSONDecodeMixin):
         """  # noqa: D202 E501
 
         def parse_entity_build_obj(
-            entity_name: str, converter_type: Type[StarmapJSONDecodeMixin]
+            entity_name: str, converter_type: Type[StarmapJSONDecodeMixin[T]]
         ) -> None:
             entity = json.pop(entity_name, {})
             for k in entity.keys():
@@ -427,7 +447,7 @@ class QueryResponseContainer:
     """List with all responses from a Query V2 mapping."""
 
     @classmethod
-    def from_json(cls, json: Any):
+    def from_json(cls, json: Any) -> QueryResponseContainer:
         """
         Convert the APIv2 response JSON into this object.
 
@@ -497,7 +517,7 @@ class QueryResponseContainer:
         rsp = responses or self.responses
         return [x for x in rsp if x.cloud == cloud]
 
-    def filter_by(self, **kwargs) -> List[QueryResponseEntity]:
+    def filter_by(self, **kwargs: Any) -> List[QueryResponseEntity]:
         """Return a sublist of the responses with the selected filters."""
         filters = {
             "name": self.filter_by_name,

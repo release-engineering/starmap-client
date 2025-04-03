@@ -2,7 +2,7 @@
 import logging
 import re
 from abc import ABC, abstractmethod
-from typing import Any, Dict
+from typing import Any, Dict, Union
 
 import requests
 import requests_mock
@@ -15,15 +15,15 @@ class StarmapBaseSession(ABC):
     """Define the interface for the Starmap's session objects."""
 
     @abstractmethod
-    def get(self, path: str, **kwargs) -> requests.Response:
+    def get(self, path: str, **kwargs: Any) -> requests.Response:
         """Perform a GET request on StArMap."""
 
     @abstractmethod
-    def post(self, path: str, json: Dict[str, Any], **kwargs) -> requests.Response:
+    def post(self, path: str, json: Dict[str, Any], **kwargs: Any) -> requests.Response:
         """Perform a POST request on StArMap."""
 
     @abstractmethod
-    def put(self, path: str, json: Dict[str, Any], **kwargs) -> requests.Response:
+    def put(self, path: str, json: Dict[str, Any], **kwargs: Any) -> requests.Response:
         """Perform a PUT request on StArMap."""
 
 
@@ -65,7 +65,7 @@ class StarmapSession(StarmapBaseSession):
         self.session.mount("https://", adapter)
         self.verify = True
 
-    def _request(self, method: str, path: str, **kwargs) -> requests.Response:
+    def _request(self, method: str, path: str, **kwargs: Any) -> requests.Response:
         """Perform a generic request on StArMap."""
         headers = {
             "Accept": "application/json",
@@ -77,15 +77,15 @@ class StarmapSession(StarmapBaseSession):
 
         return self.session.request(method, url=url, headers=headers, verify=self.verify, **kwargs)
 
-    def get(self, path: str, **kwargs) -> requests.Response:
+    def get(self, path: str, **kwargs: Any) -> requests.Response:
         """Perform a GET request on StArMap."""
         return self._request("get", path, **kwargs)
 
-    def post(self, path: str, json: Dict[str, Any], **kwargs) -> requests.Response:
+    def post(self, path: str, json: Dict[str, Any], **kwargs: Any) -> requests.Response:
         """Perform a POST request on StArMap."""
         return self._request("post", path, json=json, **kwargs)
 
-    def put(self, path: str, json: Dict[str, Any], **kwargs) -> requests.Response:
+    def put(self, path: str, json: Dict[str, Any], **kwargs: Any) -> requests.Response:
         """Perform a PUT request on StArMap."""
         return self._request("put", path, json=json, **kwargs)
 
@@ -122,9 +122,9 @@ class StarmapMockSession(StarmapSession):
         base_url = "/".join(arg.strip("/") for arg in base_url_elements)
         methods = ["GET", "POST", "PUT"]
         for m in methods:
-            self.register_uri(m, re.compile(f"{base_url}/.*"))  # type: ignore [arg-type]
+            self.register_uri(m, re.compile(f"{base_url}/.*"))
 
-    def register_uri(self, method: str, uri: str) -> None:
+    def register_uri(self, method: str, uri: Union[str, re.Pattern[str]]) -> None:
         """Register an URI into the ``requests_mock`` adapter.
 
         Args:
