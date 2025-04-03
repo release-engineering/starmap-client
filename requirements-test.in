@@ -6,3 +6,4 @@ pytest-cov
 sphinx
 sphinx-autodoc-typehints
 types-requests
+types-setuptools

@@ -5,12 +5,12 @@ from starmap_client.providers.base import StarmapProvider
 from starmap_client.providers.utils import get_image_name
 
 
-class InMemoryMapProviderV2(StarmapProvider):
+class InMemoryMapProviderV2(StarmapProvider[QueryResponseContainer, QueryResponseEntity]):
     """Provide in memory (RAM) QueryResponseContainer objects for APIv2."""
 
     api = "v2"
 
-    def __init__(self, container: QueryResponseContainer, *args, **kwargs) -> None:
+    def __init__(self, container: QueryResponseContainer, *args: None, **kwargs: None) -> None:
         """Crete a new InMemoryMapProvider object.
 
         Args:

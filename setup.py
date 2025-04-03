@@ -1,5 +1,6 @@
 from setuptools import setup, find_packages
 
+
 setup(
     name='starmap-client',
     description='Client for StArMap',
@@ -10,6 +11,7 @@ setup(
     url='https://github.com/release-engineering/starmap-client',
     license='GPLv3+',
     packages=find_packages(exclude=['tests', 'tests.*']),
+    package_data={"starmap-client": ["py.typed"]},
     include_package_data=True,
     classifiers=[
         'License :: OSI Approved :: GNU General Public License v3 or later (GPLv3+)',

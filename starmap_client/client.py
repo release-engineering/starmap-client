@@ -8,6 +8,7 @@ from starmap_client.models import (
     PaginatedRawData,
     Policy,
     QueryResponseContainer,
+    QueryResponseEntity,
 )
 from starmap_client.providers import StarmapProvider
 from starmap_client.session import StarmapBaseSession, StarmapSession
@@ -27,7 +28,7 @@ class StarmapClient(object):
         api_version: str = "v2",
         session: Optional[StarmapBaseSession] = None,
         session_params: Optional[Dict[str, Any]] = None,
-        provider: Optional[StarmapProvider] = None,
+        provider: Optional[StarmapProvider[QueryResponseContainer, QueryResponseEntity]] = None,
     ):
         """
         Create a new StArMapClient.
@@ -77,7 +78,7 @@ class StarmapClient(object):
         rsp.raise_for_status()
         return QueryResponseContainer.from_json(json=rsp.json())
 
-    def query_image(self, nvr: str, **kwargs) -> Optional[QueryResponseContainer]:
+    def query_image(self, nvr: str, **kwargs: Any) -> Optional[QueryResponseContainer]:
         """
         Query StArMap using an image NVR.
 
@@ -94,7 +95,7 @@ class StarmapClient(object):
         self,
         name: str,
         version: Optional[str] = None,
-        **kwargs,
+        **kwargs: Any,
     ) -> Optional[QueryResponseContainer]:
         """
         Query StArMap using an image NVR.
