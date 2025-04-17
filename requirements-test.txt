@@ -332,9 +332,9 @@ pytest==8.3.5 \
     # via
     #   -r requirements-test.in
     #   pytest-cov
-pytest-cov==6.1.0 \
-    --hash=sha256:cd7e1d54981d5185ef2b8d64b50172ce97e6f357e6df5cb103e828c7f993e201 \
-    --hash=sha256:ec55e828c66755e5b74a21bd7cc03c303a9f928389c0563e50ba454a6dbe71db
+pytest-cov==6.1.1 \
+    --hash=sha256:46935f7aaefba760e716c2ebfbe1c216240b9592966e7da99ea8292d4d3e2a0a \
+    --hash=sha256:bddf29ed2d0ab6f4df17b4c55b0a657287db8684af9c42ea546b21b1041b3dde
     # via -r requirements-test.in
 requests==2.32.3 \
     --hash=sha256:55365417734eb18255590a9ff9eb97e9e1da868d4ccd6402399eaf68af20a760 \
@@ -435,9 +435,9 @@ types-urllib3==1.26.25.14 \
     --hash=sha256:229b7f577c951b8c1b92c1bc2b2fdb0b49847bd2af6d1cc2a2e3dd340f3bda8f \
     --hash=sha256:9683bbb7fb72e32bfe9d2be6e04875fbe1b3eeec3cbb4ea231435aa7fd6b4f0e
     # via types-requests
-typing-extensions==4.13.1 \
-    --hash=sha256:4b6cf02909eb5495cfbc3f6e8fd49217e6cc7944e145cdda8caa3734777f9e69 \
-    --hash=sha256:98795af00fb9640edec5b8e31fc647597b4691f099ad75f469a2616be1a76dff
+typing-extensions==4.13.2 \
+    --hash=sha256:a439e7c04b49fec3e5d3e2beaa21755cadbbdc391694e28ccdd36ca4a1408f8c \
+    --hash=sha256:e6c81219bd689f51865d9e372991c540bda33a0379d5573cddb9a3a23f7caaef
     # via mypy
 urllib3==1.26.20 \
     --hash=sha256:0ed14ccfbf1c30a9072c7ca157e4319b70d65f623e91e7b32fadb2853431016e \
