@@ -184,6 +184,12 @@ class Destination(StarmapBaseData["Destination"]):
     )
     """Dictionary with custom tags to be set on cloud marketplaces resources."""
 
+    vhd_check_base_sas_only: Optional[bool] = field(
+        validator=optional(instance_of(bool)), default=False  # type: ignore
+    )
+    """Whether to compare the base SAS URI by ignoring its parameters (True) or not (False).
+    Defaults to ``False``."""
+
 
 def _to_to_dist_destination(x: Any) -> List[Destination]:
     return [Destination.from_json(d) for d in x] if x else []
