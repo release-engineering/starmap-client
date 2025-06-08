@@ -13,7 +13,7 @@ alabaster==0.7.16 \
 attrs==25.3.0 \
     --hash=sha256:427318ce031701fea540783410126f03899a97ffc6f61596ad581ac2e40e3bc3 \
     --hash=sha256:75d7cefc7fb576747b2c81b4442d4d4a1ce0900973527c011d1030fd3bf4af1b
-    # via starmap-client (setup.py)
+    # via starmap_client (setup.py)
 babel==2.17.0 \
     --hash=sha256:0c54cffb19f690cdcc52a3b50bcbf71e07a808d1c80d549f2459b9d2cf0afb9d \
     --hash=sha256:4d0b53093fdfb4b21c92b5213dba5a1b23885afa8383709427046b21c366e5f2
@@ -352,11 +352,11 @@ requests==2.32.3 \
     # via
     #   requests-mock
     #   sphinx
-    #   starmap-client (setup.py)
+    #   starmap_client (setup.py)
 requests-mock==1.12.1 \
     --hash=sha256:b1e37054004cdd5e56c84454cc7df12b25f90f382159087f4b6915aaeef39563 \
     --hash=sha256:e9e12e333b525156e82a3c852f22016b9158220d2f47454de9cae8a77d371401
-    # via starmap-client (setup.py)
+    # via starmap_client (setup.py)
 snowballstemmer==3.0.1 \
     --hash=sha256:6cd7b3897da8d6c9ffb968a6781fa6532dce9c3618a4b127d920dab764a19064 \
     --hash=sha256:6d5eeeec8e9f84d4d56b847692bacf79bc2c8e90c7f80ca4444ff8b6f2e52895
@@ -456,8 +456,8 @@ urllib3==1.26.20 \
     --hash=sha256:40c2dc0c681e47eb8f90e7e27bf6ff7df2e677421fd46756da1161c39ca70d32
     # via
     #   requests
-    #   starmap-client (setup.py)
-zipp==3.22.0 \
-    --hash=sha256:dd2f28c3ce4bc67507bfd3781d21b7bb2be31103b51a4553ad7d90b84e57ace5 \
-    --hash=sha256:fe208f65f2aca48b81f9e6fd8cf7b8b32c26375266b009b413d45306b6148343
+    #   starmap_client (setup.py)
+zipp==3.23.0 \
+    --hash=sha256:071652d6115ed432f5ce1d34c336c0adfd6a884660d1e9712a256d3d3bd4b14e \
+    --hash=sha256:a07157588a12518c9d4034df3fbbee09c814741a33ff63c05fa29d26a2404166
     # via importlib-metadata
