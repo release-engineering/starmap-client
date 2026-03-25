@@ -2,7 +2,7 @@
 import logging
 import re
 from abc import ABC, abstractmethod
-from typing import Any, Dict, Union
+from typing import Any, Dict, Tuple, Union
 
 import requests
 import requests_mock
@@ -36,6 +36,7 @@ class StarmapSession(StarmapBaseSession):
         api_version: str,
         retries: int = 3,
         backoff_factor: float = 2.0,
+        timeout: float | Tuple[float, float] = 10.0,
     ):
         """
         Create the StarmapSession object.
@@ -49,10 +50,15 @@ class StarmapSession(StarmapBaseSession):
                 The number of request retries on failure
             backoff_factor (float, optional)
                 The backoff factor to apply between attempts after the second try
+            timeout (float | tuple[float, float], optional)
+                The timeout in seconds for the request. If a tuple is provided, the first value
+                is the connection timeout, and the second is the read timeout. Defaults to
+                10 seconds for both connection and read.
         """
         super(StarmapSession, self).__init__()
         self.url = url
         self.api_version = api_version
+        self.timeout = timeout
         self.session = requests.Session()
         retry = Retry(
             total=retries,
@@ -75,7 +81,12 @@ class StarmapSession(StarmapBaseSession):
         url_elements = [self.url, f"/api/{self.api_version}", path]
         url = "/".join(arg.strip("/") for arg in url_elements)
 
-        return self.session.request(method, url=url, headers=headers, verify=self.verify, **kwargs)
+        # If timeout is not provided, use the default timeout
+        timeout = kwargs.pop("timeout", self.timeout)
+
+        return self.session.request(
+            method, url=url, headers=headers, verify=self.verify, timeout=timeout, **kwargs
+        )
 
     def get(self, path: str, **kwargs: Any) -> requests.Response:
         """Perform a GET request on StArMap."""
