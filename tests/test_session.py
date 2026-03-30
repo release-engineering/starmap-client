@@ -25,6 +25,7 @@ class TestStarmapSession(TestCase):
             url=f"{self.starmap_url}/api/{self.starmap_api_version}/{path}",
             headers=headers,
             verify=True,
+            timeout=self.session.timeout,
             **kwargs,
         )
 
