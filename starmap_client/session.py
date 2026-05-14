@@ -36,7 +36,7 @@ class StarmapSession(StarmapBaseSession):
         api_version: str,
         retries: int = 3,
         backoff_factor: float = 2.0,
-        timeout: float | Tuple[float, float] = 10.0,
+        timeout: Union[float, Tuple[float, float]] = 10.0,
     ):
         """
         Create the StarmapSession object.
