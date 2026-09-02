@@ -34,23 +34,23 @@
 <span></span><span class="kn">from</span><span class="w"> </span><span class="nn">abc</span><span class="w"> </span><span class="kn">import</span> <span class="n">ABC</span><span class="p">,</span> <span class="n">abstractmethod</span>
 <span class="kn">from</span><span class="w"> </span><span class="nn">typing</span><span class="w"> </span><span class="kn">import</span> <span class="n">Any</span><span class="p">,</span> <span class="n">Dict</span><span class="p">,</span> <span class="n">Generic</span><span class="p">,</span> <span class="n">List</span><span class="p">,</span> <span class="n">Optional</span><span class="p">,</span> <span class="n">TypeVar</span>
 
-<span class="n">TQRC</span> <span class="o">=</span> <span class="n">TypeVar</span><span class="p">(</span><span class="s2">&quot;TQRC&quot;</span><span class="p">)</span>  <span class="c1"># QueryResponseContainer</span>
-<span class="n">TQRE</span> <span class="o">=</span> <span class="n">TypeVar</span><span class="p">(</span><span class="s2">&quot;TQRE&quot;</span><span class="p">)</span>  <span class="c1"># QueryResponseEntity</span>
+<span class="n">TQRC</span> <span class="o">=</span> <span class="n">TypeVar</span><span class="p">(</span><span class="s2">"TQRC"</span><span class="p">)</span>  <span class="c1"># QueryResponseContainer</span>
+<span class="n">TQRE</span> <span class="o">=</span> <span class="n">TypeVar</span><span class="p">(</span><span class="s2">"TQRE"</span><span class="p">)</span>  <span class="c1"># QueryResponseEntity</span>
 
 
 <div class="viewcode-block" id="StarmapProvider">
 <a class="viewcode-back" href="../../../provider/provider.html#starmap_client.providers.StarmapProvider">[docs]</a>
 <span class="k">class</span><span class="w"> </span><span class="nc">StarmapProvider</span><span class="p">(</span><span class="n">ABC</span><span class="p">,</span> <span class="n">Generic</span><span class="p">[</span><span class="n">TQRC</span><span class="p">,</span> <span class="n">TQRE</span><span class="p">]):</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;Define the interface for a local mappings provider.&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">"""Define the interface for a local mappings provider."""</span>
 
-    <span class="n">api</span> <span class="o">=</span> <span class="s2">&quot;default&quot;</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;The provider&#39;s API level implementation.&quot;&quot;&quot;</span>
+    <span class="n">api</span> <span class="o">=</span> <span class="s2">"default"</span>
+<span class="w">    </span><span class="sd">"""The provider's API level implementation."""</span>
 
 <div class="viewcode-block" id="StarmapProvider.query">
 <a class="viewcode-back" href="../../../provider/provider.html#starmap_client.providers.StarmapProvider.query">[docs]</a>
     <span class="nd">@abstractmethod</span>
     <span class="k">def</span><span class="w"> </span><span class="nf">query</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">params</span><span class="p">:</span> <span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Any</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="n">Optional</span><span class="p">[</span><span class="n">TQRC</span><span class="p">]:</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;Retrieve the mapping without using the server.</span>
+<span class="w">        </span><span class="sd">"""Retrieve the mapping without using the server.</span>
 
 <span class="sd">        It relies in the local provider to retrieve the correct mapping</span>
 <span class="sd">        according to the parameters.</span>
@@ -60,26 +60,26 @@
 <span class="sd">                The request params to retrieve the mapping.</span>
 <span class="sd">        Returns:</span>
 <span class="sd">            The requested mapping when found.</span>
-<span class="sd">        &quot;&quot;&quot;</span></div>
+<span class="sd">        """</span></div>
 
 
 <div class="viewcode-block" id="StarmapProvider.list_content">
 <a class="viewcode-back" href="../../../provider/provider.html#starmap_client.providers.StarmapProvider.list_content">[docs]</a>
     <span class="nd">@abstractmethod</span>
     <span class="k">def</span><span class="w"> </span><span class="nf">list_content</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">List</span><span class="p">[</span><span class="n">TQRE</span><span class="p">]:</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;Return a list with all stored responses.&quot;&quot;&quot;</span></div>
+<span class="w">        </span><span class="sd">"""Return a list with all stored responses."""</span></div>
 
 
 <div class="viewcode-block" id="StarmapProvider.store">
 <a class="viewcode-back" href="../../../provider/provider.html#starmap_client.providers.StarmapProvider.store">[docs]</a>
     <span class="nd">@abstractmethod</span>
     <span class="k">def</span><span class="w"> </span><span class="nf">store</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">response</span><span class="p">:</span> <span class="n">TQRE</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;Store a single response into the local provider.</span>
+<span class="w">        </span><span class="sd">"""Store a single response into the local provider.</span>
 
 <span class="sd">        Args:</span>
 <span class="sd">            response (response):</span>
 <span class="sd">                The object to store.</span>
-<span class="sd">        &quot;&quot;&quot;</span></div>
+<span class="sd">        """</span></div>
 </div>
 
 </pre></div>

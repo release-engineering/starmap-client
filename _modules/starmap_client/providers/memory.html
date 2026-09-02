@@ -41,21 +41,21 @@
 <div class="viewcode-block" id="InMemoryMapProviderV2">
 <a class="viewcode-back" href="../../../provider/provider.html#starmap_client.providers.InMemoryMapProviderV2">[docs]</a>
 <span class="k">class</span><span class="w"> </span><span class="nc">InMemoryMapProviderV2</span><span class="p">(</span><span class="n">StarmapProvider</span><span class="p">[</span><span class="n">QueryResponseContainer</span><span class="p">,</span> <span class="n">QueryResponseEntity</span><span class="p">]):</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;Provide in memory (RAM) QueryResponseContainer objects for APIv2.&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">"""Provide in memory (RAM) QueryResponseContainer objects for APIv2."""</span>
 
-    <span class="n">api</span> <span class="o">=</span> <span class="s2">&quot;v2&quot;</span>
+    <span class="n">api</span> <span class="o">=</span> <span class="s2">"v2"</span>
 
 <div class="viewcode-block" id="InMemoryMapProviderV2.__init__">
 <a class="viewcode-back" href="../../../provider/provider.html#starmap_client.providers.InMemoryMapProviderV2.__init__">[docs]</a>
     <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">container</span><span class="p">:</span> <span class="n">QueryResponseContainer</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">:</span> <span class="kc">None</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">:</span> <span class="kc">None</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;Crete a new InMemoryMapProvider object.</span>
+<span class="w">        </span><span class="sd">"""Crete a new InMemoryMapProvider object.</span>
 
 <span class="sd">        Args:</span>
 <span class="sd">            container (QueryResponseContainer)</span>
 <span class="sd">                QueryResponseContainer object to load into memory. It will be</span>
 <span class="sd">                used by query to return the correct response based on name</span>
 <span class="sd">                and workflow.</span>
-<span class="sd">        &quot;&quot;&quot;</span>
+<span class="sd">        """</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">_container</span> <span class="o">=</span> <span class="n">container</span>
         <span class="nb">super</span><span class="p">(</span><span class="n">StarmapProvider</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="fm">__init__</span><span class="p">()</span></div>
 
@@ -63,7 +63,7 @@
 <div class="viewcode-block" id="InMemoryMapProviderV2.query">
 <a class="viewcode-back" href="../../../provider/provider.html#starmap_client.providers.InMemoryMapProviderV2.query">[docs]</a>
     <span class="k">def</span><span class="w"> </span><span class="nf">query</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">params</span><span class="p">:</span> <span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Any</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="n">Optional</span><span class="p">[</span><span class="n">QueryResponseContainer</span><span class="p">]:</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;Retrieve the mapping without using the server.</span>
+<span class="w">        </span><span class="sd">"""Retrieve the mapping without using the server.</span>
 
 <span class="sd">        It relies in the local provider to retrieve the correct mappings</span>
 <span class="sd">        according to the parameters.</span>
@@ -73,9 +73,9 @@
 <span class="sd">                The request params to retrieve the mapping.</span>
 <span class="sd">        Returns:</span>
 <span class="sd">            The requested container with mappings when found.</span>
-<span class="sd">        &quot;&quot;&quot;</span>
-        <span class="n">filter_params</span> <span class="o">=</span> <span class="p">{</span><span class="s2">&quot;name&quot;</span><span class="p">:</span> <span class="n">params</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;name&quot;</span><span class="p">)</span> <span class="ow">or</span> <span class="n">get_image_name</span><span class="p">(</span><span class="n">params</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;image&quot;</span><span class="p">))}</span>
-        <span class="k">for</span> <span class="n">k</span> <span class="ow">in</span> <span class="p">[</span><span class="s2">&quot;cloud&quot;</span><span class="p">,</span> <span class="s2">&quot;workflow&quot;</span><span class="p">]:</span>
+<span class="sd">        """</span>
+        <span class="n">filter_params</span> <span class="o">=</span> <span class="p">{</span><span class="s2">"name"</span><span class="p">:</span> <span class="n">params</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">"name"</span><span class="p">)</span> <span class="ow">or</span> <span class="n">get_image_name</span><span class="p">(</span><span class="n">params</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">"image"</span><span class="p">))}</span>
+        <span class="k">for</span> <span class="n">k</span> <span class="ow">in</span> <span class="p">[</span><span class="s2">"cloud"</span><span class="p">,</span> <span class="s2">"workflow"</span><span class="p">]:</span>
             <span class="n">v</span> <span class="o">=</span> <span class="n">params</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">k</span><span class="p">)</span>
             <span class="k">if</span> <span class="n">v</span><span class="p">:</span>
                 <span class="n">filter_params</span><span class="o">.</span><span class="n">update</span><span class="p">({</span><span class="n">k</span><span class="p">:</span> <span class="n">v</span><span class="p">})</span>
@@ -88,19 +88,19 @@
 <div class="viewcode-block" id="InMemoryMapProviderV2.list_content">
 <a class="viewcode-back" href="../../../provider/provider.html#starmap_client.providers.InMemoryMapProviderV2.list_content">[docs]</a>
     <span class="k">def</span><span class="w"> </span><span class="nf">list_content</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">List</span><span class="p">[</span><span class="n">QueryResponseEntity</span><span class="p">]:</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;Return a the responses stored in the container.&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">"""Return a the responses stored in the container."""</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_container</span><span class="o">.</span><span class="n">responses</span></div>
 
 
 <div class="viewcode-block" id="InMemoryMapProviderV2.store">
 <a class="viewcode-back" href="../../../provider/provider.html#starmap_client.providers.InMemoryMapProviderV2.store">[docs]</a>
     <span class="k">def</span><span class="w"> </span><span class="nf">store</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">response</span><span class="p">:</span> <span class="n">QueryResponseEntity</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;Store a single response into the local provider&#39;s container.</span>
+<span class="w">        </span><span class="sd">"""Store a single response into the local provider's container.</span>
 
 <span class="sd">        Args:</span>
 <span class="sd">            container (container):</span>
 <span class="sd">                The container to store.</span>
-<span class="sd">        &quot;&quot;&quot;</span>
+<span class="sd">        """</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">_container</span><span class="o">.</span><span class="n">responses</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">response</span><span class="p">)</span></div>
 </div>
 
